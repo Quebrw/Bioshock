@@ -1,1 +1,0 @@
-JDK downloaden für Eclipse. Adoptium heißt die Seite
