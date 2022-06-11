@@ -7,6 +7,6 @@ public abstract class Items {
 
     public Items(){
         this.pos.setXpos(0.0f);
-        this.pos.
+        this.pos.setYpos(0.0f);
     }
 }
