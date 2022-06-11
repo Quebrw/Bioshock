@@ -1,4 +1,4 @@
-package src;
+package src.objects;
 import src.tools.*;
 
 public abstract class Items {
@@ -7,11 +7,6 @@ public abstract class Items {
 
     public Items(){
         this.pos.setXpos(0.0f);
-
+        this.pos.
     }
-}
-
-public class healingItems extends Items{
-
-
 }
