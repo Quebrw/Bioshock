@@ -1,16 +1,16 @@
 package src.tools;
 
-public class Vector2f {
+public class Vector2f {                         //2-Dimensional Vector, that contains a position inf floats
 
     private float xpos;
     private float ypos; 
 
-    public Vector2f(){
+    public Vector2f(){                          // Nullconstructor
         this.xpos = 0f;
         this.ypos = 0f;
     }
 
-    public Vector2f(float xpos, float ypos){
+    public Vector2f(float xpos, float ypos){    //Constructor
         this.xpos = xpos;
         this.ypos = ypos;
     }
@@ -35,4 +35,24 @@ public class Vector2f {
         return new float[]{this.xpos, this.ypos};
     }
 
+    public void increaseX(float increaseBy, boolean positive) {
+        
+        if(positive == true){
+            this.xpos += increaseBy;
+        }else{
+            this.xpos -= increaseBy;
+        }
+    }
+
+    public void increaseY(float increaseBy, boolean positive) {
+        
+        if(positive == true){
+            this.ypos += increaseBy;
+        }else{
+            this.ypos -= increaseBy;
+        }
+    }
+
+
+    void loop(){}
 }
