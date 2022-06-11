@@ -7,10 +7,10 @@ int healing = 30;
 
     public void addHealth(player p){
 
-        if ((player.health + healing) =< 100){
-            player.health += healing;
+        if ((p.health + healing) =< 100){
+            p.health += healing;
         } else {
-            player.health = 100;
+            p.health = 100;
         }
     }
 }
