@@ -31,6 +31,8 @@ public class Vector2f {
         this.ypos = ypos;
     }
 
-
+    public float[] getVector2f(){
+        return new float[]{this.xpos, this.ypos};
+    }
 
 }
