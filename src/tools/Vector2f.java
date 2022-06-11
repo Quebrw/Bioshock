@@ -9,4 +9,14 @@ public class Vector2f {
         this.xpos = 0f;
         this.ypos = 0f;
     }
+
+    public float getXpos() {
+        return xpos;
+    }
+
+    public float getYpos() {
+        return ypos;
+    }
+
+
 }
