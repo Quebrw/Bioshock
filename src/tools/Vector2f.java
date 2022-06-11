@@ -10,6 +10,11 @@ public class Vector2f {
         this.ypos = 0f;
     }
 
+    public Vector2f(float xpos, float ypos){
+        this.xpos = xpos;
+        this.ypos = ypos;
+    }
+
     public float getXpos() {
         return xpos;
     }
@@ -25,5 +30,7 @@ public class Vector2f {
     public void setYpos(float ypos) {
         this.ypos = ypos;
     }
+
+
 
 }
