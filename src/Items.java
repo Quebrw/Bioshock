@@ -12,6 +12,6 @@ public abstract class Items {
 }
 
 public class healingItems extends Items{
-
+    int healing;
 
 }
