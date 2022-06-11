@@ -18,5 +18,12 @@ public class Vector2f {
         return ypos;
     }
 
+    public void setXpos(float xpos) {
+        this.xpos = xpos;
+    }
+
+    public void setYpos(float ypos) {
+        this.ypos = ypos;
+    }
 
 }
