@@ -1,7 +1,7 @@
 package src.objects;
 import src.tools.*;
 
-// Generates healing potion/pad
+// Generates healing potion/pad which extends 
 public class healingItems extends Items{
 int healing = 30;
 
