@@ -20,7 +20,7 @@ public class GameLoop implements Runnable{
 
     public void update(float time){
       
-      if(i == 60){
+      if(i == 60){                                                              //tests FrameRate
         System.out.println(time / 1000000000);
         i = 0;
       }else{
