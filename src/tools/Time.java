@@ -2,10 +2,10 @@ package src.tools;
 
 public class Time {
     
-    private long initTime;
+    //private long initTime;
 
     Time(){
-        initTime = System.nanoTime();
+        //initTime = System.nanoTime();
     }  
 
     public static long dTime(long startTime){                      // Returns a Delta of time between an input Time and the current Time

@@ -48,16 +48,24 @@ public class player {
     public void abruptStopRight(long dTime){
         float dTimeinSeconds = dTime / 1000000000;
         if(currentSpeedR != 0){
+            if(currentSpeedR <= inertia/4){
             currentSpeedR -= currentSpeedR * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the right, some inertia of movement should remain
             playerpos.increaseX(currentSpeedR, true);
+        }else{
+            currentSpeedR = 0;
+        }
         }
     }
     
     public void abruptStopLight(long dTime){
         float dTimeinSeconds = dTime / 1000000000;
         if(currentSpeedL != 0){
+            if(dTimeinSeconds <= inertia/4){
             currentSpeedL -= currentSpeedL * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the left, some inertia of movement should remain
             playerpos.increaseX(currentSpeedL, false);
+            }else{
+                currentSpeedL = 0;
+            }
         }
     }
 
