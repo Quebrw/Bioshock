@@ -1,6 +1,6 @@
 package tools;
 
-public class Vector2f {                         //2-Dimensional Vector, that contains a position inf floats
+public class Vector2f {                         //2-Dimensional Vector, that contains a position in floats
 
     private float xpos;
     private float ypos; 
