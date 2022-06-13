@@ -1,5 +1,5 @@
 package objects;
-import tools.*;
+import tools.Vector2f;
 
 public abstract class Items {
 
