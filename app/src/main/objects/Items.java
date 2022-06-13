@@ -1,5 +1,5 @@
-package src.objects;
-import src.tools.*;
+package objects;
+import tools.*;
 
 public abstract class Items {
 

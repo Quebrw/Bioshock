@@ -1,5 +1,5 @@
-package src.objects;
-import src.tools.Vector2f;
+package objects;
+import tools.Vector2f;
 
 
 

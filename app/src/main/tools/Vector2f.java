@@ -1,4 +1,4 @@
-package src.tools;
+package tools;
 
 public class Vector2f {                         //2-Dimensional Vector, that contains a position inf floats
 

@@ -1,4 +1,4 @@
-package src.objects;
+package objects;
 //import src.tools.*;
 
 // Generates healing potion/pad which extends 
