@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import objects.Player;
-import objects.worldObjects;
-import tools.Collider;
+//import objects.worldObjects;
+//import tools.Collider;
 import tools.MyKeyHandler;
 import tools.Vector2f;
 //import java.awt.Component;
@@ -18,7 +18,7 @@ public class GameLoop extends JComponent implements Runnable {
     private long beganMoving;
 
     private Player P = new Player();
-    private ArrayList<worldObjects> sObjects;
+    //private ArrayList<worldObjects> sObjects;
     private MyKeyHandler kH;
 
     //#endregion
@@ -59,6 +59,8 @@ public class GameLoop extends JComponent implements Runnable {
       //updateCollision();
       updatePlayerMovement();
 
+      updateCollision();
+
       updatePositions();
     }
 
@@ -85,7 +87,7 @@ public class GameLoop extends JComponent implements Runnable {
 
     private void updateCollision() {                                              //currently just Testcode inside
       
-      Collider.getCollisisions(P, sObjects);
+      //Collider.getCollisisions(P, sObjects);
 
       // worldObjects R = new worldObjects();
       // if(Collider.isColliding(P, R) == true){
