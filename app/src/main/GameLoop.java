@@ -26,6 +26,7 @@ public class GameLoop extends JComponent implements Runnable {
 
       this.setFocusable(true);
       MyKeyHandler kH = new MyKeyHandler();
+      this.addKeyListener(kH);
       while (running == true) {
           float currentTime = System.nanoTime();
           float dTime = currentTime - lastUpdate;
@@ -45,7 +46,7 @@ public class GameLoop extends JComponent implements Runnable {
       }else{
         i++;
       }
-      updateCollision();
+      //wupdateCollision();
 
 
       updatePositions();
