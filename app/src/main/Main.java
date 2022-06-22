@@ -3,6 +3,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 import GUI.GamePanel;
+import tools.MyKeyHandler;
 
 public class Main extends JFrame{
 
@@ -22,7 +23,9 @@ public class Main extends JFrame{
         // window size is constant
         window.setResizable(false);
 
-        GamePanel gamePanel = new GamePanel();
+        MyKeyHandler kH = new MyKeyHandler();
+
+        GamePanel gamePanel = new GamePanel(kH);
 
         window.add(gamePanel);
 
@@ -34,8 +37,8 @@ public class Main extends JFrame{
 
         window.setVisible(true);
 
-        // GameLoop gameLoop = new GameLoop();
-        // Thread t1 = new Thread(gameLoop);
-        // t1.start();
+        GameLoop gameLoop = new GameLoop(kH);
+        Thread t1 = new Thread(gameLoop);
+        t1.start();
     }
 }

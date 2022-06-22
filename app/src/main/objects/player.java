@@ -3,7 +3,7 @@ import tools.Vector2f;
 
 
 
-public class player extends worldObjects{
+public class Player extends worldObjects{
 
 
     //#region Variables
@@ -22,7 +22,7 @@ public class player extends worldObjects{
     //#endregion
 
     //#region Constructors
-    public player(int health, Vector2f pos, int width, int height) {
+    public Player(int health, Vector2f pos, int width, int height) {
         this.health = health;
         this.pos = pos;
         this.speed = 2;
@@ -32,7 +32,7 @@ public class player extends worldObjects{
 
     }
 
-    public player() {
+    public Player() {
         this.health = 0;
         this.pos = new Vector2f();
         this.width = 0;

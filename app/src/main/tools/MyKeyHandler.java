@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 public class MyKeyHandler implements KeyListener{
 
-    boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED, SPACE_PRESSED, SHIFT_PRESSED;               //whether a certian key is being precced at this moment
+    public boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED, SPACE_PRESSED, SHIFT_PRESSED;               //whether a certian key is being precced at this moment
 
     @Override
     public void keyTyped(KeyEvent e) {

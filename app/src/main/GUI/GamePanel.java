@@ -1,6 +1,6 @@
 package GUI;
 
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tools.MyKeyHandler;
@@ -15,7 +15,7 @@ public class GamePanel extends JPanel {
 
     public int screenHeight = 1080;
 
-    public GamePanel() {
+    public GamePanel(MyKeyHandler kH) {
 
         // size of the GamePanel
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -23,7 +23,8 @@ public class GamePanel extends JPanel {
         // sets background color of the GamePanel to black
         this.setBackground(Color.black);
 
-        MyKeyHandler kH = new MyKeyHandler();
+        //MyKeyHandler kH = new MyKeyHandler();
+        //Puts the Pnael in keyboard focus
         this.setFocusable(true);
         this.addKeyListener(kH);
     }
