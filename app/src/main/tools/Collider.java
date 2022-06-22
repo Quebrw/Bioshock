@@ -1,5 +1,6 @@
 package tools;
 import objects.*;
+import java.util.ArrayList;
 
 public class Collider {                                             //Class that handles Collisions
     
@@ -14,5 +15,16 @@ public class Collider {                                             //Class that
             return false;
         }
 
+    }
+
+    public static ArrayList<worldObjects> getCollisisions(worldObjects collider, ArrayList<worldObjects> sceneObjects) {                    //since further Collision computing with objects that are not colliding is unnecessary, this function will filter out non-Colliding Objects
+        ArrayList<worldObjects> output = new ArrayList<worldObjects>(0);
+        for (int i = 0; i < sceneObjects.size(); i++) {
+                worldObjects tempO = (worldObjects) sceneObjects.get(i);
+            if(isColliding(collider, tempO) == true){
+                output.add(tempO);
+            }
+        }
+        return output;
     }
 }
