@@ -26,11 +26,11 @@ public class Main extends JFrame{
 
         window.add(gamePanel);
 
-        // window is created in the center of the screen
-        window.setLocationRelativeTo(null);
-
         // The size of the Frame equals the GamePanel
         window.pack();
+
+        // window is created in the center of the screen
+        window.setLocationRelativeTo(null);
 
         window.setVisible(true);
 
