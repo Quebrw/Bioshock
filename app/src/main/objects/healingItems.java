@@ -5,7 +5,7 @@ package objects;
 public class healingItems extends Items{
 int healing = 30;
 
-    public void addHealth(player p){
+    public void addHealth(Player p){
 
         if ((p.health + healing) <= 100){
             p.health += healing;

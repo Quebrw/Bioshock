@@ -4,6 +4,7 @@ import java.awt.event.*;
 public class MyKeyHandler implements KeyListener{
 
     public boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED, SPACE_PRESSED, SHIFT_PRESSED;               //whether a certian key is being precced at this moment
+    public long A_releaseTime, D_releaseTime;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -48,6 +49,7 @@ public class MyKeyHandler implements KeyListener{
 
         if(e.getKeyCode() == KeyEvent.VK_A){
             A_PRESSED = false;
+            A_releaseTime = System.nanoTime();
         }
 
         if(e.getKeyCode() == KeyEvent.VK_S){
@@ -56,6 +58,7 @@ public class MyKeyHandler implements KeyListener{
 
         if(e.getKeyCode() == KeyEvent.VK_D){
             D_PRESSED = false;
+            D_releaseTime = System.nanoTime();
         }
 
         if(e.getKeyCode() == KeyEvent.VK_SHIFT){

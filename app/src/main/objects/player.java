@@ -18,6 +18,7 @@ public class Player extends worldObjects{
     private int speed;
     private float currentSpeedR;
     private float currentSpeedL;
+    public boolean actMovR, actMovL;
     private Vector2f despos;                                                                        //desired Position
     //#endregion
 
@@ -54,6 +55,7 @@ public class Player extends worldObjects{
             currentSpeedR = 2;
             despos.increaseX(speed, true);
         }
+        actMovR = true;
     }
 
     public void moveLeft(long dTime) {
@@ -66,9 +68,11 @@ public class Player extends worldObjects{
             currentSpeedL = 2;
             despos.increaseX(speed, false);
         }
+        actMovL = true;
     }
 
     public void abruptStopRight(long dTime){
+        actMovR = false;
         float dTimeinSeconds = dTime / 1000000000;
         if(currentSpeedR != 0){
             if(currentSpeedR <= inertia/4){
@@ -80,7 +84,8 @@ public class Player extends worldObjects{
         }
     }
     
-    public void abruptStopLight(long dTime){
+    public void abruptStopLeft(long dTime){
+        actMovL = false;
         float dTimeinSeconds = dTime / 1000000000;
         if(currentSpeedL != 0){
             if(dTimeinSeconds <= inertia/4){
@@ -89,6 +94,22 @@ public class Player extends worldObjects{
             }else{
                 currentSpeedL = 0;
             }
+        }
+    }
+
+    public boolean isMovingLeft(){
+        if(currentSpeedL != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean isMovingRight() {
+        if(currentSpeedR != 0){
+            return true;
+        }else{
+            return false;
         }
     }
 

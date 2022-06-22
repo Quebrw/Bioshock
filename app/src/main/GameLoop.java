@@ -15,6 +15,7 @@ public class GameLoop extends JComponent implements Runnable {
     private float lastUpdate;
     private float updateRate = (1.0f/60.0f) * 1000000000.0f;
     private int i = 0;
+    private long beganMoving;
 
     private Player P = new Player();
     private ArrayList<worldObjects> sObjects;
@@ -56,14 +57,29 @@ public class GameLoop extends JComponent implements Runnable {
         i++;
       }
       //updateCollision();
-      updateMovement();
+      updatePlayerMovement();
 
       updatePositions();
     }
 
-    private void updateMovement() {
-        if(kH.W_PRESSED == true){
-          P.
+    private void updatePlayerMovement() {
+        if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
+
+            if(P.actMovR == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
+            P.moveRight(beganMoving - System.nanoTime());
+
+        }else if(kH.A_PRESSED == true && P.actMovR == false){   //checks if Movement right is requested and whether it interfering with previously requested Movement  
+
+          if(P.actMovL == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
+          P.moveLeft(beganMoving - System.nanoTime());
+
+        }else{
+          if(P.isMovingRight() == true){
+            P.abruptStopRight(kH.D_releaseTime - System.nanoTime());
+          }
+          if(P.isMovingLeft()){
+            P.abruptStopLeft(kH.A_releaseTime - System.nanoTime());
+          }
         }
     }
 
