@@ -24,9 +24,7 @@ public class GameLoop extends JComponent implements Runnable {
       // P.setWidth(40.0f);
       // P.setPos(new Vector2f(-10f,-10f));
 
-      this.setFocusable(true);
-      MyKeyHandler kH = new MyKeyHandler();
-      this.addKeyListener(kH);
+
       while (running == true) {
           float currentTime = System.nanoTime();
           float dTime = currentTime - lastUpdate;

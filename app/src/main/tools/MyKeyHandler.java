@@ -3,7 +3,8 @@ import java.awt.event.*;
 
 public class MyKeyHandler implements KeyListener{
 
-    public boolean Wpressed, Apressed, Spressed, Dpressed, SPACEpressed, SHIFTpressed;
+    boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED, SPACE_PRESSED, SHIFT_PRESSED;               //whether a certian key is being precced at this moment
+
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
@@ -14,23 +15,66 @@ public class MyKeyHandler implements KeyListener{
     public void keyPressed(KeyEvent e) {
 
         if(e.getKeyCode() == KeyEvent.VK_W){
-            System.out.println("W");
+            W_PRESSED = true;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_A){
+            A_PRESSED = true;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_S){
+            S_PRESSED = true;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            D_PRESSED = true;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+            SHIFT_PRESSED = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            SPACE_PRESSED = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
+
+        if(e.getKeyCode() == KeyEvent.VK_W){
+            W_PRESSED = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_A){
+            A_PRESSED = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_S){
+            S_PRESSED = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            D_PRESSED = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+            SHIFT_PRESSED = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            SPACE_PRESSED = false;
+        }
         
     }
 
     public MyKeyHandler() {
-        Wpressed = false;
-        Apressed = false;
-        Spressed = false;
-        Dpressed = false;
-        SPACEpressed = false;
-        SHIFTpressed = false;
+        W_PRESSED = false;
+        A_PRESSED = false;
+        S_PRESSED = false;
+        D_PRESSED = false;
+        SPACE_PRESSED = false;
+        SHIFT_PRESSED = false;
     }
 
 }

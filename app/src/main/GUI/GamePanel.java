@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tools.MyKeyHandler;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -20,6 +22,10 @@ public class GamePanel extends JPanel {
         
         // sets background color of the GamePanel to black
         this.setBackground(Color.black);
+
+        MyKeyHandler kH = new MyKeyHandler();
+        this.setFocusable(true);
+        this.addKeyListener(kH);
     }
 
     
