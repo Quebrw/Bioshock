@@ -10,6 +10,9 @@ public class Main extends JFrame{
 
         JFrame window = new JFrame();
 
+        // sets title
+        window.setTitle("Das ist unser Titel");
+
         // allows the user to exit the window
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
