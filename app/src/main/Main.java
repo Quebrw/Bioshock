@@ -1,5 +1,6 @@
 import java.awt.Color;
 
+import tools.*;
 import javax.swing.JFrame;
 
 import GUI.GamePanel;
@@ -25,7 +26,7 @@ public class Main extends JFrame{
 
         MyKeyHandler kH = new MyKeyHandler();
 
-        GamePanel gamePanel = new GamePanel(kH);
+        GamePanel gamePanel = new GamePanel();
 
         window.add(gamePanel);
 
