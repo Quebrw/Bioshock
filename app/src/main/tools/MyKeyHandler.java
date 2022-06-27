@@ -21,6 +21,7 @@ public class MyKeyHandler implements KeyListener{
 
         if(e.getKeyCode() == KeyEvent.VK_A){
             A_PRESSED = true;
+            System.out.println("A-in");
         }
 
         if(e.getKeyCode() == KeyEvent.VK_S){

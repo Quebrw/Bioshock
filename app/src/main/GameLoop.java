@@ -7,7 +7,7 @@ import tools.MyKeyHandler;
 import tools.Vector2f;
 //import java.awt.Component;
 import javax.swing.*;   
-import java.awt.Graphics;                                                        //Maybe specify later
+//import java.awt.Graphics;                                                        //Maybe specify later
 
 import GUI.GamePanel;
 //import tools.MyKeyHandler;
@@ -40,6 +40,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(100.0f);
       P.setPos(new Vector2f(500f,500f));
       this.setFocusable(true);
+      this.addKeyListener(kH);
 
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
@@ -59,7 +60,7 @@ public class GameLoop extends JComponent implements Runnable {
     public void update(float time){
       
       if(i == 60){                                                              //tests FrameRate
-        System.out.println(time / 1000000000);
+        //System.out.println(time / 1000000000);
         i = 0;
       }else{
         i++;
@@ -75,7 +76,7 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     private void updatePlayerMovement() {
-      if(kH.A_PRESSED){System.out.println("okay");}  
+      if(kH.A_PRESSED == true){System.out.println("okay");}  
       
       if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
 
