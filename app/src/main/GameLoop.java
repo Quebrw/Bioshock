@@ -39,8 +39,8 @@ public class GameLoop extends JComponent implements Runnable {
       P.setHeight(100.0f);                   
       P.setWidth(100.0f);
       P.setPos(new Vector2f(500f,500f));
-      this.setFocusable(true);
-      this.addKeyListener(kH);
+      //this.setFocusable(true);
+      //this.addKeyListener(kH);
 
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
@@ -79,21 +79,23 @@ public class GameLoop extends JComponent implements Runnable {
       if(kH.A_PRESSED == true){System.out.println("okay");}  
       
       if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
-
             if(P.actMovR == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
-            P.moveRight(beganMoving - System.nanoTime());
+            P.moveRight(System.nanoTime() - beganMoving);
+            
 
         }else if(kH.A_PRESSED == true && P.actMovR == false){   //checks if Movement right is requested and whether it interfering with previously requested Movement  
 
           if(P.actMovL == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
-          P.moveLeft(beganMoving - System.nanoTime());
+          P.moveLeft(System.nanoTime()-beganMoving);
 
         }else{
+          System.err.println(P.isMovingRight());
           if(P.isMovingRight() == true){
-            P.abruptStopRight(kH.D_releaseTime - System.nanoTime());
+            System.out.println("yes");
+            P.abruptStopRight(System.nanoTime() - kH.D_releaseTime);
           }
-          if(P.isMovingLeft()){
-            P.abruptStopLeft(kH.A_releaseTime - System.nanoTime());
+          if(P.isMovingLeft() == true){
+            P.abruptStopLeft(System.nanoTime() - kH.A_releaseTime);
           }
         }
     }
@@ -115,8 +117,7 @@ public class GameLoop extends JComponent implements Runnable {
 
     }
     private void updateFrame() {
-      
-      int x = (int)P.getPos().getXpos();
+      int x = (int)P.xpos;
       int y = (int)P.getPos().getYpos();
       int w = (int)P.getWidth();
       int h = (int)P.getHeight();

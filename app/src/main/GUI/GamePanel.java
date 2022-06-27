@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
 
     //MyKeyHandler kH = new MyKeyHandler();
 
-    public GamePanel() {
+    public GamePanel(MyKeyHandler kH) {
 
         // size of the GamePanel
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -35,10 +35,10 @@ public class GamePanel extends JPanel {
         this.setBackground(Color.black);
 
         //Puts the Panel in keyboard focus
-        //this.setFocusable(true);
+        this.setFocusable(true);
 
         // adds keyHandler
-        //this.addKeyListener(kH);
+        this.addKeyListener(kH);
     }
 
     public void uGamePanel(int x, int y, int w, int h) {

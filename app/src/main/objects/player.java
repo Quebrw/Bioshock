@@ -8,12 +8,14 @@ public class Player extends worldObjects{
 
     //#region Variables
     public int health;
-
+    
     public Vector2f pos;
+    public float xpos;
+    public float ypos;
     
     private int width;
     private int height;
-
+    
     float inertia = 2;                                                                              //seconds for which the player experiences inertia
     private int speed;
     private float currentSpeedR;
@@ -21,27 +23,49 @@ public class Player extends worldObjects{
     public boolean actMovR, actMovL;
     private Vector2f despos;                                                                        //desired Position
     //#endregion
-
+    
     //#region Constructors
     public Player(int health, Vector2f pos, int width, int height) {
         this.health = health;
         this.pos = pos;
-        this.speed = 20;
+        this.speed = 50;
         this.width = width;
         this.height = height;
-
-
+        
+        
     }
-
+    
     public Player() {
         this.health = 0;
         this.pos = new Vector2f();
         this.width = 0;
         this.height = 0;
-        this.speed = 0;
+        this.speed = 10;
         this.despos = this.pos;
     }
     //#endregion
+
+    public boolean isMovingLeft(){
+        if(currentSpeedL != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean isMovingRight() {
+        if(currentSpeedR != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void updatePosition() {
+        this.xpos = this.despos.getXpos();
+        this.ypos = this.despos.getYpos();
+        
+    }
     
     //#region movement
 
@@ -74,9 +98,10 @@ public class Player extends worldObjects{
     public void abruptStopRight(long dTime){
         actMovR = false;
         float dTimeinSeconds = dTime / 1000000000;
+        System.out.println(dTimeinSeconds);
         if(currentSpeedR != 0){
-            if(currentSpeedR <= inertia/4){
-            currentSpeedR -= currentSpeedR * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the right, some inertia of movement should remain
+            if(dTimeinSeconds <= inertia/4){
+            currentSpeedR -= speed * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the right, some inertia of movement should remain
             despos.increaseX(currentSpeedR, true);
         }else{
             currentSpeedR = 0;
@@ -89,7 +114,7 @@ public class Player extends worldObjects{
         float dTimeinSeconds = dTime / 1000000000;
         if(currentSpeedL != 0){
             if(dTimeinSeconds <= inertia/4){
-            currentSpeedL -= currentSpeedL * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the left, some inertia of movement should remain
+            currentSpeedL -= speed * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the left, some inertia of movement should remain
             despos.increaseX(currentSpeedL, false);
             }else{
                 currentSpeedL = 0;
@@ -97,26 +122,6 @@ public class Player extends worldObjects{
         }
     }
 
-    public boolean isMovingLeft(){
-        if(currentSpeedL != 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean isMovingRight() {
-        if(currentSpeedR != 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public void updatePosition() {
-        pos = despos;
-        
-    }
 
     //#endregion
 

@@ -26,7 +26,7 @@ public class Main extends JFrame{
 
         MyKeyHandler kH = new MyKeyHandler();
 
-        GamePanel gamePanel = new GamePanel();
+        GamePanel gamePanel = new GamePanel(kH);
 
         window.add(gamePanel);
 
@@ -39,7 +39,6 @@ public class Main extends JFrame{
         window.setVisible(true);
 
         GameLoop gameLoop = new GameLoop(kH, gamePanel);
-
         Thread t1 = new Thread(gameLoop);
         t1.start();
     }
