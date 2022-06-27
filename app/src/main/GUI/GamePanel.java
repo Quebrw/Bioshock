@@ -15,7 +15,10 @@ import objects.Player;
 
 public class GamePanel extends JPanel {
 
-    Player P;
+    private int Pxpos;
+    private int Pypos;
+    private int Pwidth;
+    private int Pheight;
 
     public int screenWidth = 1920;
 
@@ -38,9 +41,15 @@ public class GamePanel extends JPanel {
         //this.addKeyListener(kH);
     }
 
-    public void updateGamePanel(Player Play) {
-        this.P = Play;
+    public void uGamePanel(int x, int y, int w, int h) {
+        this.Pxpos = x;
+        this.Pypos = y;
+        this.Pheight = h;
+        this.Pwidth = w;
+
     }
+
+    
     // standard method to draw things on the JPanel
     public void paintComponent(Graphics g) {
 
@@ -50,9 +59,10 @@ public class GamePanel extends JPanel {
         // changes Graphics g to Graphics2D (more functions)
         Graphics2D g2 = (Graphics2D)g;
 
-        g2.setColor(Color.white);
+        g2.setColor(Color.blue);
 
-        g2.fillRect((int)P.getPos().getXpos(), (int) P.getPos().getYpos(), (int) P.getWidth(), (int) P.getHeight());
+
+        g2.fillRect(Pxpos,Pypos,Pwidth,Pheight);
 
         // saves memory
         g2.dispose();

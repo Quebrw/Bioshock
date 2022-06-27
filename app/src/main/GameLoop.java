@@ -36,9 +36,10 @@ public class GameLoop extends JComponent implements Runnable {
     public void run() {
 
       //Most of these implementation should later be handled by a load Class
-      P.setHeight(20.0f);                   
-      P.setWidth(40.0f);
-      P.setPos(new Vector2f(-10f,-10f));
+      P.setHeight(100.0f);                   
+      P.setWidth(100.0f);
+      P.setPos(new Vector2f(500f,500f));
+      this.setFocusable(true);
 
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
@@ -74,7 +75,9 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     private void updatePlayerMovement() {
-        if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
+      if(kH.A_PRESSED){System.out.println("okay");}  
+      
+      if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
 
             if(P.actMovR == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
             P.moveRight(beganMoving - System.nanoTime());
@@ -111,8 +114,12 @@ public class GameLoop extends JComponent implements Runnable {
 
     }
     private void updateFrame() {
-      Graphics g;
-      gP.updateGamePanel(P);
+      
+      int x = (int)P.getPos().getXpos();
+      int y = (int)P.getPos().getYpos();
+      int w = (int)P.getWidth();
+      int h = (int)P.getHeight();
+      gP.uGamePanel(x,y,w,h);
       gP.repaint();
     }
 

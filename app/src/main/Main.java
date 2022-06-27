@@ -19,7 +19,7 @@ public class Main extends JFrame{
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // background color
-        window.setBackground(Color.black);
+        window.setBackground(Color.red);
 
         // window size is constant
         window.setResizable(false);

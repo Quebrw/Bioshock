@@ -26,7 +26,7 @@ public class Player extends worldObjects{
     public Player(int health, Vector2f pos, int width, int height) {
         this.health = health;
         this.pos = pos;
-        this.speed = 2;
+        this.speed = 20;
         this.width = width;
         this.height = height;
 

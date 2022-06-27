@@ -54,5 +54,5 @@ public class Vector2f {                         //2-Dimensional Vector, that con
     }
 
 
-    void loop(){}
+    //void loop(){}
 }
