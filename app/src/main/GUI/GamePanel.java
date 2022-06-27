@@ -8,9 +8,10 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import tools.MyKeyHandler;
+import tools.*;
 
 import objects.Player;
+
 
 public class GamePanel extends JPanel {
 
@@ -21,7 +22,7 @@ public class GamePanel extends JPanel {
 
     public int screenHeight = 1080;
 
-    MyKeyHandler keyHandler = new MyKeyHandler();
+    MyKeyHandler kH = new MyKeyHandler();
 
     public GamePanel() {
 
@@ -35,12 +36,7 @@ public class GamePanel extends JPanel {
         this.setFocusable(true);
 
         // adds keyHandler
-        this.addKeyListener(keyHandler);
-    }
-    public void update() {
-
-    
-
+        this.addKeyListener(kH);
     }
 
     // standard method to draw things on the JPanel
@@ -55,12 +51,11 @@ public class GamePanel extends JPanel {
         g2.setColor(Color.white);
 
         g2.fillRect(playerX, playerY, 100, 100);
+
         // saves memory
         g2.dispose();
     }
-
     
-
-
+    
     
 }

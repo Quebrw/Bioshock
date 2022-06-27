@@ -44,7 +44,7 @@ public class GameLoop extends JComponent implements Runnable {
               lastUpdate = System.nanoTime();
             }
             
-          }
+      }
     }
 
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
