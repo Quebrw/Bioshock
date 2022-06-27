@@ -38,7 +38,7 @@ public class Main extends JFrame{
 
         window.setVisible(true);
 
-        GameLoop gameLoop = new GameLoop(kH);
+        GameLoop gameLoop = new GameLoop(kH, gamePanel);
         Thread t1 = new Thread(gameLoop);
         t1.start();
     }

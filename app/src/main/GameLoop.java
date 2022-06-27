@@ -6,7 +6,10 @@ import objects.Player;
 import tools.MyKeyHandler;
 import tools.Vector2f;
 //import java.awt.Component;
-import javax.swing.*;                                                           //Maybe specify later
+import javax.swing.*;   
+import java.awt.Graphics;                                                        //Maybe specify later
+
+import GUI.GamePanel;
 //import tools.MyKeyHandler;
 public class GameLoop extends JComponent implements Runnable {
     
@@ -20,11 +23,13 @@ public class GameLoop extends JComponent implements Runnable {
     private Player P = new Player();
     //private ArrayList<worldObjects> sObjects;
     private MyKeyHandler kH;
+    private GamePanel gP;
 
     //#endregion
 
-    public GameLoop(MyKeyHandler kHin) {
+    public GameLoop(MyKeyHandler kHin, GamePanel gamePanel) {
       this.kH = kHin;
+      this.gP = gamePanel;
     }
 
     @Override
@@ -43,6 +48,8 @@ public class GameLoop extends JComponent implements Runnable {
               update(currentTime);
               lastUpdate = System.nanoTime();
             }
+
+    
             
       }
     }
@@ -56,12 +63,14 @@ public class GameLoop extends JComponent implements Runnable {
       }else{
         i++;
       }
-      //updateCollision();
       updatePlayerMovement();
 
       updateCollision();
 
       updatePositions();
+
+      updateFrame();
+
     }
 
     private void updatePlayerMovement() {
@@ -100,6 +109,11 @@ public class GameLoop extends JComponent implements Runnable {
     private void updatePositions(){
       P.updatePosition();
 
+    }
+    private void updateFrame() {
+      Graphics g;
+      gP.updateGamePanel(P);
+      gP.repaint();
     }
 
 }

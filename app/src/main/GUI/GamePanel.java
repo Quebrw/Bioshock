@@ -15,14 +15,13 @@ import objects.Player;
 
 public class GamePanel extends JPanel {
 
-    int playerX = 100;
-    int playerY = 100;
+    Player P;
 
     public int screenWidth = 1920;
 
     public int screenHeight = 1080;
 
-    MyKeyHandler kH = new MyKeyHandler();
+    //MyKeyHandler kH = new MyKeyHandler();
 
     public GamePanel() {
 
@@ -33,12 +32,15 @@ public class GamePanel extends JPanel {
         this.setBackground(Color.black);
 
         //Puts the Panel in keyboard focus
-        this.setFocusable(true);
+        //this.setFocusable(true);
 
         // adds keyHandler
-        this.addKeyListener(kH);
+        //this.addKeyListener(kH);
     }
 
+    public void updateGamePanel(Player Play) {
+        this.P = Play;
+    }
     // standard method to draw things on the JPanel
     public void paintComponent(Graphics g) {
 
@@ -50,7 +52,7 @@ public class GamePanel extends JPanel {
 
         g2.setColor(Color.white);
 
-        g2.fillRect(playerX, playerY, 100, 100);
+        g2.fillRect((int)P.getPos().getXpos(), (int) P.getPos().getYpos(), (int) P.getWidth(), (int) P.getHeight());
 
         // saves memory
         g2.dispose();
