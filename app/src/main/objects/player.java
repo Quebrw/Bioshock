@@ -1,6 +1,7 @@
 package objects;
 import tools.Vector2f;
-
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 public class Player extends worldObjects{
@@ -16,7 +17,7 @@ public class Player extends worldObjects{
     private int width;
     private int height;
     
-    float inertia = 2;                                                                              //seconds for which the player experiences inertia
+    float inertia = .8f;                                                                              //seconds for which the player experiences inertia
     private int speed;
     private float currentSpeedR;
     private float currentSpeedL;
@@ -73,7 +74,7 @@ public class Player extends worldObjects{
          
         float dTimeinSeconds = dTime / 1000000000;
 
-        if(dTimeinSeconds <= 2){
+        if(dTimeinSeconds <= inertia){
             despos.increaseX(speed/2, true);
         }else{
             despos.increaseX(speed, true);
@@ -96,10 +97,10 @@ public class Player extends worldObjects{
     public void moveLeft(long dTime) {
         float dTimeinSeconds = dTime / 1000000000;
 
-        if(dTimeinSeconds <= 2){
+        if(dTimeinSeconds <= inertia){
             despos.increaseX(speed/2, false);
         }else{
-            despos.increaseX(speed/2, false);
+            despos.increaseX(speed, false);
         }
         /* 
         if (dTimeinSeconds <= this.inertia){
@@ -144,4 +145,7 @@ public class Player extends worldObjects{
 
     //#endregion
 
+    public void draw(Graphics g2) {
+        BufferedImage image = null;
+    }
 }

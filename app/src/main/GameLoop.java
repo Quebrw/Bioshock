@@ -60,13 +60,13 @@ public class GameLoop extends JComponent implements Runnable {
     public void update(float time){
       
       System.out.println(time);
-
+      
       updatePlayerMovement();
-
+      
       updateCollision();
-
+      
       updatePositions();
-
+      
       updateFrame();
 
     }
@@ -98,9 +98,15 @@ public class GameLoop extends JComponent implements Runnable {
           if(P.actMovR == false){beganMoving = System.nanoTime();}
           P.moveRight(System.nanoTime() - beganMoving);
         }
-        if(kH.A_PRESSED == true){
+        if(kH.A_PRESSED == true && P.actMovR == false){
           if(P.actMovR == false){beganMoving = System.nanoTime();}
           P.moveLeft(System.nanoTime() - beganMoving);
+        }
+        if(kH.D_PRESSED == false && P.actMovR	 == true){
+          P.actMovR = false;
+        }
+        if(kH.A_PRESSED == false && P.actMovL == true){
+          P.actMovL = false;
         }
     }
 
@@ -120,13 +126,13 @@ public class GameLoop extends JComponent implements Runnable {
       P.updatePosition();
 
     }
-    
+
     private void updateFrame() {
       int x = (int)P.xpos;
       int y = (int)P.getPos().getYpos();
       int w = (int)P.getWidth();
       int h = (int)P.getHeight();
-      gP.uGamePanel(x,y,w,h);
+      gP.uGamePanel(x,y,w,h, P);
       gP.repaint();
     }
 
