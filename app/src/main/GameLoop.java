@@ -59,12 +59,8 @@ public class GameLoop extends JComponent implements Runnable {
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
     public void update(float time){
       
-      if(i == 60){                                                              //tests FrameRate
-        //System.out.println(time / 1000000000);
-        i = 0;
-      }else{
-        i++;
-      }
+      System.out.println(time);
+
       updatePlayerMovement();
 
       updateCollision();

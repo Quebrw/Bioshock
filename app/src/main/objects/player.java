@@ -70,7 +70,16 @@ public class Player extends worldObjects{
     //#region movement
 
     public void moveRight(long dTime) {
+         
         float dTimeinSeconds = dTime / 1000000000;
+
+        if(dTimeinSeconds <= 2){
+            despos.increaseX(speed/2, true);
+        }else{
+            despos.increaseX(speed, true);
+        }
+
+        /*
         if (dTimeinSeconds <= this.inertia){
             double i = speed * Math.sin((Math.PI*dTimeinSeconds)/(2*inertia));                      //The player should feel inertia while starting to move
             currentSpeedR = (float)i;
@@ -79,11 +88,20 @@ public class Player extends worldObjects{
             currentSpeedR = 2;
             despos.increaseX(speed, true);
         }
+        */
+        
         actMovR = true;
     }
 
     public void moveLeft(long dTime) {
         float dTimeinSeconds = dTime / 1000000000;
+
+        if(dTimeinSeconds <= 2){
+            despos.increaseX(speed/2, false);
+        }else{
+            despos.increaseX(speed/2, false);
+        }
+        /* 
         if (dTimeinSeconds <= this.inertia){
             double i = speed * Math.sin((Math.PI*dTimeinSeconds)/(2*inertia));                      //The player should feel inertia while starting to move
             currentSpeedL = (float)i;
@@ -92,6 +110,7 @@ public class Player extends worldObjects{
             currentSpeedL = 2;
             despos.increaseX(speed, false);
         }
+        */
         actMovL = true;
     }
 
