@@ -27,7 +27,7 @@ public class Main extends JFrame{
         MyKeyHandler kH = new MyKeyHandler();
 
         GamePanel gamePanel = new GamePanel(kH);
-
+        // Implements the GamePanel to the Frame
         window.add(gamePanel);
 
         // The size of the Frame equals the GamePanel
@@ -36,6 +36,7 @@ public class Main extends JFrame{
         // window is created in the center of the screen
         window.setLocationRelativeTo(null);
 
+        // Turns the frame with its content visible
         window.setVisible(true);
 
         GameLoop gameLoop = new GameLoop(kH, gamePanel);
