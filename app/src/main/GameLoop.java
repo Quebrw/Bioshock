@@ -8,7 +8,6 @@ import tools.Vector2f;
 //import java.awt.Component;
 import javax.swing.*;   
 //import java.awt.Graphics;                                                        //Maybe specify later
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 import GUI.GamePanel;
 //import tools.MyKeyHandler;
@@ -41,11 +40,16 @@ public class GameLoop extends JComponent implements Runnable {
       //Most of these implementation should later be handled by a load Class
       P.setHeight(100);                   
       P.setWidth(100);
-      P.setPos(new Vector2f(500f,500f));
-      worldObjects box = new worldObjects(100,100, new Vector2f(2000.0f,500.0f), "box");
+      P.xpos = 50f;
+      P.ypos = 0f;
+      worldObjects box = new worldObjects(100,100, new Vector2f(1000.0f,0.0f), "box");
+      worldObjects box2 = new worldObjects(100,100, new Vector2f(-100.0f,0.0f), "box");
+
       sObjects.clear();
       sObjects.add(P);
       sObjects.add(box);
+      sObjects.add(box2);
+
       System.out.println(sObjects.size());
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
@@ -68,6 +72,8 @@ public class GameLoop extends JComponent implements Runnable {
       
       updatePlayerMovement();
       
+      updateScene();
+
       updateCollision();
       
       updatePositions();
@@ -99,6 +105,10 @@ public class GameLoop extends JComponent implements Runnable {
           }
         }
         */
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------
+        //The Player starts sprinting after 2 seconds, when stopping to sprint, they will experience a certiant inertia of movement because of their speed
+        //------------------------------------------------------------------------------------------------------------------------------------------------
 
         //If the Player is not already moving in another direction, he will start moving right/left
         if(kH.D_PRESSED == true && P.actMovL == false){
@@ -135,27 +145,38 @@ public class GameLoop extends JComponent implements Runnable {
         }
     }
 
-    private void updateCollision() {                                              //currently just Testcode inside
+    private void updateScene() {
+      sObjects.set(0, P);
+    }
+
+    private void updateCollision() {                                              //currently only checking Player collision
       
+      //gets a List of all Objects that are currently touching the player
       ArrayList<worldObjects> colliders = Collider.getCollisisions(P, sObjects);
-
-      if(colliders.size() > 0){
-        for(int j = 0; j >= colliders.size(); j++){
-        switch(colliders.get(j).getObjectType()){
+      System.out.println(colliders + "|" + colliders.size()); //debug
+      //safeguard so theres no out of bounds exception
+      if(colliders.size() >= 1){
+        for(int j = 0; j < colliders.size(); j++){
+          //for every colliding object the Type of collision is checked
+          switch(colliders.get(j).getObjectType()){
           
-          case "generic":
-          break;
+            case "generic":
+            break;
 
-          case "box":
-            boolean isColliding = true;
-            Vector2f move = P.despos.getDifference(P.pos);
-            while(isColliding == true){
-              P.despos.subtract(move, 0.2f);
-              if(Collider.isColliding(P, colliders.get(j))== false){
-                isColliding = false;
+            //for boxcollisions the player is supposed to not be able to move through
+            case "box":
+              boolean isColliding = true;
+              P.pos.setXpos(P.xpos);
+              P.pos.setYpos(P.ypos);
+              Vector2f move = P.despos.getDifference(P.pos);
+              //sets the player back so that its as close to the colliding object as possible without touching it
+              while(isColliding == true){
+                P.despos.subtract(move, 0.1f);
+                if(Collider.isColliding(P, colliders.get(j))== false){
+                  isColliding = false;
+                }
               }
-            }
-          break;
+            break;
 
         }
       }

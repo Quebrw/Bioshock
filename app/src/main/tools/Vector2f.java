@@ -62,8 +62,10 @@ public class Vector2f {                         //2-Dimensional Vector, that con
 
 
     public void subtract(Vector2f v2, float basis){
-        this.xpos = this.xpos - v2.xpos * basis;
-        this.xpos = this.ypos - v2.ypos * basis;
+        System.out.println(this.xpos);
+        this.xpos = this.xpos - (v2.xpos * basis);
+        System.out.println(this.xpos);
+        this.ypos = this.ypos - (v2.ypos * basis);
     }
 
     //void loop(){}

@@ -8,10 +8,11 @@ import tools.Vector2f;
  */
 public class worldObjects {           //Every Object in the world should have a Position and Size; making this a Parent class simplifies passing the objects to the Collider      
 
-    private int width;
-    private int height;
+    public int width,  height;
     private Vector2f pos;
+    public float xpos, ypos;
     private String ObjectType;
+    public Vector2f despos;
 
     //#region GetSet
     public int getHeight() {
@@ -42,6 +43,8 @@ public class worldObjects {           //Every Object in the world should have a 
         this.width = w;
         this.pos = p;
         this.ObjectType = oT;
+        this.xpos = this.pos.getXpos();
+        this.ypos = this.pos.getYpos();
     }
 
     public void setHeight(int h) {
