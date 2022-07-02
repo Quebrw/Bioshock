@@ -22,7 +22,7 @@ public class Player extends worldObjects{
     private float currentSpeedR;
     private float currentSpeedL;
     public boolean actMovR, actMovL;
-    private Vector2f despos;                                                                        //desired Position
+    public Vector2f despos;                                                                        //desired Position
     //#endregion
     
     //#region Constructors
@@ -46,6 +46,16 @@ public class Player extends worldObjects{
     }
     //#endregion
 
+    
+    
+    //#region movement
+
+    public void updatePosition() {
+        this.xpos = this.despos.getXpos();
+        this.ypos = this.despos.getYpos();
+        this.pos = new Vector2f(this.xpos, this.ypos);
+    }
+    
     public boolean isMovingLeft(){
         if(currentSpeedL != 0){
             return true;
@@ -61,14 +71,6 @@ public class Player extends worldObjects{
             return false;
         }
     }
-
-    public void updatePosition() {
-        this.xpos = this.despos.getXpos();
-        this.ypos = this.despos.getYpos();
-        
-    }
-    
-    //#region movement
 
     public void moveRight(long dTime) {
          
@@ -93,6 +95,7 @@ public class Player extends worldObjects{
         
         actMovR = true;
     }
+
 
     public void moveLeft(long dTime) {
         float dTimeinSeconds = dTime / 1000000000;
@@ -148,4 +151,12 @@ public class Player extends worldObjects{
     public void draw(Graphics g2) {
         BufferedImage image = null;
     }
+
+    //#region GetSet
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    //#endregion
 }

@@ -1,13 +1,14 @@
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 import objects.Player;
-//import objects.worldObjects;
-//import tools.Collider;
+import objects.worldObjects;
+import tools.Collider;
 import tools.MyKeyHandler;
 import tools.Vector2f;
 //import java.awt.Component;
 import javax.swing.*;   
 //import java.awt.Graphics;                                                        //Maybe specify later
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 import GUI.GamePanel;
 //import tools.MyKeyHandler;
@@ -17,13 +18,15 @@ public class GameLoop extends JComponent implements Runnable {
     private boolean running = true;
     private float lastUpdate;
     private float updateRate = (1.0f/60.0f) * 1000000000.0f;
-    private int i = 0;
+    private boolean inertiaR, inertiaL;
+    private long stoppedMovingR, stoppedMovingL;
     private long beganMoving;
 
     private Player P = new Player();
     //private ArrayList<worldObjects> sObjects;
     private MyKeyHandler kH;
     private GamePanel gP;
+    private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
 
     //#endregion
 
@@ -36,12 +39,14 @@ public class GameLoop extends JComponent implements Runnable {
     public void run() {
 
       //Most of these implementation should later be handled by a load Class
-      P.setHeight(100.0f);                   
-      P.setWidth(100.0f);
+      P.setHeight(100);                   
+      P.setWidth(100);
       P.setPos(new Vector2f(500f,500f));
-      //this.setFocusable(true);
-      //this.addKeyListener(kH);
-
+      worldObjects box = new worldObjects(100,100, new Vector2f(2000.0f,500.0f), "box");
+      sObjects.clear();
+      sObjects.add(P);
+      sObjects.add(box);
+      System.out.println(sObjects.size());
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
           float currentTime = System.nanoTime();
@@ -94,31 +99,67 @@ public class GameLoop extends JComponent implements Runnable {
           }
         }
         */
+
+        //If the Player is not already moving in another direction, he will start moving right/left
         if(kH.D_PRESSED == true && P.actMovL == false){
           if(P.actMovR == false){beganMoving = System.nanoTime();}
+          //gets the time for which this active movement has been underway
           P.moveRight(System.nanoTime() - beganMoving);
         }
         if(kH.A_PRESSED == true && P.actMovR == false){
-          if(P.actMovR == false){beganMoving = System.nanoTime();}
+          if(P.actMovL == false){beganMoving = System.nanoTime();}
           P.moveLeft(System.nanoTime() - beganMoving);
         }
+        //handles inertia of movement
         if(kH.D_PRESSED == false && P.actMovR	 == true){
           P.actMovR = false;
+          if((System.nanoTime() - beganMoving)/1000000000 >= 0.5){inertiaR = true;}
+          stoppedMovingR = System.nanoTime();
         }
         if(kH.A_PRESSED == false && P.actMovL == true){
           P.actMovL = false;
+          if((System.nanoTime() - beganMoving)/1000000000 >= 0.5){inertiaL = true;}
+          stoppedMovingL = System.nanoTime();
+        }
+        if(inertiaR == true && kH.D_PRESSED == false){
+          P.despos.increaseX(P.getSpeed()/2, true);
+          if((System.nanoTime() - stoppedMovingR) >= (0.15)*1000000000){
+            inertiaR = false;
+          }
+        }
+        if(inertiaL == true && kH.A_PRESSED == false){
+          P.despos.increaseX(P.getSpeed()/2, false);
+          if((System.nanoTime() - stoppedMovingL) >= (0.15)*1000000000){
+            inertiaL = false;
+          }
         }
     }
 
     private void updateCollision() {                                              //currently just Testcode inside
       
-      //Collider.getCollisisions(P, sObjects);
+      ArrayList<worldObjects> colliders = Collider.getCollisisions(P, sObjects);
 
-      // worldObjects R = new worldObjects();
-      // if(Collider.isColliding(P, R) == true){
-      //   System.out.println("yes");
-      //   P.setPos(new Vector2f(P.getPos().getXpos()+0.01667f, -10f));
-      // } 
+      if(colliders.size() > 0){
+        for(int j = 0; j >= colliders.size(); j++){
+        switch(colliders.get(j).getObjectType()){
+          
+          case "generic":
+          break;
+
+          case "box":
+            boolean isColliding = true;
+            Vector2f move = P.despos.getDifference(P.pos);
+            while(isColliding == true){
+              P.despos.subtract(move, 0.2f);
+              if(Collider.isColliding(P, colliders.get(j))== false){
+                isColliding = false;
+              }
+            }
+          break;
+
+        }
+      }
+    }
 
     }
 
@@ -130,9 +171,9 @@ public class GameLoop extends JComponent implements Runnable {
     private void updateFrame() {
       int x = (int)P.xpos;
       int y = (int)P.getPos().getYpos();
-      int w = (int)P.getWidth();
-      int h = (int)P.getHeight();
-      gP.uGamePanel(x,y,w,h, P);
+      int w = P.getWidth();
+      int h = P.getHeight();
+      gP.uGamePanel(x,y,w,h);
       gP.repaint();
     }
 

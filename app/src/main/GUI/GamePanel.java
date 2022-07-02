@@ -42,12 +42,12 @@ public class GamePanel extends JPanel {
         this.addKeyListener(kH);
     }
 
-    public void uGamePanel(int x, int y, int w, int h, Player P) {
+    public void uGamePanel(int x, int y, int w, int h) {
         this.Pxpos = x;
         this.Pypos = y;
         this.Pheight = h;
         this.Pwidth = w;
-        this.P = P;
+
     }
 
     
@@ -61,8 +61,6 @@ public class GamePanel extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
 
         g2.setColor(Color.blue);
-
-        P.draw(g2);
 
         g2.fillRect(Pxpos,Pypos,Pwidth,Pheight);
 

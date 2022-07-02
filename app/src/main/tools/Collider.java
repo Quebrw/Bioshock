@@ -21,7 +21,7 @@ public class Collider {                                             //Class that
         ArrayList<worldObjects> output = new ArrayList<worldObjects>(0);
         for (int i = 0; i < sceneObjects.size(); i++) {
                 worldObjects tempO = (worldObjects) sceneObjects.get(i);
-            if(isColliding(collider, tempO) == true){
+            if(isColliding(collider, tempO) == true && collider != tempO){
                 output.add(tempO);
             }
         }
