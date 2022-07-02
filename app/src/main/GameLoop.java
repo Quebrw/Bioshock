@@ -72,8 +72,7 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     private void updatePlayerMovement() {
-      if(kH.A_PRESSED == true){System.out.println("okay");}  
-      
+      /* 
       if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
             if(P.actMovR == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
             P.moveRight(System.nanoTime() - beganMoving);
@@ -94,6 +93,15 @@ public class GameLoop extends JComponent implements Runnable {
             P.abruptStopLeft(System.nanoTime() - kH.A_releaseTime);
           }
         }
+        */
+        if(kH.D_PRESSED == true && P.actMovL == false){
+          if(P.actMovR == false){beganMoving = System.nanoTime();}
+          P.moveRight(System.nanoTime() - beganMoving);
+        }
+        if(kH.A_PRESSED == true){
+          if(P.actMovR == false){beganMoving = System.nanoTime();}
+          P.moveLeft(System.nanoTime() - beganMoving);
+        }
     }
 
     private void updateCollision() {                                              //currently just Testcode inside
@@ -112,6 +120,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.updatePosition();
 
     }
+    
     private void updateFrame() {
       int x = (int)P.xpos;
       int y = (int)P.getPos().getYpos();
