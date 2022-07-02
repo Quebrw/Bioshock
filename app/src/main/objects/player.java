@@ -40,7 +40,7 @@ public class Player extends worldObjects{
         this.pos = new Vector2f();
         this.width = 0;
         this.height = 0;
-        this.speed = 10;
+        this.speed = 30;
         this.despos = this.pos;
     }
     //#endregion
