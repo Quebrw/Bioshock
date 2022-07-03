@@ -30,7 +30,7 @@ public class Player extends worldObjects{
     public Player(int health, Vector2f pos, int width, int height) {
         this.health = health;
         this.pos = pos;
-        this.speed = 15;
+        this.speed = 10;
         this.jumpSpeed = 15;
         this.width = width;
         this.height = height;
@@ -43,7 +43,7 @@ public class Player extends worldObjects{
         this.pos = new Vector2f();
         this.width = 0;
         this.height = 0;
-        this.speed = 15;
+        this.speed = 10;
         this.jumpSpeed = 15;
         this.despos = this.pos;
         this.setObjectType("player");
@@ -82,7 +82,7 @@ public class Player extends worldObjects{
         float dTimeinSeconds = dTime / 1000000000;
 
         if(dTimeinSeconds <= inertia){
-            despos.increaseX(speed/2, true);
+            despos.increaseX(speed*0.7f, true);
         }else{
             despos.increaseX(speed, true);
         }
@@ -106,7 +106,7 @@ public class Player extends worldObjects{
         float dTimeinSeconds = dTime / 1000000000;
 
         if(dTimeinSeconds <= inertia){
-            despos.increaseX(speed/2, false);
+            despos.increaseX(speed*0.7f, false);
         }else{
             despos.increaseX(speed, false);
         }
