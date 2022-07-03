@@ -16,13 +16,13 @@ public class Player extends worldObjects{
     //public float ypos;    
     //private int width, height;
     
-    float inertia = .8f;                                                                              //seconds for which the player experiences inertia
-    private int speed;
+    public float inertia = .8f;                                                                              //seconds for which the player experiences inertia
+    private int speed, jumpSpeed;
     private float currentSpeedR;
     private float currentSpeedL;
     public boolean actMovR, actMovL;
     public boolean touchingGround;
-    public long jumpLenght = 2 * 1000000000;
+    public long jumpLenght = 1 * 1000000000;
     //public Vector2f despos;                                                                        //desired Position
     //#endregion
     
@@ -31,6 +31,7 @@ public class Player extends worldObjects{
         this.health = health;
         this.pos = pos;
         this.speed = 15;
+        this.jumpSpeed = 15;
         this.width = width;
         this.height = height;
         this.setObjectType("player");
@@ -43,6 +44,7 @@ public class Player extends worldObjects{
         this.width = 0;
         this.height = 0;
         this.speed = 15;
+        this.jumpSpeed = 15;
         this.despos = this.pos;
         this.setObjectType("player");
         this.touchingGround = false;
@@ -122,11 +124,13 @@ public class Player extends worldObjects{
     }
 
     public void jump(long dTime) {
-        
+        double i = jumpSpeed * Math.cos((Math.PI*dTime)/(2*jumpLenght));                      //The player should feel inertia while starting to move
+        currentSpeedL = (float)i;
+        despos.increaseY(currentSpeedL, true);        
     }
 
     public void ionlyfeelGravity() {
-        
+        this.despos.setYpos(this.despos.getYpos() - 10f);;
     }
     /* 
     public void abruptStopRight(long dTime){

@@ -26,7 +26,7 @@ public class GameLoop extends JComponent implements Runnable {
     private MyKeyHandler kH;
     private GamePanel gP;
     private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
-    private worldObjects refGround;
+    private worldObjects refGround = new worldObjects();
 
     //#endregion
 
@@ -41,10 +41,12 @@ public class GameLoop extends JComponent implements Runnable {
       //Most of these implementation should later be handled by a load Class
       P.setHeight(50);                   
       P.setWidth(50);
-      P.xpos = 50f;
-      P.ypos = 0f;
-      worldObjects box = new worldObjects(100,100, new Vector2f(1000.0f,0.0f), "box");
-      worldObjects box2 = new worldObjects(100,100, new Vector2f(-100.0f,0.0f), "box");
+      P.xpos = 500f;
+      P.ypos = 500f;
+      P.pos.setXpos(P.xpos);
+      P.pos.setYpos(P.ypos); 
+      worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,399.0f), "box");
+      worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f,-100.0f), "box");
       
       
       refGround.setObjectType("generic");
@@ -117,7 +119,15 @@ public class GameLoop extends JComponent implements Runnable {
         //------------------------------------------------------------------------------------------------------------------------------------------------
         //The Player starts sprinting after 2 seconds, when stopping to sprint, they will experience a certiant inertia of movement because of their speed
         //------------------------------------------------------------------------------------------------------------------------------------------------
-
+        /* 
+        if((System.nanoTime() - beganJump) < P.jumpLenght/3){
+          kH.enabled = false;
+          kH.SPACE_PRESSED = false;
+        }
+        if((System.nanoTime() - beganJump) >= P.jumpLenght/3){
+          kH.enabled = true;
+        }
+        */
         //If the Player is not already moving in another direction, he will start moving right/left
         if(kH.D_PRESSED == true && P.actMovL == false){
           if(P.actMovR == false){beganMoving = System.nanoTime();}
@@ -152,7 +162,7 @@ public class GameLoop extends JComponent implements Runnable {
           }
         }
         if(P.touchingGround == false){
-
+          P.ionlyfeelGravity();
         }
 
         if(kH.SPACE_PRESSED == true && P.touchingGround == true){
@@ -222,7 +232,7 @@ public class GameLoop extends JComponent implements Runnable {
 
     private void updateFrame() {
       int x = (int)P.xpos;
-      int y = (int)P.getPos().getYpos();
+      int y = (int)P.ypos;
       int w = P.getWidth();
       int h = P.getHeight();
       gP.uGamePanel(x,y,w,h);
