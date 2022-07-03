@@ -44,7 +44,7 @@ public class MyKeyHandler implements KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(enabled == true){
+        //if(enabled == true){
             if (e.getKeyCode() == KeyEvent.VK_W) {
                 W_PRESSED = false;
             }
@@ -70,7 +70,7 @@ public class MyKeyHandler implements KeyListener{
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 SPACE_PRESSED = false;
             }
-        }
+        //}
     }
 
     public MyKeyHandler() {
