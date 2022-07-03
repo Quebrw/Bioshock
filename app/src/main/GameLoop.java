@@ -19,13 +19,14 @@ public class GameLoop extends JComponent implements Runnable {
     private float updateRate = (1.0f/60.0f) * 1000000000.0f;
     private boolean inertiaR, inertiaL;
     private long stoppedMovingR, stoppedMovingL;
-    private long beganMoving;
+    private long beganMoving, beganJump;
 
     private Player P = new Player();
     //private ArrayList<worldObjects> sObjects;
     private MyKeyHandler kH;
     private GamePanel gP;
     private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
+    private worldObjects refGround;
 
     //#endregion
 
@@ -38,12 +39,19 @@ public class GameLoop extends JComponent implements Runnable {
     public void run() {
 
       //Most of these implementation should later be handled by a load Class
-      P.setHeight(100);                   
-      P.setWidth(100);
+      P.setHeight(50);                   
+      P.setWidth(50);
       P.xpos = 50f;
       P.ypos = 0f;
       worldObjects box = new worldObjects(100,100, new Vector2f(1000.0f,0.0f), "box");
       worldObjects box2 = new worldObjects(100,100, new Vector2f(-100.0f,0.0f), "box");
+      
+      
+      refGround.setObjectType("generic");
+      refGround.xpos = -100.0f;
+      refGround.width = 3000;
+      refGround.ypos = -100f;
+      refGround.height = 1; 
 
       sObjects.clear();
       sObjects.add(P);
@@ -143,6 +151,22 @@ public class GameLoop extends JComponent implements Runnable {
             inertiaL = false;
           }
         }
+        if(P.touchingGround == false){
+
+        }
+
+        if(kH.SPACE_PRESSED == true && P.touchingGround == true){
+          beganJump = System.nanoTime();
+          P.touchingGround = false;
+        }
+        if((System.nanoTime() - beganJump) < P.jumpLenght){
+          P.jump(System.nanoTime() - beganJump);
+        }
+        
+        //checks if the player has stepped off a platform and should therefore experience gravity
+        if((P.xpos + P.width) < refGround.xpos || P.xpos > (refGround.xpos + refGround.width)){
+          P.touchingGround = false;
+        }
     }
 
     private void updateScene() {
@@ -175,6 +199,13 @@ public class GameLoop extends JComponent implements Runnable {
                 if(Collider.isColliding(P, colliders.get(j))== false){
                   isColliding = false;
                 }
+              }
+              //if the Player touches Ground, gravity has to be turned off, because it would cause constant collision and mess up the movement
+              if(P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
+                P.touchingGround = true;
+                //there are 2 ways a player can leave a surface: per jumping or per stepping off the platform. To account for the second one a copy of the current surface's x-Dimensions is made for reference
+                refGround.xpos = colliders.get(j).xpos;
+                refGround.width = colliders.get(j).width;
               }
             break;
 

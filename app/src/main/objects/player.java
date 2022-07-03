@@ -21,6 +21,8 @@ public class Player extends worldObjects{
     private float currentSpeedR;
     private float currentSpeedL;
     public boolean actMovR, actMovL;
+    public boolean touchingGround;
+    public long jumpLenght = 2 * 1000000000;
     //public Vector2f despos;                                                                        //desired Position
     //#endregion
     
@@ -32,7 +34,7 @@ public class Player extends worldObjects{
         this.width = width;
         this.height = height;
         this.setObjectType("player");
-        
+        this.touchingGround = false;
     }
     
     public Player() {
@@ -43,7 +45,7 @@ public class Player extends worldObjects{
         this.speed = 15;
         this.despos = this.pos;
         this.setObjectType("player");
-
+        this.touchingGround = false;
     }
     //#endregion
 
@@ -119,6 +121,14 @@ public class Player extends worldObjects{
         actMovL = true;
     }
 
+    public void jump(long dTime) {
+        
+    }
+
+    public void ionlyfeelGravity() {
+        
+    }
+    /* 
     public void abruptStopRight(long dTime){
         actMovR = false;
         float dTimeinSeconds = dTime / 1000000000;
@@ -145,7 +155,7 @@ public class Player extends worldObjects{
             }
         }
     }
-
+    */
 
     //#endregion
 
