@@ -11,7 +11,7 @@ import javax.swing.*;
 //import java.awt.Graphics;  
 //Maybe specify later
 
-import java.awt.Graphics2D;
+//import java.awt.Graphics2D;
 
 
 import GUI.GamePanel;
@@ -19,19 +19,27 @@ import GUI.GamePanel;
 public class GameLoop extends JComponent implements Runnable {
     
   //#region Variables
-    private boolean running = true;
-    private float lastUpdate;
-    private float updateRate = (1.0f/60.0f) * 1000000000.0f;
-    private boolean inertiaR, inertiaL;
-    private long stoppedMovingR, stoppedMovingL;
-    private long beganMoving, beganJump;
 
-    public Player P = new Player();
-    //private ArrayList<worldObjects> sObjects;
-    private MyKeyHandler kH;
-    private GamePanel gP;
-    private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
-    private worldObjects refGround = new worldObjects();
+  //______FRAMEUPDATE___________
+  private float lastUpdate;
+  private float updateRate = (1.0f/60.0f) * 1000000000.0f;
+  
+  //______GLOBAL_ENTITIES_______
+  private MyKeyHandler kH;
+  private GamePanel gP;
+  private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
+  private int[] worldGrid = new int[2];
+  private boolean sceneChange = false;
+  
+  //______SPECIFIC_ENTITIES_____
+  private worldObjects refGround = new worldObjects();
+  
+  //_______PLAYER_______________
+  public Player P = new Player();
+  private boolean running = true;
+  private boolean inertiaR, inertiaL;
+  private long stoppedMovingR, stoppedMovingL;
+  private long beganMoving, beganJump;
 
     //#endregion
 
@@ -43,7 +51,7 @@ public class GameLoop extends JComponent implements Runnable {
     @Override
     public void run() {
 
-      //Most of these implementation should later be handled by a load Class
+      //Most of these implementations should later be handled by a load Class
       P.setHeight(50);                   
       P.setWidth(50);
       P.xpos = 500f;
@@ -98,28 +106,6 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     private void updatePlayerMovement() {
-      /* 
-      if(kH.D_PRESSED == true && P.actMovL == false){     //checks if Movement right is requested and whether it interfering with previously requested Movement    
-            if(P.actMovR == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
-            P.moveRight(System.nanoTime() - beganMoving);
-            
-
-        }else if(kH.A_PRESSED == true && P.actMovR == false){   //checks if Movement right is requested and whether it interfering with previously requested Movement  
-
-          if(P.actMovL == false){beganMoving = System.nanoTime();}  //if the object just started the active Movement in this direction the time is taken; this is required for a later function
-          P.moveLeft(System.nanoTime()-beganMoving);
-
-        }else{
-          System.err.println(P.isMovingRight());
-          if(P.isMovingRight() == true){
-            System.out.println("yes");
-            P.abruptStopRight(System.nanoTime() - kH.D_releaseTime);
-          }
-          if(P.isMovingLeft() == true){
-            P.abruptStopLeft(System.nanoTime() - kH.A_releaseTime);
-          }
-        }
-        */
 
         //------------------------------------------------------------------------------------------------------------------------------------------------
         //The Player starts sprinting after 2 seconds, when stopping to sprint, they will experience a certiant inertia of movement because of their speed
@@ -166,14 +152,19 @@ public class GameLoop extends JComponent implements Runnable {
             inertiaL = false;
           }
         }
+
+        //executes Gravity when necessary
         if(P.touchingGround == false){
           P.ionlyfeelGravity();
         }
 
+        //initiates the jump
         if(kH.SPACE_PRESSED == true && P.touchingGround == true){
           beganJump = System.nanoTime();
           P.touchingGround = false;
         }
+
+        //executes the jump
         if((System.nanoTime() - beganJump) < P.jumpLenght){
           P.jump(System.nanoTime() - beganJump);
         }
@@ -184,11 +175,12 @@ public class GameLoop extends JComponent implements Runnable {
         }
     }
 
+    //may be unnecessary
     private void updateScene() {
       sObjects.set(0, P);
     }
 
-    private void updateCollision() {                                              //currently only checking Player collision
+    private void updateCollision() {  //currently only checking Player collision
       
       //gets a List of all Objects that are currently touching the player
       ArrayList<worldObjects> colliders = Collider.getCollisisions(P, sObjects);
@@ -224,6 +216,29 @@ public class GameLoop extends JComponent implements Runnable {
               }
             break;
 
+            //#region SceneTriggers
+
+            case "rightTrigger":
+              worldGrid[0] += 1;
+              sceneChange = true;
+            break;
+
+            case "leftTrigger":
+              worldGrid[0] -= 1;
+              sceneChange = true;
+            break;
+
+            case "upTrigger":
+              worldGrid[1] += 1;
+              sceneChange = true;
+            break;
+
+            case "downTrigger":
+              worldGrid[1] -= 1;
+              sceneChange = true;
+            break;
+            
+            //#endregion
         }
       }
     }

@@ -83,7 +83,7 @@ public class GamePanel extends JPanel {
 
             if (i == 1) {
 
-                g2.setColor(Color.green);
+                g2.setColor(Color.pink);
 
                 g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
 
@@ -91,21 +91,21 @@ public class GamePanel extends JPanel {
 
                 if (changeColor < 50) {
 
-                    g2.setColor(Color.blue);
+                    g2.setColor(Color.RED);
     
                     g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
 
-                    g2.setColor(Color.red);
+                    //g2.setColor(Color.red);
 
-                    g2.fillRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+                    //g2.fillRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
     
                     changeColor ++;
 
                 } else {
     
-                    g2.setColor(Color.blue);
+                    g2.setColor(Color.cyan);
 
-                    g2.fillRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+                    g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
     
                     changeColor = 0;
                 } 
