@@ -7,10 +7,15 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import tools.*;
 
+import test.*;
+
+
 import objects.Player;
+import objects.worldObjects;
 
 
 public class GamePanel extends JPanel {
@@ -19,7 +24,9 @@ public class GamePanel extends JPanel {
     private int Pypos;
     private int Pwidth;
     private int Pheight;
-    private Player P;
+    private ArrayList<worldObjects> sObjects;
+
+    public int changeColor = 0;
 
     public int screenWidth = 1920;
 
@@ -60,14 +67,55 @@ public class GamePanel extends JPanel {
         // changes Graphics g to Graphics2D (more functions)
         Graphics2D g2 = (Graphics2D)g;
 
-        g2.setColor(Color.blue);
-
-        g2.fillRect(Pxpos,Pypos,Pwidth,Pheight);
+        draw(g2);
 
         // saves memory
         g2.dispose();
     }
     
+    public void gimmeThatArrayList(ArrayList<worldObjects> wO) {
+        this.sObjects = wO;
+    }
+
+    public void draw(Graphics2D g2) {
+
+        for (int i = 0; i < sObjects.size(); i++) {
+
+            if (i == 1) {
+
+                g2.setColor(Color.green);
+
+                g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+
+            } else {
+
+                if (changeColor < 50) {
+
+                    g2.setColor(Color.blue);
     
+                    g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+
+                    g2.setColor(Color.red);
+
+                    g2.fillRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+    
+                    changeColor ++;
+
+                } else {
+    
+                    g2.setColor(Color.blue);
+
+                    g2.fillRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+    
+                    changeColor = 0;
+                } 
+
+            }
+
+            
+
+        }
+
+    }
     
 }
