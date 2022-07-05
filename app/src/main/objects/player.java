@@ -1,35 +1,26 @@
 package objects;
 import tools.Vector2f;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 
 public class Player extends worldObjects{
-
-
     //#region Variables
     public int health;
-    
-    public Vector2f pos;
-    
-    //public float xpos;
-    //public float ypos;    
-    //private int width, height;
-    
+
+    //_____Movement_______
     public float inertia = .8f;                                                                              //seconds for which the player experiences inertia
     private int speed, jumpSpeed;
-    private float currentSpeedR;
-    private float currentSpeedL;
     public boolean actMovR, actMovL;
     public boolean touchingGround;
     public long jumpLenght = 1 * 1000000000;
-    //public Vector2f despos;                                                                        //desired Position
     //#endregion
     
     //#region Constructors
     public Player(int health, Vector2f pos, int width, int height) {
         this.health = health;
-        this.pos = pos;
+        //this.pos = pos;
+        this.xpos = pos.getXpos();
+        this.ypos = pos.getYpos();
         this.speed = 10;
         this.jumpSpeed = 15;
         this.width = width;
@@ -40,12 +31,13 @@ public class Player extends worldObjects{
     
     public Player() {
         this.health = 0;
-        this.pos = new Vector2f();
+        this.xpos = 0;
+        this.ypos = 0;
         this.width = 0;
         this.height = 0;
         this.speed = 10;
         this.jumpSpeed = 15;
-        this.despos = this.pos;
+        this.despos = new Vector2f();
         this.setObjectType("player");
         this.touchingGround = false;
     }
@@ -58,9 +50,10 @@ public class Player extends worldObjects{
     public void updatePosition() {
         this.xpos = this.despos.getXpos();
         this.ypos = this.despos.getYpos();
-        this.pos = new Vector2f(this.xpos, this.ypos);
+        //this.pos = new Vector2f(this.xpos, this.ypos);
     }
     
+    /* 
     public boolean isMovingLeft(){
         if(currentSpeedL != 0){
             return true;
@@ -76,7 +69,7 @@ public class Player extends worldObjects{
             return false;
         }
     }
-
+    */
     public void moveRight(long dTime) {
          
         float dTimeinSeconds = dTime / 1000000000;
@@ -104,8 +97,8 @@ public class Player extends worldObjects{
 
     public void jump(long dTime) {
         double i = jumpSpeed * Math.cos((Math.PI*dTime)/(2*jumpLenght));
-        currentSpeedL = (float)i;
-        despos.increaseY(currentSpeedL, true);        
+        float jSpeed = (float)i;
+        despos.increaseY(jSpeed, true);        
     }
 
     public void ionlyfeelGravity() {

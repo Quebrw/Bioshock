@@ -56,8 +56,8 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(50);
       P.xpos = 500f;
       P.ypos = 500f;
-      P.pos.setXpos(P.xpos);
-      P.pos.setYpos(P.ypos); 
+      P.despos.setXpos(P.xpos);
+      P.despos.setYpos(P.ypos); 
       worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,399.0f), "box");
       worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f,-100.0f), "box");
       
@@ -197,9 +197,9 @@ public class GameLoop extends JComponent implements Runnable {
             //for boxcollisions the player is supposed to not be able to move through
             case "box":
               boolean isColliding = true;
-              P.pos.setXpos(P.xpos);
-              P.pos.setYpos(P.ypos);
-              Vector2f move = P.despos.getDifference(P.pos);
+              //P.pos.setXpos(P.xpos);
+              //P.pos.setYpos(P.ypos);
+              Vector2f move = P.despos.getDifference(new Vector2f(P.xpos, P.ypos));
               //sets the player back so that its as close to the colliding object as possible without touching it
               while(isColliding == true){
                 P.despos.subtract(move, 0.1f);
