@@ -87,17 +87,6 @@ public class Player extends worldObjects{
             despos.increaseX(speed, true);
         }
 
-        /*
-        if (dTimeinSeconds <= this.inertia){
-            double i = speed * Math.sin((Math.PI*dTimeinSeconds)/(2*inertia));                      //The player should feel inertia while starting to move
-            currentSpeedR = (float)i;
-            despos.increaseX(currentSpeedR, true);        
-        }else{
-            currentSpeedR = 2;
-            despos.increaseX(speed, true);
-        }
-        */
-        
         actMovR = true;
     }
 
@@ -110,21 +99,11 @@ public class Player extends worldObjects{
         }else{
             despos.increaseX(speed, false);
         }
-        /* 
-        if (dTimeinSeconds <= this.inertia){
-            double i = speed * Math.sin((Math.PI*dTimeinSeconds)/(2*inertia));                      //The player should feel inertia while starting to move
-            currentSpeedL = (float)i;
-            despos.increaseX(currentSpeedL, false);        
-        }else{
-            currentSpeedL = 2;
-            despos.increaseX(speed, false);
-        }
-        */
         actMovL = true;
     }
 
     public void jump(long dTime) {
-        double i = jumpSpeed * Math.cos((Math.PI*dTime)/(2*jumpLenght));                      //The player should feel inertia while starting to move
+        double i = jumpSpeed * Math.cos((Math.PI*dTime)/(2*jumpLenght));
         currentSpeedL = (float)i;
         despos.increaseY(currentSpeedL, true);        
     }
@@ -132,34 +111,6 @@ public class Player extends worldObjects{
     public void ionlyfeelGravity() {
         this.despos.setYpos(this.despos.getYpos() - 10f);;
     }
-    /* 
-    public void abruptStopRight(long dTime){
-        actMovR = false;
-        float dTimeinSeconds = dTime / 1000000000;
-        System.out.println(dTimeinSeconds);
-        if(currentSpeedR != 0){
-            if(dTimeinSeconds <= inertia/4){
-            currentSpeedR -= speed * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the right, some inertia of movement should remain
-            despos.increaseX(currentSpeedR, true);
-        }else{
-            currentSpeedR = 0;
-        }
-        }
-    }
-    
-    public void abruptStopLeft(long dTime){
-        actMovL = false;
-        float dTimeinSeconds = dTime / 1000000000;
-        if(currentSpeedL != 0){
-            if(dTimeinSeconds <= inertia/4){
-            currentSpeedL -= speed * Math.sin((Math.PI*dTimeinSeconds)/(2*(inertia/4)));    //after stopping to move to the left, some inertia of movement should remain
-            despos.increaseX(currentSpeedL, false);
-            }else{
-                currentSpeedL = 0;
-            }
-        }
-    }
-    */
 
     //#endregion
 
