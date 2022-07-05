@@ -1,3 +1,4 @@
+package test;
 import java.util.ArrayList;
 
 import objects.Player;
@@ -7,7 +8,11 @@ import tools.MyKeyHandler;
 import tools.Vector2f;
 //import java.awt.Component;
 import javax.swing.*;   
-//import java.awt.Graphics;                                                        //Maybe specify later
+//import java.awt.Graphics;  
+//Maybe specify later
+
+import java.awt.Graphics2D;
+
 
 import GUI.GamePanel;
 //import tools.MyKeyHandler;
@@ -21,7 +26,7 @@ public class GameLoop extends JComponent implements Runnable {
     private long stoppedMovingR, stoppedMovingL;
     private long beganMoving, beganJump;
 
-    private Player P = new Player();
+    public Player P = new Player();
     //private ArrayList<worldObjects> sObjects;
     private MyKeyHandler kH;
     private GamePanel gP;
@@ -231,11 +236,14 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     private void updateFrame() {
-      int x = (int)P.xpos;
-      int y = (int)P.ypos;
-      int w = P.getWidth();
-      int h = P.getHeight();
-      gP.uGamePanel(x,y,w,h);
+      //int x = (int)P.xpos;
+      //int y = (int)P.ypos;
+      //int w = P.getWidth();
+      //int h = P.getHeight();
+
+      gP.gimmeThatArrayList(sObjects);
+
+      // gP.uGamePanel(x,y,w,h);
       gP.repaint();
     }
 

@@ -115,7 +115,11 @@ public class Player extends worldObjects{
     //#endregion
 
     public void draw(Graphics g2) {
-        BufferedImage image = null;
+        
+    g2.setColor(Color.blue);
+
+        g2.fillRect((int) this.xpos,(int) this.ypos,this.width,this.height);
+
     }
 
     //#region GetSet
