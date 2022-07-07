@@ -90,18 +90,19 @@ public class GamePanel extends JPanel {
             int y = 1080 - (int) sObjects.get(i).ypos - h;            // Up = up
             //int y = (int) sObjects.get(i).ypos;                         // upside down
 
-            if (i != 0) {
+            switch (sObjects.get(i).getObjectType()){
 
+            case "box":
                 g2.setColor(Color.pink);
 
                 g2.drawRect(x, y, w, h);
-                
+            break;
 
-            } else {
+            case "player":
                 if(actualPlayer.health > 0){
                     if (this.invincible == 0) {
 
-                        g2.setColor(Color.RED);
+                        g2.setColor(Color.green);
 
                         g2.drawRect(x, y, w, h);
 
@@ -121,9 +122,23 @@ public class GamePanel extends JPanel {
 
                     g2.drawRect(x,y,w,h);
                 }
-            }
-            
+            break;
 
+            case "trap":
+                g2.setColor(Color.red);
+                //g2.draw3DRect(x, y, w, h, false);
+                g2.drawRect(x, y, w, h);
+            break;
+            
+            case "generic":
+            
+            break;
+            
+            default:
+                g2.setColor(Color.white);
+                g2.fillRect(x, y, w, h);
+            break;
+            }
         }
 
         
