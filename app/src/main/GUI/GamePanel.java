@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 import tools.*;
 
-import test.*;
-
 
 import objects.Player;
 import objects.worldObjects;
@@ -20,10 +18,10 @@ import objects.worldObjects;
 
 public class GamePanel extends JPanel {
 
-    private int Pxpos;
-    private int Pypos;
-    private int Pwidth;
-    private int Pheight;
+    //private int Pxpos;
+    //private int Pypos;
+    //private int Pwidth;
+    //private int Pheight;
     private ArrayList<worldObjects> sObjects;
 
     public int changeColor = 0;
@@ -51,14 +49,14 @@ public class GamePanel extends JPanel {
         this.addKeyListener(kH);
     }
 
-    //Outdated ? 
-    public void uGamePanel(int x, int y, int w, int h) {
-        this.Pxpos = x;
-        this.Pypos = y;
-        this.Pheight = h;
-        this.Pwidth = w;
+    // Outdated ? 
+    // public void uGamePanel(int x, int y, int w, int h) {
+    //     this.Pxpos = x;
+    //     this.Pypos = y;
+    //     this.Pheight = h;
+    //     this.Pwidth = w;
 
-    }
+    // }
 
     
     // standard method to draw things on the JPanel
@@ -131,7 +129,7 @@ public class GamePanel extends JPanel {
             break;
             
             case "generic":
-            
+
             break;
             
             default:

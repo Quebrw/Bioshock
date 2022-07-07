@@ -21,7 +21,7 @@ public class GameLoop extends JComponent implements Runnable {
   //#region Variables
 
   //______FRAMEUPDATE___________
-  private float lastUpdate;
+  //private float lastUpdate;
   private float updateRate = (1.0f/60.0f) * 1000.0f;
   
   //______GLOBAL_ENTITIES_______
@@ -41,7 +41,7 @@ public class GameLoop extends JComponent implements Runnable {
   private boolean inertiaR, inertiaL;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
-  private int jumpFrames, switchCoold, invincFrames;
+  private int jumpFrames, invincFrames;
 
 
     //#endregion
@@ -83,6 +83,10 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(box2);
       sObjects.add(box3);
 
+      //Fuck that Problem-text
+      if(sceneChange == true){
+
+      }
       System.out.println(sObjects.size());
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
@@ -101,25 +105,25 @@ public class GameLoop extends JComponent implements Runnable {
 
 
     // to be ignored
-    private void fun() {
-      if( switchCoold == 0 ){
-        for(int j = 1; j < sObjects.size(); j++){
-          sObjects.get(j).ypos = 1080.0f - sObjects.get(j).ypos - sObjects.get(j).height;
-        }
-        /* 
-        if(P.upsidedown == false){
-          P.upsidedown = true;
-        }else{
-          P.upsidedown = false;
-        }
-        */
-        P.touchingGround = false;
-        switchCoold = 180;
-      }
-      if(switchCoold > 0){
-        switchCoold -= 1;
-      }
-    }
+    // private void fun() {
+    //   if( switchCoold == 0 ){
+    //     for(int j = 1; j < sObjects.size(); j++){
+    //       sObjects.get(j).ypos = 1080.0f - sObjects.get(j).ypos - sObjects.get(j).height;
+    //     }
+    //     /* 
+    //     if(P.upsidedown == false){
+    //       P.upsidedown = true;
+    //     }else{
+    //       P.upsidedown = false;
+    //     }
+    //     */
+    //     P.touchingGround = false;
+    //     switchCoold = 180;
+    //   }
+    //   if(switchCoold > 0){
+    //     switchCoold -= 1;
+    //   }
+    // }
 
     //-------------------------------------------------------------------------------------------------------------------------------
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
