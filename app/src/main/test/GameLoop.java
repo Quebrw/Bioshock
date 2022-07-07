@@ -22,7 +22,7 @@ public class GameLoop extends JComponent implements Runnable {
 
   //______FRAMEUPDATE___________
   private float lastUpdate;
-  private float updateRate = (1.0f/60.0f) * 1000000000.0f;
+  private float updateRate = (1.0f/60.0f) * 1000.0f;
   
   //______GLOBAL_ENTITIES_______
   private MyKeyHandler kH;
@@ -30,6 +30,7 @@ public class GameLoop extends JComponent implements Runnable {
   private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
   private int[] worldGrid = new int[2];
   private boolean sceneChange = false;
+
   
   //______SPECIFIC_ENTITIES_____
   private worldObjects refGround = new worldObjects();
@@ -40,6 +41,7 @@ public class GameLoop extends JComponent implements Runnable {
   private boolean inertiaR, inertiaL;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
+  private int jumpFrames, switchCoold;
 
     //#endregion
 
@@ -47,6 +49,7 @@ public class GameLoop extends JComponent implements Runnable {
       this.kH = kHin;
       this.gP = gamePanel;
     }
+
 
     @Override
     public void run() {
@@ -58,8 +61,9 @@ public class GameLoop extends JComponent implements Runnable {
       P.ypos = 500f;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
-      worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,399.0f), "box");
-      worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f,-100.0f), "box");
+      worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,200.0f), "box");
+      worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, -0.0f), "box");
+      switchCoold = 180;
       
       
       refGround.setObjectType("generic");
@@ -76,29 +80,65 @@ public class GameLoop extends JComponent implements Runnable {
       System.out.println(sObjects.size());
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
-          float currentTime = System.nanoTime();
+        /*   
+        float currentTime = System.nanoTime();
           float dTime = currentTime - lastUpdate;
           if( dTime >= updateRate){
               update(currentTime);
+              System.out.println(dTime / 1000000000f);
               lastUpdate = System.nanoTime();
             }
+        */
 
+        update(System.nanoTime());
+        try {
+          Thread.sleep((long) updateRate);
+        } catch (Exception e) {
+          System.err.println("no Thread");
+        }
+        
     
             
       }
     }
 
+    // to be ignored
+    private void fun() {
+      if( switchCoold == 0 ){
+        for(int j = 1; j < sObjects.size(); j++){
+          sObjects.get(j).ypos = 1080.0f - sObjects.get(j).ypos - sObjects.get(j).height;
+        }
+        /* 
+        if(P.upsidedown == false){
+          P.upsidedown = true;
+        }else{
+          P.upsidedown = false;
+        }
+        */
+        P.touchingGround = false;
+        switchCoold = 180;
+      }
+      if(switchCoold > 0){
+        switchCoold -= 1;
+      }
+    }
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
     public void update(float time){
       
-      System.out.println(time);
+      //System.out.println(time / 1000000000);
       
       updatePlayerMovement();
       
+      //fun();
+
       updateScene();
 
       updateCollision();
-      
+
+      //Handles a bug where the player floats above the ground and behaves as if he's still touching it
+      if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
+        P.despos.setYpos((refGround.ypos + refGround.height + 1));
+      }
       updatePositions();
       
       updateFrame();
@@ -159,9 +199,10 @@ public class GameLoop extends JComponent implements Runnable {
         }
 
         //initiates the jump
-        if(kH.SPACE_PRESSED == true && P.touchingGround == true){
+        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 6) && (P.actMovL == true || P.actMovR == true)))){
           beganJump = System.nanoTime();
           P.touchingGround = false;
+          jumpFrames = 0;
         }
 
         //executes the jump
@@ -170,8 +211,13 @@ public class GameLoop extends JComponent implements Runnable {
         }
         
         //checks if the player has stepped off a platform and should therefore experience gravity
-        if((P.xpos + P.width) < refGround.xpos || P.xpos > (refGround.xpos + refGround.width)){
+        if(((P.xpos + P.width) < refGround.xpos || P.xpos > (refGround.xpos + refGround.width)) && P.touchingGround == true){
           P.touchingGround = false;
+          beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
+        }
+
+        if(jumpFrames > 0){
+        jumpFrames = jumpFrames - 1;
         }
     }
 
@@ -184,7 +230,7 @@ public class GameLoop extends JComponent implements Runnable {
       
       //gets a List of all Objects that are currently touching the player
       ArrayList<worldObjects> colliders = Collider.getCollisisions(P, sObjects);
-      System.out.println(colliders + "|" + colliders.size()); //debug
+      //System.out.println(colliders + "|" + colliders.size()); //debug
       //safeguard so theres no out of bounds exception
       if(colliders.size() >= 1){
         for(int j = 0; j < colliders.size(); j++){
@@ -210,10 +256,22 @@ public class GameLoop extends JComponent implements Runnable {
               //if the Player touches Ground, gravity has to be turned off, because it would cause constant collision and mess up the movement
               if(P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
                 P.touchingGround = true;
+                P.despos.setYpos(colliders.get(j).ypos + colliders.get(j).height +1);
                 //there are 2 ways a player can leave a surface: per jumping or per stepping off the platform. To account for the second one a copy of the current surface's x-Dimensions is made for reference
                 refGround.xpos = colliders.get(j).xpos;
                 refGround.width = colliders.get(j).width;
+                refGround.ypos = colliders.get(j).ypos;
+                refGround.height = colliders.get(j).height;
               }
+              //allows Walljump
+              if(colliders.get(j).ypos > (P.ypos + P.height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
+                beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
+              }else{
+                if(P.touchingGround == false){
+                  jumpFrames = 8;
+                }
+              }
+
             break;
 
             //#region SceneTriggers
@@ -241,6 +299,8 @@ public class GameLoop extends JComponent implements Runnable {
             //#endregion
         }
       }
+
+
     }
 
     }

@@ -10,9 +10,10 @@ public class Player extends worldObjects{
     //_____Movement_______
     public float inertia = .8f;                                                                              //seconds for which the player experiences inertia
     private int speed, jumpSpeed;
-    public boolean actMovR, actMovL;
+    public boolean actMovR, actMovL, upsidedown;
     public boolean touchingGround;
     public long jumpLenght = 1 * 1000000000;
+    public float gravityStrenght;
     //#endregion
     
     //#region Constructors
@@ -37,6 +38,8 @@ public class Player extends worldObjects{
         this.height = 0;
         this.speed = 10;
         this.jumpSpeed = 15;
+        this.gravityStrenght = 10.0f;
+        upsidedown = false;
         this.despos = new Vector2f();
         this.setObjectType("player");
         this.touchingGround = false;
@@ -102,7 +105,8 @@ public class Player extends worldObjects{
     }
 
     public void ionlyfeelGravity() {
-        this.despos.setYpos(this.despos.getYpos() - 10f);;
+        //this.despos.setYpos(this.despos.getYpos() - gravityStrenght);
+        this.despos.increaseY(gravityStrenght, upsidedown);
     }
 
     //#endregion

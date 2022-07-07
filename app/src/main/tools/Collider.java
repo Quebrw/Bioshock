@@ -20,13 +20,13 @@ public class Collider {                                             //Class that
             return false;
         }
         */
-        System.out.println(o1.xpos +" playpos | " + o2.xpos + " objpos | " + (o1.xpos+o1.getWidth()) + " playcorner | " + (o2.xpos+o2.getWidth()) + " objcorner");
+        //System.out.println(o1.xpos +" playpos | " + o2.xpos + " objpos | " + (o1.xpos+o1.getWidth()) + " playcorner | " + (o2.xpos+o2.getWidth()) + " objcorner");
         if((o1.despos.getXpos() <= o2.xpos && o2.xpos <= (o1.despos.getXpos() + o1.getWidth()) ) || (o2.xpos <= o1.despos.getXpos() && o1.despos.getXpos() <= (o2.xpos + o2.getWidth()) )){
             if((o1.despos.getYpos() <= o2.ypos && o2.ypos <= (o1.despos.getYpos() + o1.getHeight()) ) || (o2.ypos <= o1.despos.getYpos() && o1.despos.getYpos() <= (o2.ypos + o2.getHeight()) )){
-                System.out.println("yes");
+                //System.out.println("yes");
                 return true;
             }else{
-                System.out.println("no2");
+                //System.out.println("no2");
                 return false;
             }
         }else{

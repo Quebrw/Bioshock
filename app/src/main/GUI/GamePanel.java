@@ -81,11 +81,17 @@ public class GamePanel extends JPanel {
 
         for (int i = 0; i < sObjects.size(); i++) {
 
-            if (i == 1) {
+            int w = sObjects.get(i).width;
+            int h = sObjects.get(i).height;
+            int x = (int) sObjects.get(i).xpos;
+            int y = 1080 - (int) sObjects.get(i).ypos - h;            // Up = up
+            //int y = (int) sObjects.get(i).ypos;                         // upside down
+
+            if (i != 0) {
 
                 g2.setColor(Color.pink);
 
-                g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+                g2.drawRect(x, y, w, h);
 
             } else {
 
@@ -93,7 +99,7 @@ public class GamePanel extends JPanel {
 
                     g2.setColor(Color.RED);
     
-                    g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+                    g2.drawRect(x, y, w, h);
 
                     //g2.setColor(Color.red);
 
@@ -105,7 +111,7 @@ public class GamePanel extends JPanel {
     
                     g2.setColor(Color.cyan);
 
-                    g2.drawRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
+                    g2.drawRect(x, y, w, h);
     
                     changeColor = 0;
                 } 
