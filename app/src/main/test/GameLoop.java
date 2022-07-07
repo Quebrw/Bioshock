@@ -130,6 +130,8 @@ public class GameLoop extends JComponent implements Runnable {
     //-------------------------------------------------------------------------------------------------------------------------------
     public void update(float time){
 
+
+      if(sceneChange == false){
       updatePlayerMovement();
       
       //fun();
@@ -146,6 +148,10 @@ public class GameLoop extends JComponent implements Runnable {
       
       updateFrame();
 
+    }else{
+      loadnewScene();
+      sceneChange = false;
+    }
     }
 
     private void updatePlayerMovement() {
@@ -320,6 +326,10 @@ public class GameLoop extends JComponent implements Runnable {
 
     }
 
+    public void loadnewScene() {
+      
+    }
+    
     private void updateFrame() {
       //int x = (int)P.xpos;
       //int y = (int)P.ypos;
