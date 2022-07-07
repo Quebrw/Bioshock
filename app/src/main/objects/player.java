@@ -119,6 +119,12 @@ public class Player extends worldObjects{
 
     }
 
+    public void ouch(int dmg) {
+        if(health > 0){
+            this.health -= dmg;
+            System.out.println(this.health);
+        }
+    }
     //#region GetSet
 
     public int getSpeed() {

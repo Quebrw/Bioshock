@@ -27,6 +27,8 @@ public class GamePanel extends JPanel {
     private ArrayList<worldObjects> sObjects;
 
     public int changeColor = 0;
+    public int invincible;
+    private Player actualPlayer;
 
     public int screenWidth = 1920;
 
@@ -49,6 +51,7 @@ public class GamePanel extends JPanel {
         this.addKeyListener(kH);
     }
 
+    //Outdated ? 
     public void uGamePanel(int x, int y, int w, int h) {
         this.Pxpos = x;
         this.Pypos = y;
@@ -92,36 +95,43 @@ public class GamePanel extends JPanel {
                 g2.setColor(Color.pink);
 
                 g2.drawRect(x, y, w, h);
+                
 
             } else {
+                if(actualPlayer.health > 0){
+                    if (this.invincible == 0) {
 
-                if (changeColor < 50) {
+                        g2.setColor(Color.RED);
 
-                    g2.setColor(Color.RED);
-    
-                    g2.drawRect(x, y, w, h);
+                        g2.drawRect(x, y, w, h);
 
-                    //g2.setColor(Color.red);
 
-                    //g2.fillRect((int) sObjects.get(i).xpos, (int) sObjects.get(i).ypos, sObjects.get(i).width, sObjects.get(i).height);
-    
-                    changeColor ++;
+                    } else {
 
-                } else {
-    
-                    g2.setColor(Color.cyan);
+                        g2.setColor(Color.cyan);
 
-                    g2.drawRect(x, y, w, h);
-    
-                    changeColor = 0;
-                } 
+                        g2.drawRect(x, y, w, h);
 
+                        changeColor = 0;
+                    }
+
+                }else{
+
+                    g2.setColor(Color.white);
+
+                    g2.drawRect(x,y,w,h);
+                }
             }
-
             
 
         }
 
+        
     }
     
+    public void getShit(int inv, Player P) {
+        this.invincible = inv;
+        this.actualPlayer = P;
+    }
+
 }

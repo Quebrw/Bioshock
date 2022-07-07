@@ -41,7 +41,8 @@ public class GameLoop extends JComponent implements Runnable {
   private boolean inertiaR, inertiaL;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
-  private int jumpFrames, switchCoold;
+  private int jumpFrames, switchCoold, invincFrames;
+
 
     //#endregion
 
@@ -59,11 +60,15 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(50);
       P.xpos = 500f;
       P.ypos = 500f;
+      P.health = 40;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
-      worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,200.0f), "box");
-      worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, -0.0f), "box");
-      switchCoold = 180;
+      worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,200.0f), "box", 0);
+      worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
+      worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
+      invincFrames = 0;
+
+      //switchCoold = 180;
       
       
       refGround.setObjectType("generic");
@@ -76,19 +81,11 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(P);
       sObjects.add(box);
       sObjects.add(box2);
+      sObjects.add(box3);
 
       System.out.println(sObjects.size());
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
-        /*   
-        float currentTime = System.nanoTime();
-          float dTime = currentTime - lastUpdate;
-          if( dTime >= updateRate){
-              update(currentTime);
-              System.out.println(dTime / 1000000000f);
-              lastUpdate = System.nanoTime();
-            }
-        */
 
         update(System.nanoTime());
         try {
@@ -101,6 +98,7 @@ public class GameLoop extends JComponent implements Runnable {
             
       }
     }
+
 
     // to be ignored
     private void fun() {
@@ -122,11 +120,12 @@ public class GameLoop extends JComponent implements Runnable {
         switchCoold -= 1;
       }
     }
+
+    //-------------------------------------------------------------------------------------------------------------------------------
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
+    //-------------------------------------------------------------------------------------------------------------------------------
     public void update(float time){
-      
-      //System.out.println(time / 1000000000);
-      
+
       updatePlayerMovement();
       
       //fun();
@@ -227,7 +226,9 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     private void updateCollision() {  //currently only checking Player collision
-      
+      if(invincFrames > 0){
+        invincFrames -= 1;
+      }
       //gets a List of all Objects that are currently touching the player
       ArrayList<worldObjects> colliders = Collider.getCollisisions(P, sObjects);
       //System.out.println(colliders + "|" + colliders.size()); //debug
@@ -274,8 +275,15 @@ public class GameLoop extends JComponent implements Runnable {
 
             break;
 
+            case "trap":
+              if(invincFrames == 0){
+                P.ouch(colliders.get(j).damage);
+                invincFrames = 90;
+              }
+            break;
             //#region SceneTriggers
 
+            
             case "rightTrigger":
               worldGrid[0] += 1;
               sceneChange = true;
@@ -297,12 +305,10 @@ public class GameLoop extends JComponent implements Runnable {
             break;
             
             //#endregion
+          }
         }
       }
-
-
-    }
-
+      gP.getShit(invincFrames, P);
     }
 
     private void updatePositions(){
