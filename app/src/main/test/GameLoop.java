@@ -274,7 +274,7 @@ public class GameLoop extends JComponent implements Runnable {
                 refGround.ypos = colliders.get(j).ypos;
                 refGround.height = colliders.get(j).height;
               }
-              //allows Walljump
+              //allows Walljump & makes it so touching an overhead surface ends a jump
               if(colliders.get(j).ypos > (P.ypos + P.height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
                 beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
               }else{
@@ -289,13 +289,14 @@ public class GameLoop extends JComponent implements Runnable {
 
             case "trap":
             //if the Player Groundslams right above the Trap (currently 50px) he will avoid damage and bounce off the trap
-              if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 60){
+              if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 55){
                 isSlamming = false;
                 slamCoold = 20;
                 beganJump = System.nanoTime();
                 P.despos = new Vector2f(P.xpos, colliders.get(j).ypos + colliders.get(j).height +1 );
 
               }else{
+                //otherwise he takes damage and briefly becomes invincible
                 if(invincFrames == 0){
                   P.ouch(colliders.get(j).damage);
                   invincFrames = 90;
@@ -343,14 +344,9 @@ public class GameLoop extends JComponent implements Runnable {
     }
     
     private void updateFrame() {
-      //int x = (int)P.xpos;
-      //int y = (int)P.ypos;
-      //int w = P.getWidth();
-      //int h = P.getHeight();
 
       gP.gimmeThatArrayList(sObjects);
 
-      // gP.uGamePanel(x,y,w,h);
       gP.repaint();
     }
 
