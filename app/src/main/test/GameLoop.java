@@ -38,10 +38,11 @@ public class GameLoop extends JComponent implements Runnable {
   //_______PLAYER_______________
   public Player P = new Player();
   private boolean running = true;
-  private boolean inertiaR, inertiaL, extraJump, dJumpenabled;
+  private boolean inertiaR, inertiaL, extraJump, dJumpenabled, isSlamming;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
-  private int jumpFrames, invincFrames, dJumpCoold;
+  private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
+  private float slamHeight;
 
 
     //#endregion
@@ -85,7 +86,6 @@ public class GameLoop extends JComponent implements Runnable {
       extraJump = false;
       dJumpCoold = 0;
       dJumpenabled = false;
-
       //Fuck that Problem-text
       if(sceneChange == true){
 
@@ -106,28 +106,6 @@ public class GameLoop extends JComponent implements Runnable {
       }
     }
 
-
-    // to be ignored
-    // private void fun() {
-    //   if( switchCoold == 0 ){
-    //     for(int j = 1; j < sObjects.size(); j++){
-    //       sObjects.get(j).ypos = 1080.0f - sObjects.get(j).ypos - sObjects.get(j).height;
-    //     }
-    //     /* 
-    //     if(P.upsidedown == false){
-    //       P.upsidedown = true;
-    //     }else{
-    //       P.upsidedown = false;
-    //     }
-    //     */
-    //     P.touchingGround = false;
-    //     switchCoold = 180;
-    //   }
-    //   if(switchCoold > 0){
-    //     switchCoold -= 1;
-    //   }
-    // }
-
     //-------------------------------------------------------------------------------------------------------------------------------
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
     //-------------------------------------------------------------------------------------------------------------------------------
@@ -137,8 +115,6 @@ public class GameLoop extends JComponent implements Runnable {
       if(sceneChange == false){
       updatePlayerMovement();
       
-      //fun();
-
       updateScene();
 
       updateCollision();
@@ -147,14 +123,20 @@ public class GameLoop extends JComponent implements Runnable {
       if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
         P.despos.setYpos((refGround.ypos + refGround.height + 1));
       }
+
       updatePositions();
       
       updateFrame();
 
       if(dJumpCoold > 0){
         dJumpCoold -= 1;
-        System.out.println(dJumpCoold);
       }
+      if(slamCoold > 0){
+        slamCoold -= 1;
+      }
+      if(jumpFrames > 0){
+        jumpFrames = jumpFrames - 1;
+        }
 
     }else{
       loadnewScene();
@@ -167,15 +149,7 @@ public class GameLoop extends JComponent implements Runnable {
         //------------------------------------------------------------------------------------------------------------------------------------------------
         //The Player starts sprinting after 2 seconds, when stopping to sprint, they will experience a certiant inertia of movement because of their speed
         //------------------------------------------------------------------------------------------------------------------------------------------------
-        /* 
-        if((System.nanoTime() - beganJump) < P.jumpLenght/3){
-          kH.enabled = false;
-          kH.SPACE_PRESSED = false;
-        }
-        if((System.nanoTime() - beganJump) >= P.jumpLenght/3){
-          kH.enabled = true;
-        }
-        */
+
         //If the Player is not already moving in another direction, he will start moving right/left
         if(kH.D_PRESSED == true && P.actMovL == false){
           if(P.actMovR == false){beganMoving = System.nanoTime();}
@@ -186,6 +160,7 @@ public class GameLoop extends JComponent implements Runnable {
           if(P.actMovL == false){beganMoving = System.nanoTime();}
           P.moveLeft(System.nanoTime() - beganMoving);
         }
+
         //handles inertia of movement
         if(kH.D_PRESSED == false && P.actMovR	 == true){
           P.actMovR = false;
@@ -220,10 +195,10 @@ public class GameLoop extends JComponent implements Runnable {
           if(extraJump == false){
             extraJump = true;
             dJumpCoold = 30;
+            slamCoold = 20;
           }else{
             extraJump = false;
           }
-
           beganJump = System.nanoTime();
           P.touchingGround = false;
           jumpFrames = 0;
@@ -240,9 +215,18 @@ public class GameLoop extends JComponent implements Runnable {
           beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
         }
 
-        if(jumpFrames > 0){
-        jumpFrames = jumpFrames - 1;
+        //----------------------
+        //Handles the Groundslam
+        //----------------------
+        if(kH.SHIFT_PRESSED == true && P.touchingGround == false && slamCoold == 0){
+          isSlamming = true;
+          slamCoold = 20;
+          slamHeight = P.ypos;
         }
+        if(isSlamming == true){
+          P.despos = new Vector2f(P.xpos, (P.ypos - 20f)); 
+        }
+
     }
 
     //may be unnecessary
@@ -283,6 +267,7 @@ public class GameLoop extends JComponent implements Runnable {
               if(P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
                 P.touchingGround = true;
                 P.despos.setYpos(colliders.get(j).ypos + colliders.get(j).height +1);
+                isSlamming = false;
                 //there are 2 ways a player can leave a surface: per jumping or per stepping off the platform. To account for the second one a copy of the current surface's x-Dimensions is made for reference
                 refGround.xpos = colliders.get(j).xpos;
                 refGround.width = colliders.get(j).width;
@@ -303,9 +288,18 @@ public class GameLoop extends JComponent implements Runnable {
             break;
 
             case "trap":
-              if(invincFrames == 0){
-                P.ouch(colliders.get(j).damage);
-                invincFrames = 90;
+            //if the Player Groundslams right above the Trap (currently 50px) he will avoid damage and bounce off the trap
+              if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 60){
+                isSlamming = false;
+                slamCoold = 20;
+                beganJump = System.nanoTime();
+                P.despos = new Vector2f(P.xpos, colliders.get(j).ypos + colliders.get(j).height +1 );
+
+              }else{
+                if(invincFrames == 0){
+                  P.ouch(colliders.get(j).damage);
+                  invincFrames = 90;
+                }
               }
             break;
 
