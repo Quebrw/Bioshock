@@ -41,7 +41,7 @@ public class GameLoop extends JComponent implements Runnable {
   private boolean inertiaR, inertiaL, extraJump, dJumpenabled, isSlamming;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
-  private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
+  private int jumpFrames, invincFrames, dJumpCoold, slamCoold, Stagecounter;
   private float slamHeight;
 
 
@@ -69,6 +69,8 @@ public class GameLoop extends JComponent implements Runnable {
       worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
       invincFrames = 0;
 
+      LoadLevel test = new LoadLevel();
+
       //switchCoold = 180;
       
       
@@ -80,6 +82,13 @@ public class GameLoop extends JComponent implements Runnable {
 
       sObjects.clear();
       sObjects.add(P);
+
+
+    
+      for(int i = 0; i < test.level01.stages.get(Stagecounter).platforms.size(); i++){
+        //sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
+      }
+
       sObjects.add(box);
       sObjects.add(box2);
       sObjects.add(box3);
@@ -340,6 +349,7 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     public void loadnewScene() {
+      //Stagecounter soll sich erhöhen sobald trigger passiert wurde, lädt dann neue Stage
       
     }
     
