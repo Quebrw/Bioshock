@@ -38,10 +38,10 @@ public class GameLoop extends JComponent implements Runnable {
   //_______PLAYER_______________
   public Player P = new Player();
   private boolean running = true;
-  private boolean inertiaR, inertiaL;
+  private boolean inertiaR, inertiaL, extraJump, dJumpenabled;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
-  private int jumpFrames, invincFrames;
+  private int jumpFrames, invincFrames, dJumpCoold;
 
 
     //#endregion
@@ -82,6 +82,9 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(box);
       sObjects.add(box2);
       sObjects.add(box3);
+      extraJump = false;
+      dJumpCoold = 0;
+      dJumpenabled = false;
 
       //Fuck that Problem-text
       if(sceneChange == true){
@@ -148,6 +151,11 @@ public class GameLoop extends JComponent implements Runnable {
       
       updateFrame();
 
+      if(dJumpCoold > 0){
+        dJumpCoold -= 1;
+        System.out.println(dJumpCoold);
+      }
+
     }else{
       loadnewScene();
       sceneChange = false;
@@ -208,7 +216,14 @@ public class GameLoop extends JComponent implements Runnable {
         }
 
         //initiates the jump
-        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 6) && (P.actMovL == true || P.actMovR == true)))){
+        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 5) && (P.actMovL == true || P.actMovR == true)) || (extraJump == true && dJumpCoold == 0 && dJumpenabled == true) )){
+          if(extraJump == false){
+            extraJump = true;
+            dJumpCoold = 30;
+          }else{
+            extraJump = false;
+          }
+
           beganJump = System.nanoTime();
           P.touchingGround = false;
           jumpFrames = 0;
@@ -279,7 +294,9 @@ public class GameLoop extends JComponent implements Runnable {
                 beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
               }else{
                 if(P.touchingGround == false){
-                  jumpFrames = 8;
+                  jumpFrames = 6;
+                  beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
+
                 }
               }
 
@@ -291,6 +308,7 @@ public class GameLoop extends JComponent implements Runnable {
                 invincFrames = 90;
               }
             break;
+
             //#region SceneTriggers
 
             

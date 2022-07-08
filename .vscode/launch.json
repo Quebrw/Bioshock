@@ -9,6 +9,13 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "test.Main",
+            "projectName": "Bioshock-1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "test.Main",
             "projectName": "Bioshock_2a757b6c"
         },
         {
