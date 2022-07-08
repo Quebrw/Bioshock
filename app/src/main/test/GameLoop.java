@@ -292,7 +292,7 @@ public class GameLoop extends JComponent implements Runnable {
               if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 55){
                 isSlamming = false;
                 slamCoold = 20;
-                beganJump = System.nanoTime();
+                beganJump = System.nanoTime() - ((System.nanoTime()-beganJump)/5);
                 P.despos = new Vector2f(P.xpos, colliders.get(j).ypos + colliders.get(j).height +1 );
 
               }else{
