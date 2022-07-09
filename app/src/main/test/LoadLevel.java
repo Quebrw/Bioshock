@@ -10,7 +10,7 @@ public class LoadLevel {
     public LoadLevel(){
 
         this.addStage();
-        this.addObject(0, 100, 1500, new Vector2f(200, 200), "box", 0);
+        this.addObject(0, 20, 300, new Vector2f(200, 375), "box", 0);
 
         /*
         worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,200.0f), "box", 0);

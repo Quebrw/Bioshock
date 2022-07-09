@@ -65,7 +65,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.health = 40;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
-      worldObjects box = new worldObjects(100,1500, new Vector2f(200.0f,200.0f), "box", 0);
+      worldObjects box = new worldObjects(100,2000, new Vector2f(0.0f,200.0f), "box", 0);
       worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
       worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
       invincFrames = 0;
