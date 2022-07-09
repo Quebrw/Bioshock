@@ -30,6 +30,7 @@ public class GameLoop extends JComponent implements Runnable {
   private ArrayList<worldObjects> sObjects = new ArrayList<worldObjects>();
   private int[] worldGrid = new int[2];
   private boolean sceneChange = false;
+  private int Stagecounter;
 
   
   //______SPECIFIC_ENTITIES_____
@@ -41,7 +42,7 @@ public class GameLoop extends JComponent implements Runnable {
   private boolean inertiaR, inertiaL, extraJump, dJumpenabled, isSlamming;
   private long stoppedMovingR, stoppedMovingL;
   private long beganMoving, beganJump;
-  private int jumpFrames, invincFrames, dJumpCoold, slamCoold, Stagecounter;
+  private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
   private float slamHeight;
 
 
@@ -70,8 +71,6 @@ public class GameLoop extends JComponent implements Runnable {
       invincFrames = 0;
 
       LoadLevel test = new LoadLevel();
-
-      //switchCoold = 180;
       
       
       refGround.setObjectType("generic");
@@ -86,7 +85,7 @@ public class GameLoop extends JComponent implements Runnable {
 
     
       for(int i = 0; i < test.level01.stages.get(Stagecounter).platforms.size(); i++){
-        //sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
+        sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
       }
 
       sObjects.add(box);

@@ -7,6 +7,7 @@ import tools.Vector2f;
 public class Level {
     
     ArrayList<Stage> stages = new ArrayList<Stage>();
+    
     public Level(){
         
     };
