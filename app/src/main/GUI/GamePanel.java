@@ -168,6 +168,10 @@ public class GamePanel extends JPanel {
 
                             image = dO.returnImageDeath();
                         } 
+                        if (actualPlayer.isSlamming == true) {
+
+                            image = dO.returnImageDeath();
+                        }
                     
                         // draw function
 
