@@ -164,7 +164,7 @@ public class GamePanel extends JPanel {
 
                     g2.setColor(Color.white);
 
-                    g2.drawRect(x,y,w,h);
+                    g2.drawImage(dO.returnImageJump(), x, y, w, h, null);
                 }
             break;
 

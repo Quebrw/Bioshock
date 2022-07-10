@@ -10,7 +10,7 @@ public class DObjects {
 
     MyKeyHandler kh;
 
-    public BufferedImage right1, right2, left1, left2, nothing;
+    public BufferedImage right1, right2, left1, left2, jump, nothing;
 
     public DObjects() {
 
@@ -25,6 +25,7 @@ public class DObjects {
             right2 = ImageIO.read(getClass().getResourceAsStream("boy_right_2.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("boy_left_1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("boy_left_2.png"));
+            jump = ImageIO.read(getClass().getResourceAsStream("death.png"));
             
         } catch (IOException e) {
             //TODO: handle exception
@@ -48,5 +49,9 @@ public class DObjects {
     public BufferedImage returnImageLeft2() {
 
         return left2;
+    }
+    public BufferedImage returnImageJump() {
+    
+        return jump;
     }
 }
