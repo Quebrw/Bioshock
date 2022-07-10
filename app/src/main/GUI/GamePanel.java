@@ -28,6 +28,7 @@ public class GamePanel extends JPanel {
     //private int Pwidth;
     //private int Pheight;
     private ArrayList<worldObjects> sObjects;
+    private MyKeyHandler kH;
 
     public int changeColor = 0;
     public int invincible;
@@ -45,6 +46,7 @@ public class GamePanel extends JPanel {
     // used for sprite animation
 
     private int currentImage = 1, counter = 13;
+    private MyKeyHandler kh;
 
     //MyKeyHandler kH = new MyKeyHandler();
 
@@ -113,7 +115,7 @@ public class GamePanel extends JPanel {
             case "player":
                 if(actualPlayer.health > 0){
                     if (this.invincible == 0) {
-
+                        if (actualPlayer.actMovR == true) {
                         if (counter > 12) {
                             if (currentImage == 1) {
                                 currentImage = 2;
@@ -127,10 +129,23 @@ public class GamePanel extends JPanel {
                             } 
                             
                         } 
+                    }
+                        if (actualPlayer.actMovL == true) {
+                            if (counter > 12) {
+                                if (currentImage == 1) {
+                                    currentImage = 2;
+                                    counter = 0;
+                                    image = dO.returnImageLeft1();
+                                    
+                                } else if (currentImage == 2) {
+                                    currentImage = 1;
+                                    counter = 0;
+                                    image = dO.returnImageLeft2();
+                                } 
+                            } 
+                        }
+                    
             
-
-                        
-
                         // g2.setColor(Color.green);
 
                         g2.drawImage(image, x, y, w, h, null);
@@ -176,6 +191,13 @@ public class GamePanel extends JPanel {
     public void getShit(int inv, Player P) {
         this.invincible = inv;
         this.actualPlayer = P;
+    }
+    private void gimmeThatKeyHandler(MyKeyHandler keyHandler) {
+        this.kH = keyHandler;
+    }
+    private String KeyHandlerD() {
+
+        return "d";
     }
 
 }

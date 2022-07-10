@@ -359,5 +359,17 @@ public class GameLoop extends JComponent implements Runnable {
 
       gP.repaint();
     }
+    /* 
+    public int transferKeyHandler() {
 
+      if (kH.D_PRESSED == true) {
+
+        return 1;
+      } else if (kH.A_PRESSED == true) {
+
+        return 2;
+      }
+      return 0;
+    }
+    */
 }
