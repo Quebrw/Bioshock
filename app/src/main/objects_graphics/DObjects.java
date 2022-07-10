@@ -19,10 +19,10 @@ public class DObjects {
 
         try {
 
-            right1 = ImageIO.read(getClass().getResourceAsStream("idle.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("idle.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("idle.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("idle.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("running2.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("running 2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("running2.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("running 2.png"));
             death = ImageIO.read(getClass().getResourceAsStream("death.png"));
             jump = ImageIO.read(getClass().getResourceAsStream("jump.png"));
             
