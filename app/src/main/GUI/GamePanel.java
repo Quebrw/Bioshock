@@ -37,8 +37,14 @@ public class GamePanel extends JPanel {
 
     public int screenHeight = 1080;
 
-    DObjects dO = new DObjects();
+    // used to draw the objects as Images
+
+    private DObjects dO = new DObjects();
     private BufferedImage image;
+
+    // used for sprite animation
+
+    private int currentImage = 1, counter = 13;
 
     //MyKeyHandler kH = new MyKeyHandler();
 
@@ -108,7 +114,22 @@ public class GamePanel extends JPanel {
                 if(actualPlayer.health > 0){
                     if (this.invincible == 0) {
 
-                        image = dO.returnImage();
+                        if (counter > 12) {
+                            if (currentImage == 1) {
+                                currentImage = 2;
+                                counter = 0;
+                                image = dO.returnImageRight1();
+                                
+                            } else if (currentImage == 2) {
+                                currentImage = 1;
+                                counter = 0;
+                                image = dO.returnImageRight2();
+                            } 
+                            
+                        } 
+            
+
+                        
 
                         // g2.setColor(Color.green);
 
@@ -147,8 +168,8 @@ public class GamePanel extends JPanel {
                 g2.fillRect(x, y, w, h);
             break;
             }
-        }
-
+        } 
+        counter ++;
         
     }
     

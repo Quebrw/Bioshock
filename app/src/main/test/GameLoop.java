@@ -6,6 +6,7 @@ import objects.worldObjects;
 import tools.Collider;
 import tools.MyKeyHandler;
 import tools.Vector2f;
+import objects_graphics.*;
 //import java.awt.Component;
 import javax.swing.*;   
 //import java.awt.Graphics;  
@@ -44,6 +45,7 @@ public class GameLoop extends JComponent implements Runnable {
   private long beganMoving, beganJump;
   private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
   private float slamHeight;
+  
 
 
     //#endregion
@@ -118,7 +120,6 @@ public class GameLoop extends JComponent implements Runnable {
     //General update method; streamlines and organises specific updates; takes in time at which the update is called for convienience
     //-------------------------------------------------------------------------------------------------------------------------------
     public void update(float time){
-
 
       if(sceneChange == false){
       updatePlayerMovement();

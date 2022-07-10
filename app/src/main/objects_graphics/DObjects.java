@@ -4,9 +4,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import tools.MyKeyHandler;
+
 public class DObjects {
 
-    public BufferedImage right;
+    MyKeyHandler kh;
+
+    public BufferedImage right1, right2, nothing;
 
     public DObjects() {
 
@@ -17,7 +21,8 @@ public class DObjects {
 
         try {
 
-            right = ImageIO.read(getClass().getResourceAsStream("boy_right_2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("boy_right_1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("boy_right_2.png"));
             
         } catch (IOException e) {
             //TODO: handle exception
@@ -25,11 +30,13 @@ public class DObjects {
             e.getStackTrace();
         }
         
-    }
-    public BufferedImage returnImage() {
+    } 
+    public BufferedImage returnImageRight1() {
 
-        return right;
-    }
+        return right1;
+    }  
+    public BufferedImage returnImageRight2() {
 
-    
+        return right2;
+    }
 }
