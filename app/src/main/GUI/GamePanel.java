@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import objects.Player;
 import objects.worldObjects;
 import objects_graphics.*;
+import test.GameLoop;
 
 
 public class GamePanel extends JPanel {
@@ -121,8 +122,13 @@ public class GamePanel extends JPanel {
                         // following if-sentences decide which image should be drawn, based on the movement of the player
 
                         // sprites which are drawn as the player moves to the right
+                        
+
+                        
+
                         if (actualPlayer.actMovR == true) {
-                            if (counter > 12) {
+                            if (counter > 25) {
+                                
                                 if (currentImage == 1) {
                                     currentImage = 2;
                                     counter = 0;
@@ -138,7 +144,7 @@ public class GamePanel extends JPanel {
                         }
                         // sprites which are drawn as the player moves to the left
                         if (actualPlayer.actMovL == true) {
-                            if (counter > 12) {
+                            if (counter > 25) {
                                 if (currentImage == 1) {
                                     currentImage = 2;
                                     counter = 0;
@@ -151,11 +157,17 @@ public class GamePanel extends JPanel {
                                 } 
                             } 
                         }
+
                         // jump animation
                         if (actualPlayer.touchingGround != true) {
 
                             image = dO.returnImageJump();
                         }
+                        // insert wall climbing sprite here
+                        if (actualPlayer.spriteWall != false) {
+
+                            image = dO.returnImageDeath();
+                        } 
                     
                         // draw function
 

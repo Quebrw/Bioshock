@@ -10,7 +10,7 @@ public class Player extends worldObjects{
     //_____Movement_______
     public float inertia = .8f;                                                                              //seconds for which the player experiences inertia
     private int speed, jumpSpeed;
-    public boolean actMovR, actMovL, upsidedown;
+    public boolean actMovR, actMovL, upsidedown, spriteWall;
     public boolean touchingGround;
     public long jumpLenght = 1 * 1000000000;
     public float gravityStrenght;
@@ -84,6 +84,9 @@ public class Player extends worldObjects{
         }
 
         actMovR = true;
+
+        // cancels the wallclimbing animation
+        spriteWall = false;
     }
 
 
@@ -96,6 +99,9 @@ public class Player extends worldObjects{
             despos.increaseX(speed, false);
         }
         actMovL = true;
+
+        // cancels the wallclimbing animation
+        spriteWall = false;
     }
 
     public void jump(long dTime) {

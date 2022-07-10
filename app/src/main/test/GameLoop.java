@@ -45,7 +45,7 @@ public class GameLoop extends JComponent implements Runnable {
   private long beganMoving, beganJump;
   private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
   private float slamHeight;
-  
+
 
 
     //#endregion
@@ -286,10 +286,16 @@ public class GameLoop extends JComponent implements Runnable {
               //allows Walljump & makes it so touching an overhead surface ends a jump
               if(colliders.get(j).ypos > (P.ypos + P.height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
                 beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
+                
+                // is used for wall climbing
+                P.spriteWall = false;
               }else{
                 if(P.touchingGround == false){
                   jumpFrames = 6;
                   beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
+
+                  // is used for wall climbing
+                  P.spriteWall = true;
 
                 }
               }
