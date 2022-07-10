@@ -14,7 +14,7 @@ import javax.swing.*;
 
 //import java.awt.Graphics2D;
 
-
+import test.Gamestate;
 import GUI.GamePanel;
 //import tools.MyKeyHandler;
 public class GameLoop extends JComponent implements Runnable {
@@ -104,6 +104,8 @@ public class GameLoop extends JComponent implements Runnable {
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
 
+        
+        
         update(System.nanoTime());
         try {
           Thread.sleep((long) updateRate);
