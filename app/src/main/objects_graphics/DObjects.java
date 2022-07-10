@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class DObjects {
 
-    public BufferedImage right1, right2, left1, left2, jump, death, nothing;
+    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, nothing;
 
     public DObjects() {
 
@@ -19,12 +19,17 @@ public class DObjects {
 
         try {
 
-            right1 = ImageIO.read(getClass().getResourceAsStream("running2.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("running 2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("running2.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("running 2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("Running_Right.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("Running_Right_2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("Running_Left.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("Running_Left_2.png"));
             death = ImageIO.read(getClass().getResourceAsStream("death.png"));
-            jump = ImageIO.read(getClass().getResourceAsStream("jump.png"));
+            jumpR = ImageIO.read(getClass().getResourceAsStream("Jump_Right.png"));
+            jumpL = ImageIO.read(getClass().getResourceAsStream("Jump_Left.png"));
+            groundslam = ImageIO.read(getClass().getResourceAsStream("Groundslam.png"));
+            grabR = ImageIO.read(getClass().getResourceAsStream("Grab_Right.png"));
+            grabL = ImageIO.read(getClass().getResourceAsStream("Grab_Left.png"));
+
             
         } catch (IOException e) {
             //TODO: handle exception
@@ -53,8 +58,24 @@ public class DObjects {
     
         return death;
     }
-    public BufferedImage returnImageJump() {
+    public BufferedImage returnImageJumpR() {
 
-        return jump;
+        return jumpR;
+    }
+    public BufferedImage returnImageJumpL() {
+
+        return jumpL;
+    }
+    public BufferedImage returnImageGroundslam() {
+
+        return groundslam;
+    }
+    public BufferedImage returnImageGrabR() {
+
+        return grabR;
+    }
+    public BufferedImage returnImageGrabL() {
+
+        return grabL;
     }
 }

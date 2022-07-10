@@ -161,16 +161,32 @@ public class GamePanel extends JPanel {
                         // jump animation
                         if (actualPlayer.touchingGround != true) {
 
-                            image = dO.returnImageJump();
+                            if (actualPlayer.actMovL) {
+
+                                image = dO.returnImageJumpL();
+
+                            } else if (actualPlayer.actMovR) {
+                                
+                                image = dO.returnImageJumpR();
+
+                            }
                         }
+                        
                         // insert wall climbing sprite here
                         if (actualPlayer.spriteWall != false) {
 
-                            image = dO.returnImageDeath();
+                            if (actualPlayer.actMovL) {
+
+                                image = dO.returnImageGrabL();
+                            } else if (actualPlayer.actMovR) {
+
+                                image = dO.returnImageGrabR();
+                            }
+                            
                         } 
                         if (actualPlayer.isSlamming == true) {
 
-                            image = dO.returnImageDeath();
+                            image = dO.returnImageGroundslam();
                         }
                     
                         // draw function
