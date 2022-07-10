@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class DObjects {
 
-    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, nothing;
+    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing;
 
     public DObjects() {
 
@@ -19,6 +19,8 @@ public class DObjects {
 
         try {
 
+            idle1 = ImageIO.read(getClass().getResourceAsStream("Idle.png"));
+            idle2 = ImageIO.read(getClass().getResourceAsStream("Idle_Left_2.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("Running_Right.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("Running_Right_2.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("Running_Left.png"));
@@ -77,5 +79,13 @@ public class DObjects {
     public BufferedImage returnImageGrabL() {
 
         return grabL;
+    }
+    public BufferedImage returnImageIdle1() {
+
+        return idle1;
+    }
+    public BufferedImage returnImageIdle2() {
+
+        return idle2;
     }
 }

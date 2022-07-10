@@ -124,7 +124,22 @@ public class GamePanel extends JPanel {
                         // sprites which are drawn as the player moves to the right
                         
 
-                        
+                        if (actualPlayer.actMovR != true && actualPlayer.actMovL != true && actualPlayer.touchingGround == true) {
+
+                            if (counter > 120) {
+
+                                if (currentImage == 1) {
+                                    currentImage = 2;
+                                    counter = 0;
+                                    image = dO.returnImageIdle1();
+
+                                } else if (currentImage == 2) {
+                                    currentImage = 1;
+                                    counter = 0;
+                                    image = dO.returnImageIdle2();
+                                } 
+                            }
+                        }
 
                         if (actualPlayer.actMovR == true) {
                             if (counter > 25) {
@@ -171,7 +186,7 @@ public class GamePanel extends JPanel {
 
                             }
                         }
-                        
+
                         // insert wall climbing sprite here
                         if (actualPlayer.spriteWall != false) {
 
