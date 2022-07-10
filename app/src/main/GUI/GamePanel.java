@@ -94,6 +94,8 @@ public class GamePanel extends JPanel {
         this.sObjects = wO;
     }
 
+    // function that draws all worldObjects
+
     public void draw(Graphics2D g2) {
 
         for (int i = 0; i < sObjects.size(); i++) {
@@ -115,28 +117,33 @@ public class GamePanel extends JPanel {
             case "player":
                 if(actualPlayer.health > 0){
                     if (this.invincible == 0) {
+
+                        // following if-sentences decide which image should be drawn, based on the movement of the player
+
+                        // sprites which are drawn as the player moves to the right
                         if (actualPlayer.actMovR == true) {
-                        if (counter > 12) {
-                            if (currentImage == 1) {
-                                currentImage = 2;
-                                counter = 0;
-                                image = dO.returnImageRight1();
-                                
-                            } else if (currentImage == 2) {
-                                currentImage = 1;
-                                counter = 0;
-                                image = dO.returnImageRight2();
-                            } 
+                            if (counter > 12) {
+                                if (currentImage == 1) {
+                                    currentImage = 2;
+                                    counter = 0;
+                                    image = dO.returnImageRight1();
+                        // dynamic switching between two animations, results into walking animation
+                                } else if (currentImage == 2) {
+                                    currentImage = 1;
+                                    counter = 0;
+                                    image = dO.returnImageRight2();
+                                } 
                             
-                        } 
-                    }
+                            } 
+                        }
+                        // sprites which are drawn as the player moves to the left
                         if (actualPlayer.actMovL == true) {
                             if (counter > 12) {
                                 if (currentImage == 1) {
                                     currentImage = 2;
                                     counter = 0;
                                     image = dO.returnImageLeft1();
-                                    
+                        // dynamic switching between two animations, results into walking animation
                                 } else if (currentImage == 2) {
                                     currentImage = 1;
                                     counter = 0;
@@ -144,9 +151,13 @@ public class GamePanel extends JPanel {
                                 } 
                             } 
                         }
+                        // jump animation
+                        if (actualPlayer.touchingGround != true) {
+
+                            image = dO.returnImageJump();
+                        }
                     
-            
-                        // g2.setColor(Color.green);
+                        // draw function
 
                         g2.drawImage(image, x, y, w, h, null);
 
@@ -162,9 +173,9 @@ public class GamePanel extends JPanel {
 
                 }else{
 
-                    g2.setColor(Color.white);
+                    // player is dead --> death animation
 
-                    g2.drawImage(dO.returnImageJump(), x, y, w, h, null);
+                    g2.drawImage(dO.returnImageDeath(), x, y, w, h, null);
                 }
             break;
 
@@ -184,6 +195,8 @@ public class GamePanel extends JPanel {
             break;
             }
         } 
+
+        // counter is used to switch between sprites. This method is updated 60 times per second resulting in 5 changes per second if the player moves
         counter ++;
         
     }
@@ -192,12 +205,4 @@ public class GamePanel extends JPanel {
         this.invincible = inv;
         this.actualPlayer = P;
     }
-    private void gimmeThatKeyHandler(MyKeyHandler keyHandler) {
-        this.kH = keyHandler;
-    }
-    private String KeyHandlerD() {
-
-        return "d";
-    }
-
 }
