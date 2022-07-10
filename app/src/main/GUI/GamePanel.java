@@ -11,9 +11,14 @@ import java.util.ArrayList;
 
 import tools.*;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 
 import objects.Player;
 import objects.worldObjects;
+import objects_graphics.*;
 
 
 public class GamePanel extends JPanel {
@@ -31,6 +36,9 @@ public class GamePanel extends JPanel {
     public int screenWidth = 1920;
 
     public int screenHeight = 1080;
+
+    DObjects dO = new DObjects();
+    private BufferedImage image;
 
     //MyKeyHandler kH = new MyKeyHandler();
 
@@ -100,9 +108,11 @@ public class GamePanel extends JPanel {
                 if(actualPlayer.health > 0){
                     if (this.invincible == 0) {
 
-                        g2.setColor(Color.green);
+                        image = dO.returnImage();
 
-                        g2.drawRect(x, y, w, h);
+                        // g2.setColor(Color.green);
+
+                        g2.drawImage(image, x, y, w, h, null);
 
 
                     } else {
