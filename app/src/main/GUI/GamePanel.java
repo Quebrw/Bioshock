@@ -48,8 +48,12 @@ public class GamePanel extends JPanel {
 
     private int currentImage = 1, counter = 13;
     private MyKeyHandler kh;
+    private boolean menuClose = false;
 
     //MyKeyHandler kH = new MyKeyHandler();
+
+    Menu m = new Menu();
+    public boolean PLAYING = false, MENU = true;
 
     public GamePanel(MyKeyHandler kH) {
 
@@ -85,7 +89,25 @@ public class GamePanel extends JPanel {
         // changes Graphics g to Graphics2D (more functions)
         Graphics2D g2 = (Graphics2D)g;
 
-        draw(g2);
+        if (PLAYING != false && MENU != true) {
+
+            draw(g2);
+
+        } else if (PLAYING != true && MENU != false) {
+            
+            if (kH.SPACE_PRESSED != false) {
+
+                PLAYING = true;
+                MENU = false;
+            }
+
+            m.draw(g2);
+              
+              //PLAYING = m.changeStatePlaying();
+              //MENU = m.changeStatePlaying2(); 
+        }
+
+        
 
         // saves memory
         g2.dispose();
@@ -251,5 +273,8 @@ public class GamePanel extends JPanel {
     public void getShit(int inv, Player P) {
         this.invincible = inv;
         this.actualPlayer = P;
+    }
+    public void getSpace(MyKeyHandler kH) {
+        this.kH = kH;
     }
 }

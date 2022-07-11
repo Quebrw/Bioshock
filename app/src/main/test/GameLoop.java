@@ -16,6 +16,7 @@ import javax.swing.*;
 
 import test.Gamestate;
 import GUI.GamePanel;
+import GUI.Menu;
 //import tools.MyKeyHandler;
 public class GameLoop extends JComponent implements Runnable {
     
@@ -46,6 +47,8 @@ public class GameLoop extends JComponent implements Runnable {
   private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
   private float slamHeight;
   public boolean isSlamming;
+  
+
 
 
 
@@ -108,6 +111,7 @@ public class GameLoop extends JComponent implements Runnable {
         
         
         update(System.nanoTime());
+       
         try {
           Thread.sleep((long) updateRate);
         } catch (Exception e) {
@@ -137,7 +141,7 @@ public class GameLoop extends JComponent implements Runnable {
       }
 
       updatePositions();
-      
+    
       updateFrame();
 
       if(dJumpCoold > 0){
@@ -241,6 +245,7 @@ public class GameLoop extends JComponent implements Runnable {
         if(isSlamming == true){
           P.despos = new Vector2f(P.xpos, (P.ypos - 20f)); 
         }
+        gP.getSpace(kH);
 
     }
 
@@ -359,6 +364,7 @@ public class GameLoop extends JComponent implements Runnable {
       }
       gP.getShit(invincFrames, P);
     }
+  
 
     private void updatePositions(){
       P.updatePosition();
