@@ -145,87 +145,8 @@ public class GamePanel extends JPanel {
 
                         // sprites which are drawn as the player moves to the right
                         
+                        spriteAnimation();
 
-                        if (actualPlayer.actMovR != true && actualPlayer.actMovL != true && actualPlayer.touchingGround == true) {
-
-                            if (counter > 120) {
-
-                                if (currentImage == 1) {
-                                    currentImage = 2;
-                                    counter = 0;
-                                    image = dO.returnImageIdle1();
-
-                                } else if (currentImage == 2) {
-                                    currentImage = 1;
-                                    counter = 0;
-                                    image = dO.returnImageIdle2();
-                                } 
-                            }
-                        }
-
-                        if (actualPlayer.actMovR == true) {
-                            if (counter > 25) {
-                                
-                                if (currentImage == 1) {
-                                    currentImage = 2;
-                                    counter = 0;
-                                    image = dO.returnImageRight1();
-                        // dynamic switching between two animations, results into walking animation
-                                } else if (currentImage == 2) {
-                                    currentImage = 1;
-                                    counter = 0;
-                                    image = dO.returnImageRight2();
-                                } 
-                            
-                            } 
-                        }
-                        // sprites which are drawn as the player moves to the left
-                        if (actualPlayer.actMovL == true) {
-                            if (counter > 25) {
-                                if (currentImage == 1) {
-                                    currentImage = 2;
-                                    counter = 0;
-                                    image = dO.returnImageLeft1();
-                        // dynamic switching between two animations, results into walking animation
-                                } else if (currentImage == 2) {
-                                    currentImage = 1;
-                                    counter = 0;
-                                    image = dO.returnImageLeft2();
-                                } 
-                            } 
-                        }
-
-                        // jump animation
-                        if (actualPlayer.touchingGround != true) {
-
-                            if (actualPlayer.actMovL) {
-
-                                image = dO.returnImageJumpL();
-
-                            } else if (actualPlayer.actMovR) {
-                                
-                                image = dO.returnImageJumpR();
-
-                            }
-                        }
-
-                        // insert wall climbing sprite here
-                        if (actualPlayer.spriteWall != false) {
-
-                            if (actualPlayer.actMovL) {
-
-                                image = dO.returnImageGrabL();
-                            } else if (actualPlayer.actMovR) {
-
-                                image = dO.returnImageGrabR();
-                            }
-                            
-                        } 
-                        if (actualPlayer.isSlamming == true) {
-
-                            image = dO.returnImageGroundslam();
-                        }
-                    
                         // draw function
 
                         g2.drawImage(image, x, y, w, h, null);
@@ -276,5 +197,89 @@ public class GamePanel extends JPanel {
     }
     public void getSpace(MyKeyHandler kH) {
         this.kH = kH;
+    }
+    public void spriteAnimation() {
+
+        if (actualPlayer.actMovR != true && actualPlayer.actMovL != true && actualPlayer.touchingGround == true) {
+
+            if (counter > 120) {
+
+                if (currentImage == 1) {
+                    currentImage = 2;
+                    counter = 0;
+                    image = dO.returnImageIdle1();
+
+                } else if (currentImage == 2) {
+                    currentImage = 1;
+                    counter = 0;
+                    image = dO.returnImageIdle2();
+                } 
+            }
+        }
+
+        if (actualPlayer.actMovR == true) {
+            if (counter > 25) {
+                
+                if (currentImage == 1) {
+                    currentImage = 2;
+                    counter = 0;
+                    image = dO.returnImageRight1();
+        // dynamic switching between two animations, results into walking animation
+                } else if (currentImage == 2) {
+                    currentImage = 1;
+                    counter = 0;
+                    image = dO.returnImageRight2();
+                } 
+            
+            } 
+        }
+        // sprites which are drawn as the player moves to the left
+        if (actualPlayer.actMovL == true) {
+            if (counter > 25) {
+                if (currentImage == 1) {
+                    currentImage = 2;
+                    counter = 0;
+                    image = dO.returnImageLeft1();
+        // dynamic switching between two animations, results into walking animation
+                } else if (currentImage == 2) {
+                    currentImage = 1;
+                    counter = 0;
+                    image = dO.returnImageLeft2();
+                } 
+            } 
+        }
+
+        // jump animation
+        if (actualPlayer.touchingGround != true) {
+
+            if (actualPlayer.actMovL) {
+
+                image = dO.returnImageJumpL();
+
+            } else if (actualPlayer.actMovR) {
+                
+                image = dO.returnImageJumpR();
+
+            }
+        }
+
+        // insert wall climbing sprite here
+        if (actualPlayer.spriteWall != false) {
+
+            if (actualPlayer.actMovL) {
+
+                image = dO.returnImageGrabL();
+            } else if (actualPlayer.actMovR) {
+
+                image = dO.returnImageGrabR();
+            }
+            
+        } 
+        if (actualPlayer.isSlamming == true) {
+
+            image = dO.returnImageGroundslam();
+        }
+
+
     }
 }
