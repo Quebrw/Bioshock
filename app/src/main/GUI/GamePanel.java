@@ -171,8 +171,13 @@ public class GamePanel extends JPanel {
 
             case "trap":
                 g2.setColor(Color.red);
-                //g2.draw3DRect(x, y, w, h, false);
                 g2.drawRect(x, y, w, h);
+            break;
+
+            case "trapPlus":
+                g2.setColor(Color.green);
+                g2.drawRect(x, y, w, h);
+
             break;
             
             case "generic":

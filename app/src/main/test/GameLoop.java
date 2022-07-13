@@ -47,6 +47,7 @@ public class GameLoop extends JComponent implements Runnable {
   private int jumpFrames, invincFrames, dJumpCoold, slamCoold;
   private float slamHeight;
   public boolean isSlamming;
+  public int shiftFrameC, spaceFrameC = 0;
   
 
 
@@ -74,6 +75,7 @@ public class GameLoop extends JComponent implements Runnable {
       worldObjects box = new worldObjects(100,2000, new Vector2f(0.0f,200.0f), "box", 0);
       worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
       worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
+      //worldObjects box4 = new worldObjects(50 ,200, new Vector2f(900, 380.0f), new Vector2f(1100, 450.0f), "box", 20, new Vector2f(2, 2));
       invincFrames = 0;
 
       LoadLevel test = new LoadLevel();
@@ -97,6 +99,7 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(box);
       sObjects.add(box2);
       sObjects.add(box3);
+      //sObjects.add(box4);
       extraJump = false;
       dJumpCoold = 0;
       dJumpenabled = false;
@@ -135,9 +138,13 @@ public class GameLoop extends JComponent implements Runnable {
 
       updateCollision();
 
+      updateObjectMovement();
+
+      updaterefGroundMovement();
       //Handles a bug where the player floats above the ground and behaves as if he's still touching it
       if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
         P.despos.setYpos((refGround.ypos + refGround.height + 1));
+        System.out.println("yes");
       }
 
       updatePositions();
@@ -165,6 +172,18 @@ public class GameLoop extends JComponent implements Runnable {
         //------------------------------------------------------------------------------------------------------------------------------------------------
         //The Player starts sprinting after 2 seconds, when stopping to sprint, they will experience a certiant inertia of movement because of their speed
         //------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //Counter so the player doesnt just hold down Space or shift
+      if(kH.SHIFT_PRESSED == true){
+        shiftFrameC +=1;
+      }else{
+        shiftFrameC = 0;
+      }
+      if(kH.SPACE_PRESSED == true){
+        spaceFrameC += 1;
+      }else{
+        spaceFrameC = 0;
+      }
 
         //If the Player is not already moving in another direction, he will start moving right/left
         if(kH.D_PRESSED == true && P.actMovL == false){
@@ -207,7 +226,7 @@ public class GameLoop extends JComponent implements Runnable {
         }
 
         //initiates the jump
-        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 5) && (P.actMovL == true || P.actMovR == true)) || (extraJump == true && dJumpCoold == 0 && dJumpenabled == true) )){
+        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 5) && (P.actMovL == true || P.actMovR == true) && spaceFrameC < 2) || (extraJump == true && dJumpCoold == 0 && dJumpenabled == true) )){
           if(extraJump == false){
             extraJump = true;
             dJumpCoold = 30;
@@ -234,7 +253,7 @@ public class GameLoop extends JComponent implements Runnable {
         //----------------------
         //Handles the Groundslam
         //----------------------
-        if(kH.SHIFT_PRESSED == true && P.touchingGround == false && slamCoold == 0){
+        if(kH.SHIFT_PRESSED == true && P.touchingGround == false && slamCoold == 0 && shiftFrameC < 2){
           isSlamming = true;
           slamCoold = 20;
           slamHeight = P.ypos;
@@ -260,6 +279,11 @@ public class GameLoop extends JComponent implements Runnable {
       }
       //gets a List of all Objects that are currently touching the player
       ArrayList<worldObjects> colliders = Collider.getCollisisions(P, sObjects);
+
+      //hascollided is only valid for one frame
+      for (worldObjects i : sObjects) {
+        i.hascollided = false;
+      }
       //System.out.println(colliders + "|" + colliders.size()); //debug
       //safeguard so theres no out of bounds exception
       if(colliders.size() >= 1){
@@ -273,9 +297,13 @@ public class GameLoop extends JComponent implements Runnable {
             //for boxcollisions the player is supposed to not be able to move through
             case "box":
               boolean isColliding = true;
+              //important for if a moving object collides with the player this Frame
+              int index = sObjects.indexOf(colliders.get(j));
+              sObjects.get(index).hascollided = true;
               //P.pos.setXpos(P.xpos);
               //P.pos.setYpos(P.ypos);
               Vector2f move = P.despos.getDifference(new Vector2f(P.xpos, P.ypos));
+
               //sets the player back so that its as close to the colliding object as possible without touching it
               while(isColliding == true){
                 P.despos.subtract(move, 0.1f);
@@ -294,10 +322,21 @@ public class GameLoop extends JComponent implements Runnable {
                 P.despos.setYpos(colliders.get(j).ypos + colliders.get(j).height +1);
                 isSlamming = false;
                 //there are 2 ways a player can leave a surface: per jumping or per stepping off the platform. To account for the second one a copy of the current surface's x-Dimensions is made for reference
+                //yes, inefficient, i know i shouldve just created a new object but this works too
                 refGround.xpos = colliders.get(j).xpos;
                 refGround.width = colliders.get(j).width;
                 refGround.ypos = colliders.get(j).ypos;
                 refGround.height = colliders.get(j).height;
+                //if the Object is moving, the reference Ground has to move with it
+                refGround.movDirx = colliders.get(j).movDirx;
+                refGround.movDiry = colliders.get(j).movDiry;
+                refGround.movingx = colliders.get(j).movingx;
+                refGround.movingy = colliders.get(j).movingy;
+                refGround.setSx(colliders.get(j).Speedx());
+                refGround.setSy(colliders.get(j).Speedy());
+                refGround.setFromTo(new Vector2f(colliders.get(j).moveFx(), colliders.get(j).moveFy()), new Vector2f(colliders.get(j).moveTx(), colliders.get(j).moveTy()));
+                
+
               }
               //allows Walljump & makes it so touching an overhead surface ends a jump
               if(colliders.get(j).ypos > (P.ypos + P.height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
@@ -319,9 +358,10 @@ public class GameLoop extends JComponent implements Runnable {
             break;
 
             case "trap":
-            //if the Player Groundslams right above the Trap (currently 50px) he will avoid damage and bounce off the trap
+            //if the player groundslams right above the Trap (currently 50px) he will avoid damage and bounce off the trap
               if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 55){
                 isSlamming = false;
+                P.isSlamming = false;
                 slamCoold = 20;
                 beganJump = System.nanoTime() - ((System.nanoTime()-beganJump)/5);
                 P.despos = new Vector2f(P.xpos, colliders.get(j).ypos + colliders.get(j).height +1 );
@@ -333,8 +373,17 @@ public class GameLoop extends JComponent implements Runnable {
                   invincFrames = 90;
                 }
               }
+
             break;
 
+            //some traps should not be "avoidable" with a groundslam
+            case "trapPlus":
+            if(invincFrames == 0){
+              P.ouch(colliders.get(j).damage);
+              invincFrames = 90;
+
+            }
+            break;
             //#region SceneTriggers
 
             
@@ -365,6 +414,108 @@ public class GameLoop extends JComponent implements Runnable {
       gP.getShit(invincFrames, P);
     }
   
+    private void updateObjectMovement(){
+      for (worldObjects o : sObjects) {
+        if(o.movingx == true){
+          //basic 2-state machine
+          if(o.xpos <= o.moveFx()){
+            o.movDirx = "right";
+          }else if(o.xpos >= o.moveTx()){
+            o.movDirx = "left";
+          }
+          //switch because I like them better than "if"s
+          switch(o.movDirx){
+            case "right":
+              o.xpos += o.Speedx();
+              if(o.hascollided == true){
+                P.despos.setXpos(P.despos.getXpos() + o.Speedx());
+              }
+            break;
+
+            case "left":
+              o.xpos -= o.Speedx();
+              if(o.hascollided == true){
+                P.despos.setXpos(P.despos.getXpos() - o.Speedx());
+              }            
+            break;
+          }
+        }
+
+        if(o.movingy ==  true){
+          if(o.ypos <= o.moveFy()){
+            o.movDiry = "up";
+          }else if(o.ypos >= o.moveTy()){
+            o.movDiry = "down";
+          }
+
+          switch(o.movDiry){
+            case "up":
+              o.ypos += o.Speedy();
+              if(o.hascollided == true){
+                P.despos.setYpos(P.despos.getYpos() + o.Speedy());
+              }
+            break;
+
+            case "down":
+              o.ypos -= o.Speedy();
+              if(o.hascollided == true){
+                P.despos.setYpos(P.despos.getYpos() - o.Speedy());
+              }            
+            break;
+          }
+        }
+
+      }
+    }
+
+    //this is solely used for updating the reference Object 
+    private void updaterefGroundMovement(){
+      worldObjects o = refGround;
+      if(o.movingx == true){
+          //basic 2-state machine
+          if(o.xpos <= o.moveFx()){
+            o.movDirx = "right";
+          }else if(o.xpos >= o.moveTx()){
+            o.movDirx = "left";
+          }
+          //switch because I like them better than "if"s
+          switch(o.movDirx){
+            case "right":
+              o.xpos += o.Speedx();
+
+            break;
+
+            case "left":
+              o.xpos -= o.Speedx();
+    
+            break;
+          }
+        }
+
+        if(o.movingy ==  true){
+          if(o.ypos <= o.moveFy()){
+            o.movDiry = "up";
+          }else if(o.ypos >= o.moveTy()){
+            o.movDiry = "down";
+          }
+
+          switch(o.movDiry){
+            case "up":
+              o.ypos += o.Speedy();
+
+            break;
+
+            case "down":
+              o.ypos -= o.Speedy();
+          
+            break;
+          }
+        }
+
+        refGround = o;
+
+      
+    }
 
     private void updatePositions(){
       P.updatePosition();
