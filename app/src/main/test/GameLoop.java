@@ -75,7 +75,7 @@ public class GameLoop extends JComponent implements Runnable {
       worldObjects box = new worldObjects(100,2000, new Vector2f(0.0f,200.0f), "box", 0);
       worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
       worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
-      //worldObjects box4 = new worldObjects(50 ,200, new Vector2f(900, 380.0f), new Vector2f(1100, 450.0f), "box", 20, new Vector2f(2, 2));
+      worldObjects box4 = new worldObjects(50 ,200, new Vector2f(900, 380.0f), new Vector2f(900, 450.0f), "box", 20, new Vector2f(2, 2));
       invincFrames = 0;
 
       LoadLevel test = new LoadLevel();
@@ -99,7 +99,7 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(box);
       sObjects.add(box2);
       sObjects.add(box3);
-      //sObjects.add(box4);
+      sObjects.add(box4);
       extraJump = false;
       dJumpCoold = 0;
       dJumpenabled = false;
@@ -144,7 +144,6 @@ public class GameLoop extends JComponent implements Runnable {
       //Handles a bug where the player floats above the ground and behaves as if he's still touching it
       if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
         P.despos.setYpos((refGround.ypos + refGround.height + 1));
-        System.out.println("yes");
       }
 
       updatePositions();
