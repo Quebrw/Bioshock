@@ -48,6 +48,8 @@ public class GameLoop extends JComponent implements Runnable {
   private float slamHeight;
   public boolean isSlamming;
   public int shiftFrameC, spaceFrameC = 0;
+
+  private int counter;
   
 
 
@@ -135,6 +137,8 @@ public class GameLoop extends JComponent implements Runnable {
 
         if (gP.gameState == gP.gameStatePlaying) {
 
+          gameState();
+
           updatePlayerMovement();
           
           updateScene();
@@ -154,6 +158,7 @@ public class GameLoop extends JComponent implements Runnable {
         } 
         else if (gP.gameState == gP.gameStateMenu) {
 
+          gameState();
 
         }
     
@@ -256,22 +261,6 @@ public class GameLoop extends JComponent implements Runnable {
         if(((P.xpos + P.width) < refGround.xpos || P.xpos > (refGround.xpos + refGround.width)) && P.touchingGround == true){
           P.touchingGround = false;
           beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
-        }
-
-        // for the gamestate 
-        if (kH.ESCAPE_PRESSED == true) {
-          
-          System.out.println("ESC");
-
-          if (gP.gameState == gP.gameStatePlaying) {
-
-            gP.gameState = gP.gameStateMenu;
-
-          } else if (gP.gameState == gP.gameStateMenu) {
-
-            gP.gameState = gP.gameStatePlaying;
-          }
-
         }
 
         //----------------------
@@ -557,17 +546,21 @@ public class GameLoop extends JComponent implements Runnable {
 
       gP.repaint();
     }
-    /* 
-    public int transferKeyHandler() {
+    public void gameState() {
+      
+       // for the gamestate 
+       if (kH.ESCAPE_PRESSED == true) {
 
-      if (kH.D_PRESSED == true) {
+        if (gP.gameState == gP.gameStatePlaying) {
 
-        return 1;
-      } else if (kH.A_PRESSED == true) {
+          gP.gameState = gP.gameStateMenu;
 
-        return 2;
+        } else if (gP.gameState == gP.gameStateMenu) {
+
+          gP.gameState = gP.gameStatePlaying;
+        }
+
       }
-      return 0;
+
     }
-    */
 }
