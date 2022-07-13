@@ -158,7 +158,7 @@ public class GameLoop extends JComponent implements Runnable {
 
         }
 
-        gameState();
+      gameState();
     
       updateFrame();
 
@@ -548,6 +548,12 @@ public class GameLoop extends JComponent implements Runnable {
       
        // for the gamestate 
        if (kH.ESCAPE_PRESSED == true) {
+        if (counter > 0) {
+
+          counter --;
+
+
+        } else {
 
         if (gP.gameState == gP.gameStatePlaying) {
 
@@ -556,6 +562,10 @@ public class GameLoop extends JComponent implements Runnable {
         } else if (gP.gameState == gP.gameStateMenu) {
 
           gP.gameState = gP.gameStatePlaying;
+        }
+
+        counter = 10;
+
         }
 
       }

@@ -100,6 +100,8 @@ public class GamePanel extends JPanel {
 
                 draw(g2); 
 
+                
+
             }
 
             else if (gameState == gameStateMenu) {
