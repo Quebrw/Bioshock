@@ -132,21 +132,30 @@ public class GameLoop extends JComponent implements Runnable {
     public void update(float time){
 
       if(sceneChange == false){
-      updatePlayerMovement();
-      
-      updateScene();
 
-      updateCollision();
+        if (gP.gameState == gP.gameStatePlaying) {
 
-      updateObjectMovement();
+          updatePlayerMovement();
+          
+          updateScene();
 
-      updaterefGroundMovement();
-      //Handles a bug where the player floats above the ground and behaves as if he's still touching it
-      if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
-        P.despos.setYpos((refGround.ypos + refGround.height + 1));
-      }
+          updateCollision();
 
-      updatePositions();
+          updateObjectMovement();
+
+          updaterefGroundMovement();
+          //Handles a bug where the player floats above the ground and behaves as if he's still touching it
+          if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
+            P.despos.setYpos((refGround.ypos + refGround.height + 1));
+          }
+
+          updatePositions();
+
+        } 
+        else if (gP.gameState == gP.gameStateMenu) {
+
+
+        }
     
       updateFrame();
 
@@ -247,6 +256,22 @@ public class GameLoop extends JComponent implements Runnable {
         if(((P.xpos + P.width) < refGround.xpos || P.xpos > (refGround.xpos + refGround.width)) && P.touchingGround == true){
           P.touchingGround = false;
           beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
+        }
+
+        // for the gamestate 
+        if (kH.ESCAPE_PRESSED == true) {
+          
+          System.out.println("ESC");
+
+          if (gP.gameState == gP.gameStatePlaying) {
+
+            gP.gameState = gP.gameStateMenu;
+
+          } else if (gP.gameState == gP.gameStateMenu) {
+
+            gP.gameState = gP.gameStatePlaying;
+          }
+
         }
 
         //----------------------

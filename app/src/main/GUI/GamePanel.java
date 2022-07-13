@@ -53,7 +53,12 @@ public class GamePanel extends JPanel {
     //MyKeyHandler kH = new MyKeyHandler();
 
     Menu m = new Menu();
-    public boolean PLAYING = false, MENU = true;
+    
+    //Gamestates
+
+    public int gameState;
+    public int gameStatePlaying = 1;
+    public int gameStateMenu = 2;
 
     public GamePanel(MyKeyHandler kH) {
 
@@ -68,6 +73,8 @@ public class GamePanel extends JPanel {
 
         // adds keyHandler
         this.addKeyListener(kH);
+
+        gameState = gameStatePlaying;
     }
 
     // Outdated ? 
@@ -89,25 +96,17 @@ public class GamePanel extends JPanel {
         // changes Graphics g to Graphics2D (more functions)
         Graphics2D g2 = (Graphics2D)g;
 
-        if (PLAYING != false && MENU != true) {
+            if(gameState == gameStatePlaying) {
 
-            draw(g2);
+                draw(g2); 
 
-        } else if (PLAYING != true && MENU != false) {
-            
-            if (kH.SPACE_PRESSED != false) {
-
-                PLAYING = true;
-                MENU = false;
             }
 
-            m.draw(g2);
-              
-              //PLAYING = m.changeStatePlaying();
-              //MENU = m.changeStatePlaying2(); 
-        }
+            else if (gameState == gameStateMenu) {
 
-        
+                m.draw(g2);
+
+            }
 
         // saves memory
         g2.dispose();
