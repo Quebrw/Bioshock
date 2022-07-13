@@ -9,8 +9,6 @@ public class MyKeyHandler implements KeyListener{
     public boolean enabled;               //whether a certian key is being precced at this moment
     public long A_releaseTime, D_releaseTime;
 
-    public int fixBug;
-
     GamePanel gP;
 
     public MyKeyHandler(GamePanel gP) {
@@ -51,8 +49,6 @@ public class MyKeyHandler implements KeyListener{
             }
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 ESCAPE_PRESSED = true;
-
-                fixBug = 1;
             }
         }
     }
