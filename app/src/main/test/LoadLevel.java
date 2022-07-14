@@ -12,7 +12,7 @@ public class LoadLevel {
         this.addStage();
         this.addObject(0, 20, 300, new Vector2f(200, 375), "box", 0);
         this.addObject(0, 20, 200, new Vector2f(600, 425), "box", 0);
-        this.addObject(0, 10000, 50, new Vector2f(-55, 0), "box", 0);
+        this.addObject(0, 10000, 50, new Vector2f(0, 0), "box", 0);
 
         //World Loadboarders (copy paste)
         this.addObject(0, 10000, 50, new Vector2f(-60, 0), "leftTrigger", 0);
@@ -30,9 +30,9 @@ public class LoadLevel {
 
 
         this.addStage();
-        this.addObject(2, 500, 300, new Vector2f(600, 300), "box", 0);
-        this.addObject(2, 500, 300, new Vector2f(1100, 300), "box", 0);
-        this.addObject(2, 50, 200, new Vector2f(1300, 600), "box", 0);
+        this.addObject(2, 500, 300, new Vector2f(600, 350), "box", 0);
+        this.addObject(2, 500, 300, new Vector2f(1100, 350), "box", 0);
+        this.addObject(2, 50, 200, new Vector2f(1300, 350), "box", 0);
 
 
         this.addStage();  
