@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import GUI.GamePanel;
 import tools.MyKeyHandler;
+import tools.MyMouseHandler;
 
 public class Main extends JFrame{
 
@@ -27,7 +28,9 @@ public class Main extends JFrame{
 
         MyKeyHandler kH = new MyKeyHandler();
 
-        GamePanel gamePanel = new GamePanel(kH);
+        MyMouseHandler mH = new MyMouseHandler();
+
+        GamePanel gamePanel = new GamePanel(kH, mH);
         // Implements the GamePanel to the Frame
         window.add(gamePanel);
 

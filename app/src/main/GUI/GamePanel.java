@@ -60,7 +60,7 @@ public class GamePanel extends JPanel {
     public final int gameStatePlaying = 1;
     public final int gameStateMenu = 2;
 
-    public GamePanel(MyKeyHandler kH) {
+    public GamePanel(MyKeyHandler kH, MyMouseHandler mH) {
 
         // size of the GamePanel
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -73,6 +73,10 @@ public class GamePanel extends JPanel {
 
         // adds keyHandler
         this.addKeyListener(kH);
+
+        this.addMouseListener(mH);
+
+        this.addMouseMotionListener(mH);
 
         gameState = gameStatePlaying;
     }
