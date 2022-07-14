@@ -7,17 +7,16 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 import java.awt.Rectangle;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import tools.*;
 
-public class Menu extends JFrame{
+public class Menu{
 
     public boolean changeStateToPLAYING = true;
     public boolean changeStateToMenu = false;
@@ -29,18 +28,27 @@ public class Menu extends JFrame{
     private int centerScreenY = 830/2;
 
     final String menu = "MENU";
-    private String play = "PLAY";
-    private String options = "OPTIONS";
-    private String quit = "QUIT";
+
     private MyMouseHandler mH;
+
 
     private boolean buttonPressed;
 
     private int index;
 
-    private Rectangle hitbox;
+    ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
+
+        MenuButtons b_play = new MenuButtons("PLAY", 500);
+        MenuButtons b_options = new MenuButtons("OPTIONS", 550);
+        MenuButtons b_quit = new MenuButtons("QUIT", 600);
+    
+
+    int y = 300;
+
+    
 
     public Menu() {
+
 
     }
     
@@ -48,13 +56,14 @@ public class Menu extends JFrame{
 
         titleString(g2);
 
-        buttons(g2, 500, play);
+        addMenuButtons();
 
-        buttons(g2, 550, options);
+        for (int i = 0; i < menuButtons.size(); i++) {
 
-        buttons(g2, 600, quit);
+            menuButtons.get(i).draw(g2, menuButtons.get(i).y, menuButtons.get(i).text);
 
-        // g2.fillRect(centerX, centerY, BWidth, BHeight);
+        }
+
     }
     public int getStringWidth(String text, Graphics2D g2) {
 
@@ -79,19 +88,7 @@ public class Menu extends JFrame{
         g2.drawString(menu, reallyCenteredX, 150);
     }
 
-    public void buttons(Graphics2D g2, int y, String text) {
-
-        g2.setFont(new Font("Serif", Font.BOLD, 38));
-
-        int reallyCenteredX = centerScreenX - getStringWidth(text, g2);
-
-        g2.setColor(Color.white);
-
-        hitbox = new Rectangle(reallyCenteredX, y, getStringWidth(text, g2), getStringHeight(text, g2) ); 
-
-        g2.drawString(text, reallyCenteredX, y);
-
-    }
+    
     public void update() {
 
         index = 0;
@@ -121,6 +118,13 @@ public class Menu extends JFrame{
 
 
     }
+    public void addMenuButtons() {
+
+        menuButtons.add(b_play);
+        menuButtons.add(b_options);
+        menuButtons.add(b_quit);
+    }
+    
     
 
 }
