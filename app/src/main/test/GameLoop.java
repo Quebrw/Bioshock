@@ -79,10 +79,10 @@ public class GameLoop extends JComponent implements Runnable {
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
 
-      worldObjects box = new worldObjects(100,2000, new Vector2f(0.0f,200.0f), "box", 0);
-      worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
-      worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
-      worldObjects box4 = new worldObjects(50 ,200, new Vector2f(900, 380.0f), new Vector2f(900, 450.0f), "box", 20, new Vector2f(2, 2));
+      // worldObjects box = new worldObjects(100,2000, new Vector2f(0.0f,200.0f), "box", 0);
+      // worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
+      // worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
+      // worldObjects box4 = new worldObjects(50 ,200, new Vector2f(900, 380.0f), new Vector2f(900, 450.0f), "box", 20, new Vector2f(2, 2));
       
 
       LoadLevel test = new LoadLevel();
@@ -103,15 +103,11 @@ public class GameLoop extends JComponent implements Runnable {
         sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
       }
 
-      sObjects.add(box);
-      sObjects.add(box2);
-      sObjects.add(box3);
-      sObjects.add(box4);
+      // sObjects.add(box);
+      // sObjects.add(box2);
+      // sObjects.add(box3);
+      // sObjects.add(box4);
 
-      //Fuck that Problem-text
-      if(sceneChange == true){
-
-      }
       //System.out.println(sObjects.size());
 
       //This Loop calls the update Function every 1/60th of a second
@@ -177,10 +173,10 @@ public class GameLoop extends JComponent implements Runnable {
         jumpFrames = jumpFrames - 1;
         }
 
-    }else{
-      loadnewScene();
-      sceneChange = false;
-    }
+      }else{
+        loadnewScene();
+        sceneChange = false;
+      }
     }
 
     private void updatePlayerMovement() {
@@ -281,7 +277,6 @@ public class GameLoop extends JComponent implements Runnable {
           P.despos = new Vector2f(P.xpos, (P.ypos - 20f)); 
         }
         gP.getSpace(kH);
-
     }
 
     //may be unnecessary
@@ -404,12 +399,16 @@ public class GameLoop extends JComponent implements Runnable {
 
             
             case "rightTrigger":
-              worldGrid[0] += 1;
+              Stagecounter++;
+              // worldGrid[0] += 1;
+              P.despos.setXpos(0);
               sceneChange = true;
             break;
 
             case "leftTrigger":
-              worldGrid[0] -= 1;
+              Stagecounter--;
+              // worldGrid[0] -= 1;
+              P.despos.setXpos(1800);
               sceneChange = true;
             break;
 
@@ -539,8 +538,16 @@ public class GameLoop extends JComponent implements Runnable {
     }
 
     public void loadnewScene() {
-      //Stagecounter soll sich erhöhen sobald trigger passiert wurde, lädt dann neue Stage
+      // Stagecounter soll sich erhöhen sobald trigger passiert wurde, lädt dann neue Stage
+      // TODO
+      sObjects.clear();
+      sObjects.add(P);
       
+      LoadLevel test = new LoadLevel();
+
+      for(int i = 0; i < test.level01.stages.get(Stagecounter).platforms.size(); i++){
+        sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
+      }
     }
     
     private void updateFrame() {

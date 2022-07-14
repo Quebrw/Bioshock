@@ -12,7 +12,7 @@ public class Level {
         
     };
     public void addStage(){
-        stages.add(new Stage(20, 300, new Vector2f(100, 100), "box", 0));
+        stages.add(new Stage(50, 1920, new Vector2f(0,250), "box", 0));
     }
     
 }
