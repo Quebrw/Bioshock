@@ -16,11 +16,13 @@ public class Menu extends JFrame{
     public boolean changeStateToPLAYING = true;
     public boolean changeStateToMenu = false;
 
-    private int BWidth = 100;
-    private int BHeight = 200;
+    private int BHeight = 100;
+    private int BWidth = 250;
 
-    private int centerX = 1920/2;
-    private int centerY = 1920/2;
+
+
+    private int centerX = 1525/2 - BWidth/2;
+    private int centerY = 830/2 - BHeight/2;
 
     JLabel label;
 
@@ -61,7 +63,7 @@ public class Menu extends JFrame{
 
         g2.setColor(Color.green);
 
-        g2.fillRect(675, 320, BHeight, BWidth);
+        g2.fillRect(centerX, centerY, BWidth, BHeight);
 
         
 

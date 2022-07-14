@@ -57,8 +57,8 @@ public class GamePanel extends JPanel {
     //Gamestates
 
     public int gameState;
-    public int gameStatePlaying = 1;
-    public int gameStateMenu = 2;
+    public final int gameStatePlaying = 1;
+    public final int gameStateMenu = 2;
 
     public GamePanel(MyKeyHandler kH) {
 
@@ -99,8 +99,6 @@ public class GamePanel extends JPanel {
             if(gameState == gameStatePlaying) {
 
                 draw(g2); 
-
-                
 
             }
 

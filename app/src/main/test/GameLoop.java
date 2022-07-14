@@ -567,8 +567,6 @@ public class GameLoop extends JComponent implements Runnable {
         counter = 10;
 
         }
-
       }
-
     }
 }
