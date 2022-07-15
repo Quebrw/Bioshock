@@ -3,6 +3,7 @@ package GUI;
 //import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Gamestate.Gamestate;
 
 import java.awt.*;
 import java.awt.Color;
@@ -56,10 +57,6 @@ public class GamePanel extends JPanel {
     
     //Gamestates
 
-    public int gameState;
-    public final int gameStatePlaying = 1;
-    public final int gameStateMenu = 2;
-
     public GamePanel(MyKeyHandler kH, MyMouseHandler mH) {
 
         // size of the GamePanel
@@ -77,8 +74,6 @@ public class GamePanel extends JPanel {
         this.addMouseListener(mH);
 
         this.addMouseMotionListener(mH);
-
-        gameState = gameStatePlaying;
     }
 
     // Outdated ? 
@@ -100,17 +95,17 @@ public class GamePanel extends JPanel {
         // changes Graphics g to Graphics2D (more functions)
         Graphics2D g2 = (Graphics2D)g;
 
-            if(gameState == gameStatePlaying) {
-
-                draw(g2); 
-
+            switch(Gamestate.state) {
+                case MENU:
+                    m.draw(g2);
+                    break;
+                case PLAYING:
+                    draw(g2); 
+                    break;
+                default:
+                    break;
             }
-
-            else if (gameState == gameStateMenu) {
-
-                m.draw(g2);
-
-            }
+ 
 
         // saves memory
         g2.dispose();

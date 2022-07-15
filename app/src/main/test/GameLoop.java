@@ -12,11 +12,11 @@ import javax.swing.*;
 //import java.awt.Graphics;  
 //Maybe specify later
 
-//import java.awt.Graphics2D;
-
-import test.Gamestate;
 import GUI.GamePanel;
 import GUI.Menu;
+import Gamestate.*;
+
+
 //import tools.MyKeyHandler;
 public class GameLoop extends JComponent implements Runnable {
     
@@ -50,6 +50,10 @@ public class GameLoop extends JComponent implements Runnable {
   public int shiftFrameC, spaceFrameC = 0;
 
   private int counter;
+
+  private Menu menu;
+
+  
   
 
 
@@ -129,7 +133,13 @@ public class GameLoop extends JComponent implements Runnable {
 
       if(sceneChange == false){
 
-        if (gP.gameState == gP.gameStatePlaying) {
+        switch(Gamestate.state) {
+          case MENU:
+            gameState();
+            break;
+          case PLAYING:
+
+          gameState();
 
           updatePlayerMovement();
           
@@ -148,12 +158,10 @@ public class GameLoop extends JComponent implements Runnable {
 
           updatePositions();
 
-        } 
-        else if (gP.gameState == gP.gameStateMenu) {
-
+            break;
+          default:
+            break;
         }
-
-      gameState();
     
       updateFrame();
 
@@ -554,29 +562,36 @@ public class GameLoop extends JComponent implements Runnable {
 
       gP.repaint();
     }
+    
     public void gameState() {
       
        // for the gamestate 
        if (kH.ESCAPE_PRESSED == true) {
-        if (counter > 0) {
-
-          counter --;
 
 
-        } else {
+        if (counter < 0) {
 
-        if (gP.gameState == gP.gameStatePlaying) {
+        
+           
+          switch(Gamestate.state) {
+            case MENU:
+              Gamestate.state = Gamestate.PLAYING;
+              break;
+            case PLAYING:
+              Gamestate.state = Gamestate.MENU;
+              break;
+            default:
+              break;
 
-          gP.gameState = gP.gameStateMenu;
-
-        } else if (gP.gameState == gP.gameStateMenu) {
-
-          gP.gameState = gP.gameStatePlaying;
+          }
+          counter = 10;
+          
         }
-
-        counter = 10;
-
-        }
+        counter --;
       }
+    }
+    public Menu getMenu() {
+
+      return menu;    
     }
 }

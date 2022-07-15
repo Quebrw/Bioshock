@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.GamePanel;
+import Gamestate.Gamestate;
 
 import java.awt.Graphics2D;
 
@@ -32,15 +33,15 @@ public class Menu{
     private MyMouseHandler mH;
 
 
-    private boolean buttonPressed;
+   
 
-    private int index;
+    
 
     ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
 
-        MenuButtons b_play = new MenuButtons("PLAY", 500);
-        MenuButtons b_options = new MenuButtons("OPTIONS", 550);
-        MenuButtons b_quit = new MenuButtons("QUIT", 600);
+        MenuButtons b_play = new MenuButtons("PLAY", 500, Gamestate.PLAYING);
+        MenuButtons b_options = new MenuButtons("OPTIONS", 550, Gamestate.OPTIONS);
+        MenuButtons b_quit = new MenuButtons("QUIT", 600, Gamestate.QUIT);
     
 
     int y = 300;
@@ -49,14 +50,13 @@ public class Menu{
 
     public Menu() {
 
+        addMenuButtons();
 
     }
     
     public void draw(Graphics2D g2) {
 
         titleString(g2);
-
-        addMenuButtons();
 
         for (int i = 0; i < menuButtons.size(); i++) {
 
@@ -88,36 +88,42 @@ public class Menu{
         g2.drawString(menu, reallyCenteredX, 150);
     }
 
+   
+
     
-    public void update() {
-
-        index = 0;
-
-        if (buttonPressed) {
-
-            index = 1;
-
-        } 
-    }
-
-    public boolean isButtonPressed() {
-        return buttonPressed;
-    }
-
-    public void setButtonPressed(boolean buttonPressed) {
-        this.buttonPressed = buttonPressed;
-    }
     public void applyGamestates() {
 
     }
-    public void resetBools() {
-
-        buttonPressed = false;
-    }
+   
     public void mousePressed (MouseEvent e) {
+        for (MenuButtons mb : menuButtons) {
+            if (mb.isIn(e, mb)) {
+
+                mb.setButtonPressed(true);
+                break;
+            }
+        }
 
 
     }
+    public void mouseReleased(MouseEvent e) {
+        for (MenuButtons mb : menuButtons) {
+            if (mb.isIn(e, mb)) {
+                if(mb.isButtonPressed())
+                    mb.applyGamestate();
+                    break;
+
+            }
+        resetButtons();
+    }
+}
+    private void resetButtons() {
+        for (MenuButtons mb : menuButtons) 
+
+            mb.resetBools(); 
+
+    }
+
     public void addMenuButtons() {
 
         menuButtons.add(b_play);

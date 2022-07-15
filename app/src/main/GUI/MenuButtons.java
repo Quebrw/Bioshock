@@ -7,6 +7,8 @@ import java.awt.Font;
 
 import javax.swing.JTextArea;
 
+import Gamestate.Gamestate;
+
 import java.awt.Rectangle;
 
 import java.awt.event.MouseEvent;
@@ -24,17 +26,26 @@ public class MenuButtons {
     public String text;
     public int y;
 
+    private int index;
+
+    private boolean buttonPressed;
+
+    private Gamestate state;
+
     private String play = "PLAY";
     private String options = "OPTIONS";
     private String quit = "QUIT";
 
+    GamePanel gP;
+
     
 
 
-    public MenuButtons(String text, int y) {
+    public MenuButtons(String text, int y, Gamestate state) {
 
         this.text = text;
         this.y = y;
+        this.state = state;
 
     }
 
@@ -62,6 +73,42 @@ public class MenuButtons {
         int centerY = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight()/(2);
 
         return centerY;
+    }
+    public boolean isIn (MouseEvent e, MenuButtons mb) {
+
+        return mb.getHitbox().contains(e.getX(),e.getY());
+
+
+    }
+    public Rectangle getHitbox() {
+
+        return hitbox;
+    }
+    public boolean isButtonPressed() {
+        return buttonPressed;
+    }
+    public void update() {
+
+        index = 0;
+
+        if (buttonPressed) {
+
+            index = 1;
+
+        } 
+    }
+    public void resetBools() {
+
+        buttonPressed = false;
+    }
+    public void setButtonPressed(boolean buttonPressed) {
+        this.buttonPressed = buttonPressed;
+    }
+    public void applyGamestate() {
+
+        Gamestate.state = state;
+
+       
     }
     
 }
