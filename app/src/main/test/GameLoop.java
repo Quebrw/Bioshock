@@ -137,6 +137,9 @@ public class GameLoop extends JComponent implements Runnable {
           case MENU:
             gameState();
             break;
+          case TITLE:
+            gameState();
+            break;
           case PLAYING:
 
           gameState();
@@ -579,6 +582,9 @@ public class GameLoop extends JComponent implements Runnable {
               break;
             case PLAYING:
               Gamestate.state = Gamestate.MENU;
+              break;
+            case TITLE:
+              Gamestate.state = Gamestate.PLAYING;
               break;
             default:
               break;

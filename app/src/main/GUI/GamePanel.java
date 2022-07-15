@@ -54,6 +54,7 @@ public class GamePanel extends JPanel {
     //MyKeyHandler kH = new MyKeyHandler();
 
     Menu m = new Menu();
+    Titlescreen t = new Titlescreen();
     
     //Gamestates
 
@@ -102,6 +103,8 @@ public class GamePanel extends JPanel {
                 case PLAYING:
                     draw(g2); 
                     break;
+                case TITLE:
+                    t.draw(g2);
                 default:
                     break;
             }
