@@ -594,7 +594,7 @@ public class GameLoop extends JComponent implements Runnable {
               Gamestate.state = Gamestate.PLAYING;
               break;
             case DEATH:
-              Gamestate.state = Gamestate.PLAYING;
+              Gamestate.state = Gamestate.TITLE;
               break;
             default:
               break;
@@ -613,7 +613,14 @@ public class GameLoop extends JComponent implements Runnable {
           P.despos.setXpos(0);
           Stagecounter = 0;
           sceneChange = true;
+<<<<<<< HEAD
 
+=======
+          P.health = 40;
+
+          invincFrames = 0;
+          dJumpenabled = false;
+>>>>>>> main
 
         switch(Gamestate.state) {
           case MENU:
@@ -641,9 +648,8 @@ public class GameLoop extends JComponent implements Runnable {
 
         Gamestate.state = Gamestate.TITLE;
 
-        P.health = 40;
-
         counter2 = 0;
+
       }
       else {
 
