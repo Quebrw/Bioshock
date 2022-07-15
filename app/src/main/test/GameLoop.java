@@ -135,14 +135,18 @@ public class GameLoop extends JComponent implements Runnable {
 
         switch(Gamestate.state) {
           case MENU:
-            gameState();
+            updateGameState();
             break;
           case TITLE:
-            gameState();
+            updateGameState();
+            break;
+          case DEATH:
+          // Hier einfügen was passieren soll wenn der Spieler stirbt an Mechaniken
+            updateGameState();
             break;
           case PLAYING:
 
-          gameState();
+          updateGameState();
 
           updatePlayerMovement();
           
@@ -160,6 +164,8 @@ public class GameLoop extends JComponent implements Runnable {
           }
 
           updatePositions();
+          
+          checkDeath();
 
             break;
           default:
@@ -566,15 +572,12 @@ public class GameLoop extends JComponent implements Runnable {
       gP.repaint();
     }
     
-    public void gameState() {
+    public void updateGameState() {
       
        // for the gamestate 
        if (kH.ESCAPE_PRESSED == true || kH.ENTER_PRESSED) {
 
-
         if (counter < 0) {
-
-        
            
           switch(Gamestate.state) {
             case MENU:
@@ -586,18 +589,45 @@ public class GameLoop extends JComponent implements Runnable {
             case TITLE:
               Gamestate.state = Gamestate.PLAYING;
               break;
+            case DEATH:
+              Gamestate.state = Gamestate.PLAYING;
+              break;
             default:
               break;
 
           }
           counter = 10;
-          
         }
         counter --;
       }
     }
-    public Menu getMenu() {
+    public void checkDeath() {
 
-      return menu;    
+      if (P.health <= 0) {
+
+        switch(Gamestate.state) {
+          case MENU:
+            Gamestate.state = Gamestate.DEATH;
+            break;
+          case PLAYING:
+            Gamestate.state = Gamestate.DEATH;
+            break;
+          case TITLE:
+            Gamestate.state = Gamestate.DEATH;
+            break;
+          case DEATH:
+            Gamestate.state = Gamestate.DEATH;
+            break;
+          default:
+            break;
+
+        }
+        
+
+
+      } else {
+
+      }
+
     }
 }

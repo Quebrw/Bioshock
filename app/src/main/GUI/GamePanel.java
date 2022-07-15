@@ -4,6 +4,8 @@ package GUI;
 import javax.swing.JPanel;
 
 import Gamestate.Gamestate;
+import Screens.Deathscreen;
+import Screens.Titlescreen;
 
 import java.awt.*;
 import java.awt.Color;
@@ -55,6 +57,7 @@ public class GamePanel extends JPanel {
 
     Menu m = new Menu();
     Titlescreen t = new Titlescreen();
+    Deathscreen d = new Deathscreen();
     
     //Gamestates
 
@@ -103,13 +106,14 @@ public class GamePanel extends JPanel {
                 case PLAYING:
                     draw(g2); 
                     break;
+                case DEATH:
+                    d.draw(g2);
                 case TITLE:
                     t.draw(g2);
                 default:
                     break;
             }
  
-
         // saves memory
         g2.dispose();
     }
