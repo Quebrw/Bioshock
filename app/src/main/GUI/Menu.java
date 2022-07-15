@@ -24,8 +24,8 @@ public class Menu{
     private int BHeight = 100;
     private int BWidth = 250;
 
-    private int centerScreenX = 1525/2;
-    private int centerScreenY = 830/2;
+    private int centerScreenX = 1920/2;
+    private int centerScreenY = 1080/2;
 
     final String menu = "MENU";
 
