@@ -44,7 +44,7 @@ public class Titlescreen {
 
         g2.drawImage(image, imageCenterX, imageCenterY, imageWidth, imageHeight, null);
 
-        drawString(g2, 40, "Press Space to Enter", 900);
+        drawString(g2, 40, "To start press Enter", 900);
 
         
 

@@ -569,7 +569,7 @@ public class GameLoop extends JComponent implements Runnable {
     public void gameState() {
       
        // for the gamestate 
-       if (kH.ESCAPE_PRESSED == true) {
+       if (kH.ESCAPE_PRESSED == true || kH.ENTER_PRESSED) {
 
 
         if (counter < 0) {
