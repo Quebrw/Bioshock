@@ -70,7 +70,7 @@ public class GameLoop extends JComponent implements Runnable {
       dJumpCoold = 0;
       dJumpenabled = false;
 
-      //Most of these implementations should later be handled by a load Class
+
       P.setHeight(50);                   
       P.setWidth(50);
       P.xpos = 500f;
@@ -79,11 +79,8 @@ public class GameLoop extends JComponent implements Runnable {
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
 
-      // worldObjects box = new worldObjects(100,2000, new Vector2f(0.0f,200.0f), "box", 0);
-      // worldObjects box2 = new worldObjects(100,3000, new Vector2f(-100.0f, 0.0f), "box", 0);
-      // worldObjects box3 = new worldObjects(50 ,50, new Vector2f(1000, 300.0f), "trap", 20);
-      // worldObjects box4 = new worldObjects(50 ,200, new Vector2f(900, 380.0f), new Vector2f(900, 450.0f), "box", 20, new Vector2f(2, 2));
       
+  
 
       LoadLevel test = new LoadLevel();
       
@@ -103,12 +100,9 @@ public class GameLoop extends JComponent implements Runnable {
         sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
       }
 
-      // sObjects.add(box);
-      // sObjects.add(box2);
-      // sObjects.add(box3);
-      // sObjects.add(box4);
 
-      //System.out.println(sObjects.size());
+
+
 
       //This Loop calls the update Function every 1/60th of a second
       while (running == true) {
@@ -238,8 +232,8 @@ public class GameLoop extends JComponent implements Runnable {
         }
 
         //initiates the jump
-        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 5) && (P.actMovL == true || P.actMovR == true) && spaceFrameC < 2) || (extraJump == true && dJumpCoold == 0 && dJumpenabled == true) )){
-          if(extraJump == false){
+        if(kH.SPACE_PRESSED == true && (P.touchingGround == true || ((jumpFrames > 0 && jumpFrames < 8) && (P.actMovL == true || P.actMovR == true) && spaceFrameC < 2) || (extraJump == true && dJumpCoold == 0 && dJumpenabled == true) )){
+          if(extraJump == false && P.touchingGround == true){
             extraJump = true;
             dJumpCoold = 30;
             slamCoold = 20;
@@ -357,7 +351,7 @@ public class GameLoop extends JComponent implements Runnable {
                 P.spriteWall = false;
               }else{
                 if(P.touchingGround == false){
-                  jumpFrames = 6;
+                  jumpFrames = 10;
                   beganJump = System.nanoTime() - ((2* P.jumpLenght)/3);
 
                   // is used for wall climbing
@@ -366,6 +360,10 @@ public class GameLoop extends JComponent implements Runnable {
                 }
               }
 
+            break;
+
+            case "doubleJump":
+              dJumpenabled = true;
             break;
 
             case "trap":
@@ -408,7 +406,7 @@ public class GameLoop extends JComponent implements Runnable {
             case "leftTrigger":
               Stagecounter--;
               // worldGrid[0] -= 1;
-              P.despos.setXpos(1800);
+              P.despos.setXpos(1850);
               sceneChange = true;
             break;
 
