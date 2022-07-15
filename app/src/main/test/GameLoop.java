@@ -613,7 +613,7 @@ public class GameLoop extends JComponent implements Runnable {
           P.despos.setXpos(0);
           Stagecounter = 0;
           sceneChange = true;
-        
+
 
         switch(Gamestate.state) {
           case MENU:
