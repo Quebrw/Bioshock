@@ -569,6 +569,8 @@ public class GameLoop extends JComponent implements Runnable {
     
     private void updateFrame() {
 
+     
+
       gP.gimmeThatArrayList(sObjects);
 
       gP.repaint();
@@ -606,6 +608,12 @@ public class GameLoop extends JComponent implements Runnable {
     public void checkDeath() {
 
       if (P.health <= 0) {
+        
+        //resets Player to stage 0 after DEATH
+          P.despos.setXpos(0);
+          Stagecounter = 0;
+          sceneChange = true;
+        
 
         switch(Gamestate.state) {
           case MENU:
