@@ -5,13 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 
-
-
-import objects_graphics.*;
-
 public class Titlescreen extends Screen{
-
-    private DObjects dO;
 
     private String titleString = "EPIC POGOMAN";
 

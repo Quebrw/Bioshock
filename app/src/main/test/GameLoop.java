@@ -50,6 +50,7 @@ public class GameLoop extends JComponent implements Runnable {
   public int shiftFrameC, spaceFrameC = 0;
 
   private int counter;
+  private int counter2;
 
   private Menu menu;
 
@@ -142,7 +143,8 @@ public class GameLoop extends JComponent implements Runnable {
             break;
           case DEATH:
           // Hier einfügen was passieren soll wenn der Spieler stirbt an Mechaniken
-            updateGameState();
+          updateGameState();
+          returnToTitleScreen();
             break;
           case PLAYING:
 
@@ -575,7 +577,7 @@ public class GameLoop extends JComponent implements Runnable {
     public void updateGameState() {
       
        // for the gamestate 
-       if (kH.ESCAPE_PRESSED == true || kH.ENTER_PRESSED) {
+       if (kH.ESCAPE_PRESSED == true || kH.ENTER_PRESSED == true) {
 
         if (counter < 0) {
            
@@ -622,12 +624,22 @@ public class GameLoop extends JComponent implements Runnable {
             break;
 
         }
-        
-
-
-      } else {
-
+       
       }
+    } 
+    public void returnToTitleScreen() {
 
+      if(counter2 > 240) {
+
+        Gamestate.state = Gamestate.TITLE;
+
+        P.health = 40;
+
+        counter2 = 0;
+      }
+      else {
+
+        counter2++;
+      }
     }
 }

@@ -33,10 +33,6 @@ public class Menu{
     private MyMouseHandler mH;
 
 
-   
-
-    
-
     ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
 
         MenuButtons b_play = new MenuButtons("PLAY", 500, Gamestate.PLAYING);

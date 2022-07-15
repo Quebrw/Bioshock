@@ -108,8 +108,10 @@ public class GamePanel extends JPanel {
                     break;
                 case DEATH:
                     d.draw(g2);
+                    break;
                 case TITLE:
                     t.draw(g2);
+                    break;
                 default:
                     break;
             }
