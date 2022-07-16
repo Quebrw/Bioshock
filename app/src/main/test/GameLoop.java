@@ -407,6 +407,7 @@ public class GameLoop extends JComponent implements Runnable {
 
             break;
 
+           
             case "doubleJump":
               dJumpenabled = true;
             break;

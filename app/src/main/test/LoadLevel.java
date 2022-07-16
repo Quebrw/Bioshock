@@ -19,10 +19,10 @@ public class LoadLevel {
         this.addObject( 0, new worldObjects(10000, 50, new Vector2f(0, 0), "box", 0));
         this.addObject( 0, new worldObjects(400, 300, new Vector2f(1300, 300), "box", 0));
         this.addObject(0, new worldObjects(20, 50, new Vector2f(1200, 360), new Vector2f(1200, 700), "box", 0, new Vector2f(0, 3)));
-        this.addObject( 0, new worldObjects(50, 50, new Vector2f(1350, 800), "win", 0));
+        this.addObject( 0, new worldObjects(50, 50, new Vector2f(1350, 800), "Win", 0));
 
 
-        //this.addObject( 0, new worldObjects(50, 50, new Vector2f(300, 400), "doubleJump", 0));
+        this.addObject( 0, new worldObjects(50, 50, new Vector2f(300, 400), "doubleJump", 0));
 
         //World Loadboarders (copy paste)
         this.addObject( 0, new worldObjects(10000, 50, new Vector2f(-60, 0), "leftTrigger", 0));
