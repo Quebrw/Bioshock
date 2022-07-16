@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
 
     // Importing images
     private DObjects dO = new DObjects();
-    private BufferedImage playerImage, backgroundGP;
+    private BufferedImage playerImage, backgroundGP, enemy, damage;
 
     // used for sprite animation
     private int currentImage = 1, counter = 0, counter2 = 90;
@@ -172,10 +172,11 @@ public class GamePanel extends JPanel {
 
                         g2.drawImage(backgroundGP, centerX - offsetX, centerY - offsetY, imageWidth, imageHeight, null);
 
-                        // When the player takes damage a animation for that is implemented
-                        g2.setColor(Color.cyan);
+                        // When the player takes damage an animation for that is implemented
 
-                        g2.fillRect(x, y, w, h);
+                        damage = dO.returnDamage();
+
+                        g2.drawImage(damage, x, y, w, h, null);
 
                     }
 
@@ -198,15 +199,17 @@ public class GamePanel extends JPanel {
 
                 // Color is created with RGB values for the trap
                 g2.setColor(new Color(94, 15, 13));
+
                 g2.fillRect(x, y, w, h);
 
             break;
 
             case "trapPlus":
 
+                enemy = dO.returnEnemy();
+
+                g2.drawImage(enemy, x, y, w, h, null);
                 
-                g2.setColor(Color.green);
-                g2.fillRect(x, y, w, h);
 
             break;
             
@@ -362,7 +365,7 @@ public class GamePanel extends JPanel {
         if (actualPlayer.isSlamming == true) {
 
             playerImage = dO.returnImageGroundslam();
-            
+
         }
     }
 }
