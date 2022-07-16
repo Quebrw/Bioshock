@@ -152,36 +152,37 @@ public class GameLoop extends JComponent implements Runnable {
 
           case DEATH:
           
-          updateGameState();
+            updateGameState();
 
-          returnToTitleScreen();
+            returnToTitleScreen();
 
-            break;
+          break;
 
           case PLAYING:
 
-          updateGameState();
+            updateGameState();
 
-          updatePlayerMovement();
-          
-          updateScene();
+            updatePlayerMovement();
 
-          updateCollision();
+            updateScene();
 
-          updateObjectMovement();
+            updateCollision();
 
-          updaterefGroundMovement();
-          
-          //Handles a bug where the player floats above the ground and behaves as if he's still touching it
-          if(P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)){
-            P.despos.setYpos((refGround.ypos + refGround.height + 1));
-          }
+            updateObjectMovement();
 
-          updatePositions();
-          
-          checkDeath();
+            updaterefGroundMovement();
 
-            break;
+            // Handles a bug where the player floats above the ground and behaves as if he's
+            // still touching it
+            if (P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)) {
+              P.despos.setYpos((refGround.ypos + refGround.height + 1));
+            }
+
+            updatePositions();
+
+            checkDeath();
+
+          break;
 
           case QUIT:
 
@@ -189,15 +190,15 @@ public class GameLoop extends JComponent implements Runnable {
 
           case VICTORY:
 
-          updateGameState();
+            updateGameState();
 
-          returnToTitleScreen();
+            returnToTitleScreen();
 
           break;
 
           default:
 
-            break;
+          break;
         }
     
       updateFrame();
@@ -432,7 +433,7 @@ public class GameLoop extends JComponent implements Runnable {
 
             break;
 
-            //enemy, essentialy the same as trap, however new texture is able to be applied
+            //enemy, essentialy the same as trap, however a different texture is able to be applied
             case "enemy":
             if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 55){
               isSlamming = false;
