@@ -4,9 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import Screens.Titlescreen;
+
 public class DObjects {
 
-    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing;
+    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background;
 
     public DObjects() {
 
@@ -31,6 +33,8 @@ public class DObjects {
             groundslam = ImageIO.read(getClass().getResourceAsStream("Groundslam.png"));
             grabR = ImageIO.read(getClass().getResourceAsStream("Grab_Right.png"));
             grabL = ImageIO.read(getClass().getResourceAsStream("Grab_Left.png"));
+            titlescreen = ImageIO.read(getClass().getResourceAsStream("Titlescreen.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("Background.png"));
 
             
         } catch (IOException e) {
@@ -88,4 +92,13 @@ public class DObjects {
 
         return idle2;
     }
+    public BufferedImage returnBackground() {
+
+        return background;
+    }
+    public BufferedImage returnTitlescreen() {
+
+        return titlescreen;
+    }
+    
 }

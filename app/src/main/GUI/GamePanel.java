@@ -45,11 +45,11 @@ public class GamePanel extends JPanel {
     // used to draw the objects as Images
 
     private DObjects dO = new DObjects();
-    private BufferedImage image;
+    private BufferedImage image, backgroundGP;
 
     // used for sprite animation
 
-    private int currentImage = 1, counter = 13;
+    private int currentImage = 1, counter = 0, counter2 = 90;
     private MyKeyHandler kh;
     private boolean menuClose = false;
 
@@ -58,6 +58,15 @@ public class GamePanel extends JPanel {
     Menu m = new Menu();
     Titlescreen t = new Titlescreen();
     Deathscreen d = new Deathscreen();
+
+    // Background
+
+    private int centerX = 1920/2;
+    private int centerY = 1080/2;
+    private int imageWidth = 1920;
+    private int imageHeight = 1080;
+    private int offsetX = imageWidth/2;
+    private int offsetY = imageHeight/2;
     
     //Gamestates
 
@@ -130,6 +139,7 @@ public class GamePanel extends JPanel {
 
         for (int i = 0; i < sObjects.size(); i++) {
 
+
             int w = sObjects.get(i).width;
             int h = sObjects.get(i).height;
             int x = (int) sObjects.get(i).xpos;
@@ -139,7 +149,8 @@ public class GamePanel extends JPanel {
             switch (sObjects.get(i).getObjectType()){
 
             case "box":
-                g2.setColor(Color.pink);
+
+                g2.setColor(Color.black);
 
                 g2.drawRect(x, y, w, h);
             break;
@@ -151,6 +162,10 @@ public class GamePanel extends JPanel {
                         // following if-sentences decide which image should be drawn, based on the movement of the player
 
                         // sprites which are drawn as the player moves to the right
+
+                        backgroundGP = dO.returnBackground();
+
+                        g2.drawImage(backgroundGP, centerX - offsetX, centerY - offsetY, imageWidth, imageHeight, null);
                         
                         spriteAnimation();
 
@@ -160,6 +175,10 @@ public class GamePanel extends JPanel {
 
 
                     } else {
+
+                        backgroundGP = dO.returnBackground();
+
+                        g2.drawImage(backgroundGP, centerX - offsetX, centerY - offsetY, imageWidth, imageHeight, null);
 
                         g2.setColor(Color.cyan);
 
@@ -171,6 +190,10 @@ public class GamePanel extends JPanel {
                 }else{
 
                     // player is dead --> death animation
+
+                    backgroundGP = dO.returnBackground();
+
+                    g2.drawImage(backgroundGP, centerX - offsetX, centerY - offsetY, imageWidth, imageHeight, null);
 
                     g2.drawImage(dO.returnImageDeath(), x, y, w, h, null);
                 }
@@ -200,6 +223,7 @@ public class GamePanel extends JPanel {
 
         // counter is used to switch between sprites. This method is updated 60 times per second resulting in 5 changes per second if the player moves
         counter ++;
+        counter2 ++;
         
     }
     
@@ -214,23 +238,23 @@ public class GamePanel extends JPanel {
 
         if (actualPlayer.actMovR != true && actualPlayer.actMovL != true && actualPlayer.touchingGround == true) {
 
-            if (counter > 120) {
+            if (counter2 > 90) {
 
                 if (currentImage == 1) {
                     currentImage = 2;
-                    counter = 0;
+                    counter2 = 0;
                     image = dO.returnImageIdle1();
 
                 } else if (currentImage == 2) {
                     currentImage = 1;
-                    counter = 0;
+                    counter2 = 0;
                     image = dO.returnImageIdle2();
                 } 
             }
         }
 
         if (actualPlayer.actMovR == true) {
-            if (counter > 25) {
+            if (counter > 20) {
                 
                 if (currentImage == 1) {
                     currentImage = 2;
@@ -247,7 +271,7 @@ public class GamePanel extends JPanel {
         }
         // sprites which are drawn as the player moves to the left
         if (actualPlayer.actMovL == true) {
-            if (counter > 25) {
+            if (counter > 20) {
                 if (currentImage == 1) {
                     currentImage = 2;
                     counter = 0;
@@ -273,7 +297,17 @@ public class GamePanel extends JPanel {
                 image = dO.returnImageJumpR();
 
             }
-        }
+        } if (actualPlayer.touchingGround != true && actualPlayer.actMovR != true && actualPlayer.actMovL != true){
+
+
+         
+
+                image = dO.returnImageJumpL();
+
+        
+
+            }
+
 
         // insert wall climbing sprite here
         if (actualPlayer.spriteWall != false) {
