@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
 
     // Importing images
     private DObjects dO = new DObjects();
-    private BufferedImage playerImage, backgroundGP, enemy, damage;
+    private BufferedImage playerImage, backgroundGP, enemy, damage, doubleJump;
 
     // used for sprite animation
     private int currentImage = 1, counter = 0, counter2 = 90;
@@ -111,6 +111,8 @@ public class GamePanel extends JPanel {
                 case TITLE:
                     t.draw(g2);
                     break;
+                case VICTORY:
+
                 default:
                     break;
             }
@@ -214,6 +216,14 @@ public class GamePanel extends JPanel {
             break;
             
             case "generic":
+
+            break;
+
+            case "doubleJump":
+
+                doubleJump = dO.returnDoubleJump();
+
+                g2.drawImage(doubleJump, x, y, w , h,null);
 
             break;
             
