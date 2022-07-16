@@ -58,7 +58,7 @@ public class MyKeyHandler implements KeyListener{
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 ENTER_PRESSED = true;
 
-                // For pressing the "buttons" in the menu and the title Screen
+                // For pressing the "buttons" in the menu
                 switch (Gamestate.state) {
 
                     case MENU:
@@ -76,13 +76,8 @@ public class MyKeyHandler implements KeyListener{
 
                     break;
 
-                    case TITLE:
-
-                        Gamestate.state = Gamestate.PLAYING;
-                    
-                    break;
-
                     default:
+
                     break;
 
                 }  
