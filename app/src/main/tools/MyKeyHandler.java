@@ -84,6 +84,7 @@ public class MyKeyHandler implements KeyListener{
                 if (Gamestate.state == Gamestate.MENU) {
 
                     Menu.userInput--;
+                    
                     if (Menu.userInput < 0)
                         Menu.userInput = 2;
                 }

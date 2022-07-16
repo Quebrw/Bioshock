@@ -90,13 +90,13 @@ public class Menu{
     }
     public void titleString(Graphics2D g2) {
 
-        g2.setFont(new Font("Serif", Font.BOLD, 64));
+        g2.setFont(new Font("Serif", Font.BOLD, 86));
 
         int reallyCenteredX = centerScreenX - getStringWidth(menu, g2);
 
         g2.setColor(Color.white);
 
-        g2.drawString(menu, reallyCenteredX, 150);
+        g2.drawString(menu, reallyCenteredX, 230);
     }
     public void applyGamestates() {
 
