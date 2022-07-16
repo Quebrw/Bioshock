@@ -451,7 +451,7 @@ public class GameLoop extends JComponent implements Runnable {
 
             //win condition
             case "Win":
-            Gamestate.state = Gamestate.VICTORY
+            Gamestate.state = Gamestate.VICTORY;
 
             break;
 
