@@ -24,6 +24,7 @@ import Gamestate.Gamestate;
 // Screens
 import Screens.Deathscreen;
 import Screens.Titlescreen;
+import Screens.Victoryscreen;
 
 
 public class GamePanel extends JPanel {
@@ -54,6 +55,7 @@ public class GamePanel extends JPanel {
     Menu m = new Menu();
     Titlescreen t = new Titlescreen();
     Deathscreen d = new Deathscreen();
+    Victoryscreen v = new Victoryscreen();
     
 // ----Objects----//
 
@@ -112,7 +114,7 @@ public class GamePanel extends JPanel {
                     t.draw(g2);
                     break;
                 case VICTORY:
-
+                    v.draw(g2);
                 default:
                     break;
             }
