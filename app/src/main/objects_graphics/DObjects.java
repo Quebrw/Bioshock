@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class DObjects {
 
     // BufferdImages in which the drawn images are stored
-    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background, menu, buttonBackground, damage, enemy, victory;
+    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background, menu, buttonBackground, damage, enemy, victory, doubleJump;
 
     public DObjects() {
 
@@ -42,6 +42,7 @@ public class DObjects {
             damage = ImageIO.read(getClass().getResourceAsStream("Damage.png"));
             enemy = ImageIO.read(getClass().getResourceAsStream("Enemy.png"));
             victory = ImageIO.read(getClass().getResourceAsStream("Victory.png"));
+            doubleJump = ImageIO.read(getClass().getResourceAsStream("double_Jump.png"));
             
         } catch (IOException e) {
 
@@ -162,6 +163,12 @@ public class DObjects {
     public BufferedImage returnButtonBackground() {
 
         return buttonBackground;
+
+    }
+
+    public BufferedImage returnDoubleJump() {
+
+        return doubleJump;
 
     }
 
