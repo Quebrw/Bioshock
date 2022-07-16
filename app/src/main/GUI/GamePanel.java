@@ -208,11 +208,8 @@ public class GamePanel extends JPanel {
 
             case "trapPlus":
 
-                enemy = dO.returnEnemy();
-
-                g2.drawImage(enemy, x, y, w, h, null);
+                g2.fillRect(x, y, w, h);
                 
-
             break;
             
             case "generic":
@@ -224,6 +221,14 @@ public class GamePanel extends JPanel {
                 doubleJump = dO.returnDoubleJump();
 
                 g2.drawImage(doubleJump, x, y, w , h,null);
+
+            break;
+
+            case "enemy":
+
+            enemy = dO.returnEnemy();
+
+            g2.drawImage(enemy, x, y, w, h, null);
 
             break;
             
