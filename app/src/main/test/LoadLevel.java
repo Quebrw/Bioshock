@@ -14,11 +14,11 @@ public class LoadLevel {
         this.addStage();
 
         this.addObject( 0, new worldObjects(50, 50, new Vector2f(300, 300), "box", 0));
-        this.addObject( 0, new worldObjects(20, 250, new Vector2f(900, 450), "box", 0));
+        this.addObject( 0, new worldObjects(20, 200, new Vector2f(900, 450), "box", 0));
         this.addObject( 0, new worldObjects(125, 200, new Vector2f(600, 300), "box", 0));
         this.addObject( 0, new worldObjects(10000, 50, new Vector2f(0, 0), "box", 0));
         this.addObject( 0, new worldObjects(400, 300, new Vector2f(1300, 300), "box", 0));
-        this.addObject(0, new worldObjects(20, 50, new Vector2f(1225, 300), new Vector2f(1600, 700), "box", 0, new Vector2f(0, 3)));
+        this.addObject(0, new worldObjects(20, 50, new Vector2f(1200, 360), new Vector2f(1200, 700), "box", 0, new Vector2f(0, 3)));
 
         //this.addObject( 0, new worldObjects(50, 50, new Vector2f(300, 400), "doubleJump", 0));
 
