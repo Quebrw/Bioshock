@@ -376,12 +376,12 @@ public class GamePanel extends JPanel {
             // Holding onto a Wall from left
             if (actualPlayer.actMovL) {
 
-                playerImage = dO.returnImageGrabL();
+                playerImage = dO.returnImageGrabR();
 
             // Holding onto a Wall from right
             } else if (actualPlayer.actMovR) {
 
-                playerImage = dO.returnImageGrabR();
+                playerImage = dO.returnImageGrabL();
 
             }  
         } 
