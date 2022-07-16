@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.GamePanel;
 import Gamestate.Gamestate;
+import objects_graphics.DObjects;
 import test.GameLoop;
 
 import java.awt.Graphics2D;
@@ -10,6 +11,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JTextArea;
+
+import java.awt.image.BufferedImage;
 
 import java.awt.Rectangle;
 
@@ -34,13 +37,20 @@ public class Menu{
 
     final String menu = "MENU";
 
+    DObjects dO4 = new DObjects();
+
     GamePanel gP;
+
+    BufferedImage image = dO4.returnImageGrabR();
+
+    private int imageWidth = 50;
+    private int imageHeight = 40;
 
     ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
 
         MenuButtons b_play = new MenuButtons("PLAY", 500);
-        MenuButtons b_options = new MenuButtons("OPTIONS", 550);
-        MenuButtons b_quit = new MenuButtons("QUIT", 600);
+        MenuButtons b_options = new MenuButtons("OPTIONS", 580);
+        MenuButtons b_quit = new MenuButtons("QUIT", 660);
     
 
     int y = 300;
@@ -101,15 +111,15 @@ public class Menu{
 
         if (userInput == 0) {
 
-            g2.drawString(">", 1920/2 - menuButtons.get(0).getStringWidth("Play", g2) - 90, menuButtons.get(0).y);
+            g2.drawImage(image, 1920/2 - menuButtons.get(0).getStringWidth("Play", g2) - imageWidth - 20,  menuButtons.get(0).y - imageHeight, 50, 50, null);
 
         } else if (userInput == 1) {
 
-            g2.drawString(">", 1920/2 - menuButtons.get(1).getStringWidth("Options", g2) - 90, menuButtons.get(1).y);
+            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Options", g2) - imageWidth - 20,  menuButtons.get(1).y - imageHeight, 50, 50, null);
 
         } else if (userInput == 2) {
 
-            g2.drawString(">", 1920/2 - menuButtons.get(2).getStringWidth("Quit", g2) - 90, menuButtons.get(2).y);
+            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Quit", g2) - imageWidth - 20,  menuButtons.get(2).y - imageHeight, 50, 50, null);
 
         }
     } 

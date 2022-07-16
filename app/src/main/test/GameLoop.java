@@ -180,6 +180,8 @@ public class GameLoop extends JComponent implements Runnable {
           checkDeath();
 
             break;
+          case QUIT:
+            System.exit(0);
           default:
             break;
         }

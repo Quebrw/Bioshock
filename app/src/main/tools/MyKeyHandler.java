@@ -54,6 +54,29 @@ public class MyKeyHandler implements KeyListener{
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 ENTER_PRESSED = true;
+
+                switch (Gamestate.state) {
+                    case MENU:
+
+                    if (Menu.userInput == 0) {
+
+                        Gamestate.state = Gamestate.PLAYING;
+                    } 
+                    else if (Menu.userInput == 1) {
+    
+                        Gamestate.state = Gamestate.OPTIONS;
+                    }
+                    else if (Menu.userInput == 2) {
+                        
+                        Gamestate.state = Gamestate.QUIT;
+    
+                    }
+                    break;
+                    default:
+                    break;
+                }
+
+                
             }
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 UP_PRESSED = true;
@@ -61,6 +84,8 @@ public class MyKeyHandler implements KeyListener{
                 if (Gamestate.state == Gamestate.MENU) {
 
                     Menu.userInput--;
+                    if (Menu.userInput < 0)
+                        Menu.userInput = 2;
                 }
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -69,6 +94,8 @@ public class MyKeyHandler implements KeyListener{
                 if (Gamestate.state == Gamestate.MENU) {
 
                     Menu.userInput++;
+                    if (Menu.userInput > 2)
+                        Menu.userInput = 0;
                 }
             }
         }
