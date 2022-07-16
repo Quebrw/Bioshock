@@ -81,7 +81,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(50);
       P.xpos = 500f;
       P.ypos = 500f;
-      P.health = 40;
+      P.health = 60;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
 
@@ -176,6 +176,7 @@ public class GameLoop extends JComponent implements Runnable {
             // still touching it
             if (P.touchingGround && true && P.despos.getYpos() != (refGround.ypos + refGround.height + 1)) {
               P.despos.setYpos((refGround.ypos + refGround.height + 1));
+              System.out.println( "yes");
             }
 
             updatePositions();
@@ -189,6 +190,9 @@ public class GameLoop extends JComponent implements Runnable {
             System.exit(0);
 
           case VICTORY:
+
+            //P.xpos = 0;
+            //P.ypos = 400;  
 
             updateGameState();
 
@@ -357,23 +361,40 @@ public class GameLoop extends JComponent implements Runnable {
 
               //sets the player back so that its as close to the colliding object as possible without touching it
               while(isColliding == true){
+                if(colliders.get(j).movingx == true && move.getXpos() == 0){
+                  switch (colliders.get(j).movDirx){
+                    case "right":
+                      move.setXpos(- colliders.get(j).Speedx());
+                    break;
+
+                    case "left":
+                      move.setXpos(+ colliders.get(j).Speedx()
+                      
+                      );
+                    break;
+                  }
+                }
+                
                 P.despos.subtract(move, 0.1f);
                 if(Collider.isColliding(P, colliders.get(j))== false){
                   isColliding = false;
                 }
               }
+
               //if the Player touches Ground, gravity has to be turned off, because it would cause constant collision and mess up the movement
-              if(P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))){
+              if (P.ypos > (colliders.get(j).ypos + colliders.get(j).height)
+                  && ((P.xpos >= colliders.get(j).xpos                && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))
+                      || ((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) {
+
                 P.touchingGround = true;
 
                 // cancels Groundslam animation
-
                 P.isSlamming = false;
 
                 P.despos.setYpos(colliders.get(j).ypos + colliders.get(j).height +1);
                 isSlamming = false;
                 //there are 2 ways a player can leave a surface: per jumping or per stepping off the platform. To account for the second one a copy of the current surface's x-Dimensions is made for reference
-                //yes, inefficient, i know i shouldve just created a new object but this works too
+                //yes, inefficient, i know, i shouldve just created a new object but this works too
                 refGround.xpos = colliders.get(j).xpos;
                 refGround.width = colliders.get(j).width;
                 refGround.ypos = colliders.get(j).ypos;

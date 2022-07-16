@@ -59,12 +59,14 @@ public class worldObjects {           //Every Object in the world should have a 
             speedx = Math.abs((int)speed.getXpos());
         }else{
             movingx =false;
+            speedx = 0;
         }
         if(moveF.getYpos() - moveT.getYpos() != 0){
             movingy = true;
             speedy = Math.abs((int)speed.getYpos());
         }else{
             movingy = false;
+            speedy =0;
         }
         this.moveFrom = moveF;
         this.moveTo = moveT;        
