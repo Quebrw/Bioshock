@@ -410,6 +410,7 @@ public class GameLoop extends JComponent implements Runnable {
            
             case "doubleJump":
               dJumpenabled = true;
+              P.doubleJump = true;
             break;
 
             case "trap":
@@ -460,7 +461,7 @@ public class GameLoop extends JComponent implements Runnable {
 
             //win condition
             case "Win":
-            
+
             Gamestate.state = Gamestate.VICTORY;
 
             break;

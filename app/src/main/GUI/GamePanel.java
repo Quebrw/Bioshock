@@ -220,9 +220,17 @@ public class GamePanel extends JPanel {
 
             case "doubleJump":
 
+                if (actualPlayer.doubleJump != true) {
+
                 doubleJump = dO.returnDoubleJump();
 
                 g2.drawImage(doubleJump, x, y, w , h,null);
+
+                } else if (actualPlayer.doubleJump == true) {
+
+
+                }
+
 
             break;
 

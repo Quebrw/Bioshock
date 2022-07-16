@@ -10,7 +10,7 @@ public class Player extends worldObjects{
     //_____Movement_______
     public float inertia = .8f;                                                                              //seconds for which the player experiences inertia
     private int speed, jumpSpeed;
-    public boolean actMovR, actMovL, upsidedown, spriteWall, isSlamming;
+    public boolean actMovR, actMovL, upsidedown, spriteWall, isSlamming, doubleJump;
     public boolean touchingGround;
     public long jumpLenght = 1 * 1000000000;
     public float gravityStrenght;
