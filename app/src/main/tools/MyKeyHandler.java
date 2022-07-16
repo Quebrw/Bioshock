@@ -2,10 +2,12 @@ package tools;
 import java.awt.event.*;
 
 import GUI.GamePanel;
+import GUI.Menu;
+import Gamestate.Gamestate;
 
 public class MyKeyHandler implements KeyListener{
 
-    public boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED, SPACE_PRESSED, SHIFT_PRESSED, ESCAPE_PRESSED, ENTER_PRESSED;
+    public boolean W_PRESSED, A_PRESSED, S_PRESSED, D_PRESSED, SPACE_PRESSED, SHIFT_PRESSED, ESCAPE_PRESSED, ENTER_PRESSED, UP_PRESSED, DOWN_PRESSED;
     public boolean enabled;               //whether a certian key is being precced at this moment
     public long A_releaseTime, D_releaseTime;
 
@@ -53,6 +55,22 @@ public class MyKeyHandler implements KeyListener{
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 ENTER_PRESSED = true;
             }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                UP_PRESSED = true;
+
+                if (Gamestate.state == Gamestate.MENU) {
+
+                    Menu.userInput--;
+                }
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                DOWN_PRESSED = true;
+
+                if (Gamestate.state == Gamestate.MENU) {
+
+                    Menu.userInput++;
+                }
+            }
         }
     }
 
@@ -89,6 +107,12 @@ public class MyKeyHandler implements KeyListener{
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 ENTER_PRESSED = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                UP_PRESSED = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                DOWN_PRESSED = false;
             }
         //}
     }

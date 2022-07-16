@@ -53,6 +53,7 @@ public class GameLoop extends JComponent implements Runnable {
   private int counter2;
 
   private Menu menu;
+  public int userInputG = 0;
 
   
   
@@ -137,6 +138,15 @@ public class GameLoop extends JComponent implements Runnable {
         switch(Gamestate.state) {
           case MENU:
             updateGameState();
+/* 
+            if (kH.DOWN_PRESSED) {
+
+              checkUserInputMenuDOWN();
+            } else if (kH.UP_PRESSED) {
+
+              checkUserInputMenuUP();
+            }
+*/
             break;
           case TITLE:
             updateGameState();
@@ -646,10 +656,20 @@ public class GameLoop extends JComponent implements Runnable {
 
         counter2 = 0;
 
-      }
-      else {
+      } else {
 
         counter2++;
       }
+    }
+    public int checkUserInputMenuUP() {
+
+      userInputG--;
+      return userInputG;
+
+    }
+    public int checkUserInputMenuDOWN() {
+
+      userInputG++;
+      return userInputG;
     }
 }

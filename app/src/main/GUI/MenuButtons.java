@@ -41,11 +41,10 @@ public class MenuButtons {
     
 
 
-    public MenuButtons(String text, int y, Gamestate state) {
+    public MenuButtons(String text, int y) {
 
         this.text = text;
         this.y = y;
-        this.state = state;
 
     }
 
@@ -56,8 +55,6 @@ public class MenuButtons {
         int reallyCenteredX = centerScreenX - getStringWidth(text, g2);
 
         g2.setColor(Color.white);
-
-        hitbox = new Rectangle(reallyCenteredX, y, getStringWidth(text, g2), getStringHeight(text, g2) ); 
 
         g2.drawString(text, reallyCenteredX, y);
 
@@ -74,40 +71,4 @@ public class MenuButtons {
 
         return centerY;
     }
-    public boolean isIn (MouseEvent e, MenuButtons mb) {
-
-        return mb.getHitbox().contains(e.getX(),e.getY());
-        
-    }
-    public Rectangle getHitbox() {
-
-        return hitbox;
-    }
-    public boolean isButtonPressed() {
-        return buttonPressed;
-    }
-    public void update() {
-
-        index = 0;
-
-        if (buttonPressed) {
-
-            index = 1;
-
-        } 
-    }
-    public void resetBools() {
-
-        buttonPressed = false;
-    }
-    public void setButtonPressed(boolean buttonPressed) {
-        this.buttonPressed = buttonPressed;
-    }
-    public void applyGamestate() {
-
-        Gamestate.state = state;
-
-       
-    }
-    
 }
