@@ -43,8 +43,17 @@ public class Menu{
 
     BufferedImage image = dO4.returnImageGrabR();
 
-    private int imageWidth = 50;
-    private int imageHeight = 40;
+    BufferedImage menuBackground = dO4.returnMenuScreen();
+
+    private int centerX = 1920/2;
+    private int centerY = 1080/2;
+    private int imageWidth = 1920;
+    private int imageHeight = 1080;
+    private int offsetX = imageWidth/2;
+    private int offsetY = imageHeight/2;
+
+    private int imageWidthCursor = 50;
+    private int imageHeightCursor = 40;
 
     ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
 
@@ -64,6 +73,8 @@ public class Menu{
     }
     
     public void draw(Graphics2D g2) {
+
+        g2.drawImage(menuBackground, centerX - offsetX, centerScreenY - offsetY, imageWidth, imageHeight, null);
 
         titleString(g2);
 
@@ -111,15 +122,15 @@ public class Menu{
 
         if (userInput == 0) {
 
-            g2.drawImage(image, 1920/2 - menuButtons.get(0).getStringWidth("Resume", g2) - imageWidth - 20,  menuButtons.get(0).y - imageHeight, 50, 50, null);
+            g2.drawImage(image, 1920/2 - menuButtons.get(0).getStringWidth("Resume", g2) - imageWidthCursor - 20,  menuButtons.get(0).y - imageHeightCursor, 50, 50, null);
 
         } else if (userInput == 1) {
 
-            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Options", g2) - imageWidth - 20,  menuButtons.get(1).y - imageHeight, 50, 50, null);
+            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Options", g2) - imageWidthCursor - 20,  menuButtons.get(1).y - imageHeightCursor, 50, 50, null);
 
         } else if (userInput == 2) {
 
-            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Quit", g2) - imageWidth - 20,  menuButtons.get(2).y - imageHeight, 50, 50, null);
+            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Quit", g2) - imageWidthCursor - 20,  menuButtons.get(2).y - imageHeightCursor, 50, 50, null);
 
         }
     } 

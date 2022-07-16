@@ -150,9 +150,9 @@ public class GamePanel extends JPanel {
 
             case "box":
 
-                g2.setColor(Color.black);
+                g2.setColor(new Color(60, 36, 22));
 
-                g2.drawRect(x, y, w, h);
+                g2.fillRect(x, y, w, h);
             break;
 
             case "player":
@@ -182,7 +182,7 @@ public class GamePanel extends JPanel {
 
                         g2.setColor(Color.cyan);
 
-                        g2.drawRect(x, y, w, h);
+                        g2.fillRect(x, y, w, h);
 
                         changeColor = 0;
                     }
@@ -200,13 +200,13 @@ public class GamePanel extends JPanel {
             break;
 
             case "trap":
-                g2.setColor(Color.red);
-                g2.drawRect(x, y, w, h);
+                g2.setColor(new Color(94, 15, 13));
+                g2.fillRect(x, y, w, h);
             break;
 
             case "trapPlus":
                 g2.setColor(Color.green);
-                g2.drawRect(x, y, w, h);
+                g2.fillRect(x, y, w, h);
 
             break;
             

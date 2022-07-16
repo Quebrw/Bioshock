@@ -8,7 +8,7 @@ import Screens.Titlescreen;
 
 public class DObjects {
 
-    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background;
+    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background, menu;
 
     public DObjects() {
 
@@ -35,6 +35,7 @@ public class DObjects {
             grabL = ImageIO.read(getClass().getResourceAsStream("Grab_Left.png"));
             titlescreen = ImageIO.read(getClass().getResourceAsStream("Titlescreen.png"));
             background = ImageIO.read(getClass().getResourceAsStream("Background.png"));
+            menu = ImageIO.read(getClass().getResourceAsStream("Menu_screen.png"));
 
             
         } catch (IOException e) {
@@ -99,6 +100,11 @@ public class DObjects {
     public BufferedImage returnTitlescreen() {
 
         return titlescreen;
+    }
+    public BufferedImage returnMenuScreen() {
+
+
+        return menu;
     }
     
 }
