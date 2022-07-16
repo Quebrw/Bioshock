@@ -30,7 +30,7 @@ public class Victoryscreen extends Screen{
         drawString(g2, 80, victory, 150, Color.black);
 
         // Draws text
-        drawString(g2, 40, "To start press Enter", 900, Color.black);
+        drawString(g2, 40, "Acquired Bachelor in Computer Science", 900, Color.black);
 
     }
     
