@@ -111,7 +111,7 @@ public class Menu{
 
         if (userInput == 0) {
 
-            g2.drawImage(image, 1920/2 - menuButtons.get(0).getStringWidth("Play", g2) - imageWidth - 20,  menuButtons.get(0).y - imageHeight, 50, 50, null);
+            g2.drawImage(image, 1920/2 - menuButtons.get(0).getStringWidth("Resume", g2) - imageWidth - 20,  menuButtons.get(0).y - imageHeight, 50, 50, null);
 
         } else if (userInput == 1) {
 
