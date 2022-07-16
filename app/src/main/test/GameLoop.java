@@ -81,7 +81,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(50);
       P.xpos = 500f;
       P.ypos = 500f;
-      P.health = 60;
+      P.health = 6000;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
 
@@ -368,17 +368,18 @@ public class GameLoop extends JComponent implements Runnable {
                     break;
 
                     case "left":
-                      move.setXpos(+ colliders.get(j).Speedx()
-                      
-                      );
+                      move.setXpos(+ colliders.get(j).Speedx());
                     break;
                   }
                 }
-                
+                if(colliders.get(j).movingx == true && ((colliders.get(j).movDirx == "right" && move.getXpos() > 0 && P.xpos > colliders.get(j).xpos) || ( colliders.get(j).movDirx == "left" && move.getXpos() <0 && P.xpos < colliders.get(j).xpos))){
+                  isColliding = false;
+                }else{
                 P.despos.subtract(move, 0.1f);
                 if(Collider.isColliding(P, colliders.get(j))== false){
                   isColliding = false;
                 }
+              }
               }
 
               //if the Player touches Ground, gravity has to be turned off, because it would cause constant collision and mess up the movement
