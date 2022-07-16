@@ -46,8 +46,8 @@ public class LoadLevel {
 
         this.addObject( 2, new worldObjects(70, 50, new Vector2f(200, 300), "box", 0));
         this.addObject( 2, new worldObjects(70, 50, new Vector2f(1000, 300), "box", 0));
-        this.addObject( 2, new worldObjects(50, 750, new Vector2f(250, 300), "trap", 0));
-        this.addObject( 2, new worldObjects(50, 750, new Vector2f(1050, 300), "trap", 0));
+        this.addObject( 2, new worldObjects(50, 750, new Vector2f(250, 300), "trap", 20));
+        this.addObject( 2, new worldObjects(50, 750, new Vector2f(1050, 300), "trap", 20));
         this.addObject(2, new worldObjects(300, 20, new Vector2f(300, 450), new Vector2f(1800, 450), "box", 0, new Vector2f(8 , 0)));
 
 
@@ -61,7 +61,7 @@ public class LoadLevel {
 
         this.addObject( 3, new worldObjects(800, 50, new Vector2f(250, 370), "box", 0));
         this.addObject( 3, new worldObjects(800, 50, new Vector2f(1200, 370), "box", 0));
-        this.addObject(3, new worldObjects(300, 900, new Vector2f(300, 300), new Vector2f(300, 700), "trap", 0, new Vector2f(0 , 5f)));
+        this.addObject(3, new worldObjects(300, 900, new Vector2f(300, 300), new Vector2f(300, 700), "trap", 100, new Vector2f(0 , 5f)));
 
         this.addObject( 3, new worldObjects(75, 50, new Vector2f(1400, 300), "box", 0));
         this.addObject( 3, new worldObjects(175, 50, new Vector2f(1450, 300), "box", 0));
@@ -77,15 +77,15 @@ public class LoadLevel {
         this.addStage();
 
         this.addObject( 4, new worldObjects(250, 300, new Vector2f(0, 300), "box", 0));
-        this.addObject( 4, new worldObjects(50, 1000, new Vector2f(300, 300), "trap", 0));
+        this.addObject( 4, new worldObjects(50, 1000, new Vector2f(300, 300), "trap", 100));
         this.addObject( 4, new worldObjects(250, 300, new Vector2f(1300, 300), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(450, 350), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(600, 350), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(750, 350), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(900, 350), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(1050, 350), "box", 0));
-        this.addObject(4, new worldObjects(50, 50, new Vector2f(450, 550), new Vector2f(800, 550), "trap", 0, new Vector2f(2 , 0)));
-        this.addObject(4, new worldObjects(50, 50, new Vector2f(850, 550), new Vector2f(1200, 550), "trap", 0, new Vector2f(2 , 0)));
+        this.addObject(4, new worldObjects(50, 50, new Vector2f(450, 550), new Vector2f(800, 550), "trap", 20, new Vector2f(2 , 0)));
+        this.addObject(4, new worldObjects(50, 50, new Vector2f(850, 550), new Vector2f(1200, 550), "trap", 20, new Vector2f(2 , 0)));
 
 
 
