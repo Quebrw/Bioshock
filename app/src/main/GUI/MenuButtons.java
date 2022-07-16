@@ -23,7 +23,7 @@ public class MenuButtons {
         this.y = y;
 
     }
-    
+
     // Draw function to draw the buttons
     public void draw(Graphics2D g2, int y, String text) {
 
@@ -33,8 +33,8 @@ public class MenuButtons {
         // Centering text
         int reallyCenteredX = centerScreenX - getStringWidth(text, g2);
 
-        // Text should appear white
-        g2.setColor(Color.white);
+        // Text should appear black
+        g2.setColor(Color.black);
 
         // Draws "buttons"
         g2.drawString(text, reallyCenteredX, y);

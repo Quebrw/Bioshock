@@ -26,6 +26,7 @@ public class Menu{
 
     // Background
     BufferedImage menuBackground = dO4.returnMenuScreen();
+    BufferedImage buttonBackground = dO4.returnButtonBackground();
 
     private int centerX = 1920/2;
     private int centerY = 1080/2;
@@ -33,6 +34,12 @@ public class Menu{
     private int imageHeight = 1080;
     private int offsetX = imageWidth/2;
     private int offsetY = imageHeight/2;
+
+    private int buttonBackgroundWidth = 1920 / 3;
+    private int buttonBackgroundHeight = 2560 / 3; 
+
+    private int buttonOffsetX = buttonBackgroundWidth / 2;
+    private int buttonOffsetY = buttonBackgroundHeight / 2;
 
     // Title
     final String menu = "MENU";
@@ -65,6 +72,9 @@ public class Menu{
         // Background
         g2.drawImage(menuBackground, centerX - offsetX, centerY - offsetY, imageWidth, imageHeight, null);
 
+        // Button background
+        g2.drawImage(buttonBackground, centerX - buttonOffsetX, centerY - buttonOffsetY, buttonBackgroundWidth, buttonBackgroundHeight, null);
+
         // Title - Menu
         titleString(g2);
 
@@ -87,6 +97,7 @@ public class Menu{
         int centerX = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth()/(2);
 
         return centerX;
+
     }
 
     // Function that gets the height of a text and returns it
@@ -95,6 +106,7 @@ public class Menu{
         int centerY = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight()/(2);
 
         return centerY;
+
     }
 
     // Function to draw a title
@@ -107,7 +119,7 @@ public class Menu{
         int reallyCenteredX = centerX - getStringWidth(menu, g2);
 
         // Text should appear in white color
-        g2.setColor(Color.white);
+        g2.setColor(Color.black);
 
         // draws title
         g2.drawString(menu, reallyCenteredX, 230);
@@ -118,6 +130,7 @@ public class Menu{
 
         menuButtons.add(b_play);
         menuButtons.add(b_quit);
+        
     }
 
     // Function to draw a cursor
