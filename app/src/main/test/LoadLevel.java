@@ -32,8 +32,8 @@ public class LoadLevel {
         this.addStage();
 
         this.addObject( 1, new worldObjects(500, 300, new Vector2f(600, 400), "box", 0));
-        this.addObject(1, new worldObjects(50, 50, new Vector2f(400, 300), new Vector2f(700, 300), "trap", 20, new Vector2f(5, 0)));
-        this.addObject(1, new worldObjects(50, 50, new Vector2f(750, 300), new Vector2f(1200, 300), "trap", 20, new Vector2f(5, 0)));
+        this.addObject(1, new worldObjects(50, 50, new Vector2f(400, 300), new Vector2f(700, 300), "enemy", 20, new Vector2f(5, 0)));
+        this.addObject(1, new worldObjects(50, 50, new Vector2f(750, 300), new Vector2f(1200, 300), "enemy", 20, new Vector2f(5, 0)));
         this.addObject( 1, new worldObjects(100, 300, new Vector2f(1300, 300), "box", 0));
         this.addObject( 1, new worldObjects(50, 150, new Vector2f(1600, 300), "trap", 20));
 
@@ -86,8 +86,8 @@ public class LoadLevel {
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(750, 350), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(900, 350), "box", 0));
         this.addObject( 4, new worldObjects(200, 50, new Vector2f(1050, 350), "box", 0));
-        this.addObject(4, new worldObjects(50, 50, new Vector2f(450, 550), new Vector2f(800, 550), "trap", 20, new Vector2f(2 , 0)));
-        this.addObject(4, new worldObjects(50, 50, new Vector2f(850, 550), new Vector2f(1200, 550), "trap", 20, new Vector2f(2 , 0)));
+        this.addObject(4, new worldObjects(50, 50, new Vector2f(450, 550), new Vector2f(800, 550), "enemy", 20, new Vector2f(2 , 0)));
+        this.addObject(4, new worldObjects(50, 50, new Vector2f(850, 550), new Vector2f(1200, 550), "enemy", 20, new Vector2f(2 , 0)));
 
 
 

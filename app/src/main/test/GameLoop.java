@@ -450,10 +450,7 @@ public class GameLoop extends JComponent implements Runnable {
             //#region SceneTriggers
 
             //win condition
-            case "Win":
-            Gamestate.state = Gamestate.VICTORY
-
-            break;
+        
 
             
             case "rightTrigger":
