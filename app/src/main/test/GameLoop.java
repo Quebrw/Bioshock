@@ -187,6 +187,14 @@ public class GameLoop extends JComponent implements Runnable {
 
             System.exit(0);
 
+          case VICTORY:
+
+          updateGameState();
+
+          returnToTitleScreen();
+
+          break;
+
           default:
 
             break;
@@ -451,6 +459,7 @@ public class GameLoop extends JComponent implements Runnable {
 
             //win condition
             case "Win":
+            
             Gamestate.state = Gamestate.VICTORY;
 
             break;
