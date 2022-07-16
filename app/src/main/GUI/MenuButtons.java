@@ -77,8 +77,7 @@ public class MenuButtons {
     public boolean isIn (MouseEvent e, MenuButtons mb) {
 
         return mb.getHitbox().contains(e.getX(),e.getY());
-
-
+        
     }
     public Rectangle getHitbox() {
 

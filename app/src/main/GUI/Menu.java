@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 import tools.*;
 
+
+
 public class Menu{
 
     public boolean changeStateToPLAYING = true;
@@ -32,6 +34,7 @@ public class Menu{
 
     private MyMouseHandler mH;
 
+    GamePanel gP;
 
     ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
 
@@ -127,6 +130,4 @@ public class Menu{
         menuButtons.add(b_quit);
     }
     
-    
-
 }

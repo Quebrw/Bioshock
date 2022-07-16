@@ -43,13 +43,13 @@ public class Deathscreen extends Screen{
 
         image = dO2.returnImageDeath();
 
-        drawString(g2, 80, death, 150);
+        drawString(g2, 80, death, 150, Color.red);
 
         g2.setColor(Color.red);
 
         g2.drawImage(image, imageCenterX, imageCenterY, imageWidth, imageHeight, null);
 
-        drawString(g2, 40, stringCounter, 900);
+        drawString(g2, 40, stringCounter, 900, Color.white);
 
     }
     

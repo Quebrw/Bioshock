@@ -17,13 +17,13 @@ public class Titlescreen extends Screen{
 
         image = dO2.returnImageGroundslam();
 
-        drawString(g2, 80, titleString, 150);
+        drawString(g2, 80, titleString, 150, Color.white);
 
         g2.setColor(Color.white);
 
         g2.drawImage(image, imageCenterX, imageCenterY, imageWidth, imageHeight, null);
 
-        drawString(g2, 40, "To start press Enter", 900);
+        drawString(g2, 40, "To start press Enter", 900, Color.white);
 
     }
     

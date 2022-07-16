@@ -44,13 +44,13 @@ public class Screen {
         return stringY;
     }
     
-    public void drawString(Graphics2D g2, int size, String text, int heightY) {
+    public void drawString(Graphics2D g2, int size, String text, int heightY, Color color) {
 
         g2.setFont(new Font("Serif", Font.BOLD, size));
 
         int reallyCenteredX = centerX - getStringWidth(text, g2);
 
-        g2.setColor(Color.white);
+        g2.setColor(color);
 
         g2.drawString(text, reallyCenteredX, heightY);
     }
