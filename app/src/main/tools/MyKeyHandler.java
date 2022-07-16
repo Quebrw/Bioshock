@@ -50,35 +50,48 @@ public class MyKeyHandler implements KeyListener{
                 SPACE_PRESSED = true;
             }
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+                // For calling the menu
                 ESCAPE_PRESSED = true;
+
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 ENTER_PRESSED = true;
 
+                // For pressing the "buttons" in the menu and the title Screen
                 switch (Gamestate.state) {
+
                     case MENU:
 
                     if (Menu.userInput == 0) {
 
                         Gamestate.state = Gamestate.PLAYING;
                     } 
+
                     else if (Menu.userInput == 1) {
-    
-                        Gamestate.state = Gamestate.OPTIONS;
-                    }
-                    else if (Menu.userInput == 2) {
                         
                         Gamestate.state = Gamestate.QUIT;
     
                     }
+
                     break;
+
+                    case TITLE:
+
+                        Gamestate.state = Gamestate.PLAYING;
+                    
+                    break;
+
                     default:
                     break;
-                }
 
-                
+                }  
             }
+
+            // For the cursor in the menu
+
             if (e.getKeyCode() == KeyEvent.VK_UP) {
+
                 UP_PRESSED = true;
 
                 if (Gamestate.state == Gamestate.MENU) {
@@ -86,16 +99,21 @@ public class MyKeyHandler implements KeyListener{
                     Menu.userInput--;
                     
                     if (Menu.userInput < 0)
-                        Menu.userInput = 2;
+
+                        Menu.userInput = 1;
                 }
             }
+
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+
                 DOWN_PRESSED = true;
 
                 if (Gamestate.state == Gamestate.MENU) {
 
                     Menu.userInput++;
-                    if (Menu.userInput > 2)
+
+                    if (Menu.userInput > 1)
+
                         Menu.userInput = 0;
                 }
             }
@@ -146,6 +164,7 @@ public class MyKeyHandler implements KeyListener{
     }
 
     public MyKeyHandler() {
+
         W_PRESSED = false;
         A_PRESSED = false;
         S_PRESSED = false;
@@ -153,8 +172,10 @@ public class MyKeyHandler implements KeyListener{
         SPACE_PRESSED = false;
         SHIFT_PRESSED = false;
         ESCAPE_PRESSED = false;
-
+        UP_PRESSED = false;
+        DOWN_PRESSED = false;
         enabled = true;
+
     }
 
 }

@@ -135,27 +135,29 @@ public class GameLoop extends JComponent implements Runnable {
 
       if(sceneChange == false){
 
+        // Implementing Gamestates
         switch(Gamestate.state) {
+
           case MENU:
+
             updateGameState();
-/* 
-            if (kH.DOWN_PRESSED) {
 
-              checkUserInputMenuDOWN();
-            } else if (kH.UP_PRESSED) {
-
-              checkUserInputMenuUP();
-            }
-*/
             break;
+
           case TITLE:
+
             updateGameState();
+
             break;
+
           case DEATH:
-          // Hier einfügen was passieren soll wenn der Spieler stirbt an Mechaniken
+          
           updateGameState();
+
           returnToTitleScreen();
+
             break;
+
           case PLAYING:
 
           updateGameState();
@@ -180,9 +182,13 @@ public class GameLoop extends JComponent implements Runnable {
           checkDeath();
 
             break;
+
           case QUIT:
+
             System.exit(0);
+
           default:
+
             break;
         }
     
@@ -590,66 +596,107 @@ public class GameLoop extends JComponent implements Runnable {
     
     public void updateGameState() {
       
-       // for the gamestate 
+       // For the Gamestates
        if (kH.ESCAPE_PRESSED == true || kH.ENTER_PRESSED == true) {
 
+        // Counter is used to cooldown the menu opening since this function is called 60 times per second in the thread
         if (counter < 0) {
            
           switch(Gamestate.state) {
+
             case MENU:
+
               Gamestate.state = Gamestate.PLAYING;
+
               break;
+
             case PLAYING:
+
               Gamestate.state = Gamestate.MENU;
+
               break;
+
             case TITLE:
+
               Gamestate.state = Gamestate.PLAYING;
+
               break;
+
             case DEATH:
+
               Gamestate.state = Gamestate.TITLE;
+
               break;
+
             default:
+
               break;
 
           }
+
+          // If menu is opened cooldown activates
           counter = 10;
         }
+
+        // Enables to reopen the menu
         counter --;
+
       }
     }
+
+    // Checks if the player is alive
     public void checkDeath() {
 
       if (P.health <= 0) {
         
         //resets Player to stage 0 after DEATH
+
           P.despos.setXpos(0);
+
           Stagecounter = 0;
+
           sceneChange = true;
+
           P.health = 40;
 
           invincFrames = 0;
+
           dJumpenabled = false;
 
         switch(Gamestate.state) {
+
           case MENU:
+
             Gamestate.state = Gamestate.DEATH;
-            break;
-          case PLAYING:
-            Gamestate.state = Gamestate.DEATH;
-            break;
-          case TITLE:
-            Gamestate.state = Gamestate.DEATH;
-            break;
-          case DEATH:
-            Gamestate.state = Gamestate.DEATH;
-            break;
-          default:
+
             break;
 
+          case PLAYING:
+
+            Gamestate.state = Gamestate.DEATH;
+
+            break;
+
+          case TITLE:
+
+            Gamestate.state = Gamestate.DEATH;
+
+            break;
+
+          case DEATH:
+
+            Gamestate.state = Gamestate.DEATH;
+
+            break;
+
+          default:
+
+            break;
         }
-       
       }
     } 
+
+    // Function to return from Deathscreen to the Titlescreen
     public void returnToTitleScreen() {
 
       if(counter2 > 240) {
@@ -661,17 +708,8 @@ public class GameLoop extends JComponent implements Runnable {
       } else {
 
         counter2++;
+
       }
-    }
-    public int checkUserInputMenuUP() {
 
-      userInputG--;
-      return userInputG;
-
-    }
-    public int checkUserInputMenuDOWN() {
-
-      userInputG++;
-      return userInputG;
     }
 }

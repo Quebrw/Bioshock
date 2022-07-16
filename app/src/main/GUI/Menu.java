@@ -1,48 +1,30 @@
 package GUI;
 
-import GUI.GamePanel;
-import Gamestate.Gamestate;
-import objects_graphics.DObjects;
-import test.GameLoop;
+
+//----Graphical components----//
 
 import java.awt.Graphics2D;
 
 import java.awt.Color;
-import java.awt.Font;
 
-import javax.swing.JTextArea;
+import java.awt.Font;
 
 import java.awt.image.BufferedImage;
 
-import java.awt.Rectangle;
-
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import tools.*;
+//----Self created----//
 
+import objects_graphics.DObjects;
 
 public class Menu{
 
-    public boolean changeStateToPLAYING = true;
-    public boolean changeStateToMenu = false;
+//----Images----//
 
-    private int BHeight = 100;
-    private int BWidth = 250;
-
-    private int centerScreenX = 1920/2;
-    private int centerScreenY = 1080/2;
-
-    public static int userInput;
-
-    final String menu = "MENU";
-
+    // Contains images
     DObjects dO4 = new DObjects();
 
-    GamePanel gP;
-
-    BufferedImage image = dO4.returnImageGrabR();
-
+    // Background
     BufferedImage menuBackground = dO4.returnMenuScreen();
 
     private int centerX = 1920/2;
@@ -52,86 +34,106 @@ public class Menu{
     private int offsetX = imageWidth/2;
     private int offsetY = imageHeight/2;
 
+    // Title
+    final String menu = "MENU";
+
+    // Cursor
+    BufferedImage CursorImage = dO4.returnImageGrabR();
+
     private int imageWidthCursor = 50;
     private int imageHeightCursor = 40;
 
+    // Used for cursor inputs
+    public static int userInput;
+
+    // "Buttons"
     ArrayList<MenuButtons> menuButtons = new ArrayList<MenuButtons>();
 
-        MenuButtons b_play = new MenuButtons("PLAY", 500);
-        MenuButtons b_options = new MenuButtons("OPTIONS", 580);
+        MenuButtons b_play = new MenuButtons("RESUME", 560);
         MenuButtons b_quit = new MenuButtons("QUIT", 660);
-    
-
-    int y = 300;
-
     
 
     public Menu() {
 
+        // Adds the Buttons the Menu when created
         addMenuButtons();
 
     }
-    
+    // Draw fucnction
     public void draw(Graphics2D g2) {
 
-        g2.drawImage(menuBackground, centerX - offsetX, centerScreenY - offsetY, imageWidth, imageHeight, null);
+        // Background
+        g2.drawImage(menuBackground, centerX - offsetX, centerY - offsetY, imageWidth, imageHeight, null);
 
+        // Title - Menu
         titleString(g2);
 
+        // MenuButtons Arraylist contains buttons that should be drawn
         for (int i = 0; i < menuButtons.size(); i++) {
 
+            //draws menuButtons
             menuButtons.get(i).draw(g2, menuButtons.get(i).y, menuButtons.get(i).text);
 
         }
 
+        // draws cursor
         drawCursor(g2);
 
     }
+
+    // Function that gets the width of a text and returns it
     public int getStringWidth(String text, Graphics2D g2) {
 
         int centerX = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth()/(2);
 
         return centerX;
     }
+
+    // Function that gets the height of a text and returns it
     public int getStringHeight(String text, Graphics2D g2) {
 
         int centerY = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight()/(2);
 
         return centerY;
     }
+
+    // Function to draw a title
     public void titleString(Graphics2D g2) {
 
+        // Font options
         g2.setFont(new Font("Serif", Font.BOLD, 86));
 
-        int reallyCenteredX = centerScreenX - getStringWidth(menu, g2);
+        // Centers the text
+        int reallyCenteredX = centerX - getStringWidth(menu, g2);
 
+        // Text should appear in white color
         g2.setColor(Color.white);
 
+        // draws title
         g2.drawString(menu, reallyCenteredX, 230);
     }
-    public void applyGamestates() {
 
-    }
+    // Adds buttons to the Arraylist
     public void addMenuButtons() {
 
         menuButtons.add(b_play);
-        menuButtons.add(b_options);
         menuButtons.add(b_quit);
     }
+
+    // Function to draw a cursor
     public void drawCursor(Graphics2D g2) {
 
+        // Depending on what the user inputs the cursor should appear at a different "Button"
         if (userInput == 0) {
 
-            g2.drawImage(image, 1920/2 - menuButtons.get(0).getStringWidth("Resume", g2) - imageWidthCursor - 20,  menuButtons.get(0).y - imageHeightCursor, 50, 50, null);
+            // draws cursor next to the button for userinput == 0 --> next to Resume
+            g2.drawImage(CursorImage, 1920/2 - menuButtons.get(0).getStringWidth("Resume", g2) - imageWidthCursor - 20,  menuButtons.get(0).y - imageHeightCursor, 50, 50, null);
 
         } else if (userInput == 1) {
 
-            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Options", g2) - imageWidthCursor - 20,  menuButtons.get(1).y - imageHeightCursor, 50, 50, null);
+        // draws cursor next to the button for userinput == 0 --> next to Resume
+            g2.drawImage(CursorImage, 1920/2 - menuButtons.get(1).getStringWidth("Quit", g2) - imageWidthCursor - 20,  menuButtons.get(1).y - imageHeightCursor, 50, 50, null);
 
-        } else if (userInput == 2) {
-
-            g2.drawImage(image, 1920/2 - menuButtons.get(2).getStringWidth("Quit", g2) - imageWidthCursor - 20,  menuButtons.get(2).y - imageHeightCursor, 50, 50, null);
-
-        }
-    } 
+        } 
+    }
 }

@@ -4,11 +4,13 @@ import java.awt.Color;
 
 import java.awt.Graphics2D;
 
-
 public class Titlescreen extends Screen{
+
+    // Title
 
     private String titleString = "EPIC POGOMAN";
 
+    // Image size
     private int centerX = 1920/2;
     private int centerY = 1080/2;
     private int imageWidth = 1920;
@@ -20,14 +22,19 @@ public class Titlescreen extends Screen{
 
     }
 
+    // Draw function
     public void draw(Graphics2D g2) {
 
-        image = dO2.titlescreen;
+        // transfersImage
+        image = dO2.returnTitlescreen();
 
+        // Draws Background
         g2.drawImage(image, centerX - offsetX , centerY - offsetY, imageWidth, imageHeight, null);
 
+        // Draws title
         drawString(g2, 80, titleString, 150, Color.black);
 
+        // Draws text
         drawString(g2, 40, "To start press Enter", 900, Color.black);
 
     }

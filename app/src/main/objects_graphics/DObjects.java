@@ -1,17 +1,19 @@
 package objects_graphics;
 
+//----Graphical stuff----//
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import Screens.Titlescreen;
 
 public class DObjects {
 
+    // BufferdImages in which the drawn images are stored
     public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background, menu;
 
     public DObjects() {
 
+        // Loads images
         gimmeThatImage();
 
     }
@@ -39,72 +41,100 @@ public class DObjects {
 
             
         } catch (IOException e) {
-            //TODO: handle exception
 
             e.getStackTrace();
+
         }
-    // methods which return the movement images, so they can be used in the draw method to draw the player
     } 
+    // Methods which return the images, so they can be used in the draw method to draw the player, screens etc.
+    
     public BufferedImage returnImageRight1() {
 
         return right1;
+
     }  
+
     public BufferedImage returnImageRight2() {
 
         return right2;
+
     }
+
     public BufferedImage returnImageLeft1() {
 
         return left1;
+
     }
+
     public BufferedImage returnImageLeft2() {
 
         return left2;
+
     }
+
     public BufferedImage returnImageDeath() {
     
         return death;
+
     }
+
     public BufferedImage returnImageJumpR() {
 
         return jumpR;
+
     }
+
     public BufferedImage returnImageJumpL() {
 
         return jumpL;
+
     }
+
     public BufferedImage returnImageGroundslam() {
 
         return groundslam;
+
     }
+
     public BufferedImage returnImageGrabR() {
 
         return grabR;
+
     }
+
     public BufferedImage returnImageGrabL() {
 
         return grabL;
+
     }
+
     public BufferedImage returnImageIdle1() {
 
         return idle1;
+
     }
+
     public BufferedImage returnImageIdle2() {
 
         return idle2;
+
     }
+
     public BufferedImage returnBackground() {
 
         return background;
+
     }
+
     public BufferedImage returnTitlescreen() {
 
         return titlescreen;
+
     }
+
     public BufferedImage returnMenuScreen() {
 
-
         return menu;
+
     }
-    
 }
