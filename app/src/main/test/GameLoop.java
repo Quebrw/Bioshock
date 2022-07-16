@@ -422,6 +422,23 @@ public class GameLoop extends JComponent implements Runnable {
 
             break;
 
+            //enemy, essentialy the same as trap, however new texture is able to be applied
+            case "enemy":
+            if((P.ypos > (colliders.get(j).ypos + colliders.get(j).height) && ((P.xpos >= colliders.get(j).xpos && P.xpos <= (colliders.get(j).xpos + colliders.get(j).width))||((P.xpos + P.width) >= colliders.get(j).xpos && (P.xpos + P.width) <= (colliders.get(j).xpos + colliders.get(j).width)))) && isSlamming == true && (slamHeight - P.ypos) <= 55){
+              isSlamming = false;
+              P.isSlamming = false;
+              slamCoold = 20;
+              beganJump = System.nanoTime() - ((System.nanoTime()-beganJump)/5);
+              P.despos = new Vector2f(P.xpos, colliders.get(j).ypos + colliders.get(j).height +1 );
+
+            }else{
+              if(invincFrames == 0){
+                P.ouch(colliders.get(j).damage);
+                invincFrames = 90;
+              }
+            }
+
+
             //some traps should not be "avoidable" with a groundslam
             case "trapPlus":
             if(invincFrames == 0){
@@ -430,11 +447,13 @@ public class GameLoop extends JComponent implements Runnable {
 
             }
             break;
-
-            case "win":
-              
-            break;
             //#region SceneTriggers
+
+            //win condition
+            case "Win":
+            Gamestate.state = Gamestate.VICTORY
+
+            break;
 
             
             case "rightTrigger":
