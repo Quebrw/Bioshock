@@ -128,7 +128,7 @@ public class LoadLevel {
 
         this.addStage();
 
-        this.addObject(7, new worldObjects(250, 250, new Vector2f(320, 300), new Vector2f(1500, 300), "enemy", 0, new Vector2f(7 , 0)));
+        this.addObject(7, new worldObjects(250, 250, new Vector2f(320, 300), new Vector2f(1500, 450), "enemy", 0, new Vector2f(7 , 3)));
         this.addObject( 7, new worldObjects(200, 50, new Vector2f(300, 300), "box", 0));
 
         //World Loadboarders (copy paste)

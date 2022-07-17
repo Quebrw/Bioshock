@@ -8,7 +8,7 @@ public class Titlescreen extends Screen{
 
     // Title
 
-    private String titleString = "EPIC POGOMAN";
+    private String titleString = "EPIC POGOMAN (working title)";
 
     // Image size
     private int centerX = 1920/2;
