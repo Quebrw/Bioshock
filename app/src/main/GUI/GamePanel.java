@@ -188,6 +188,10 @@ public class GamePanel extends JPanel {
 
                             damage = dO.returnDamageR();
 
+                        } else {
+
+                            damage = dO.returnDamageR();
+
                         }
 
                         g2.drawImage(damage, x, y, w, h, null);
