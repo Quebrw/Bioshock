@@ -235,10 +235,28 @@ public class GamePanel extends JPanel {
             break;
 
             case "enemy":
+            
+                switch (sObjects.get(i).movDirx) {
 
-            enemy = dO.returnEnemy();
+                    case "left":
 
-            g2.drawImage(enemy, x, y, w, h, null);
+                    enemy = dO.returnEnemy();
+
+                    g2.drawImage(enemy, x, y, w, h, null);
+
+                    break;
+
+                    case "right":
+
+                    enemy = dO.returnEnemyRight();
+                    
+                    g2.drawImage(enemy, x, y, w, h, null);
+
+                    break;
+
+                    default:
+                    break;
+            }
 
             break;
             
