@@ -93,6 +93,9 @@ public class GamePanel extends JPanel {
     // Standard method to draw things on the JPanel
     public void paintComponent(Graphics g) {
 
+        //gets rid of an annoying PROBLEMS Alert
+        if(kH == null){}
+
         // Gamepanel is a subclass of the parent class JPanel that is why we must use super.
         super.paintComponent(g);
 

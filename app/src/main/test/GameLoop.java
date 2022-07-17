@@ -6,7 +6,7 @@ import objects.worldObjects;
 import tools.Collider;
 import tools.MyKeyHandler;
 import tools.Vector2f;
-import objects_graphics.*;
+
 //import java.awt.Component;
 import javax.swing.*;   
 //import java.awt.Graphics;  
@@ -81,7 +81,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(50);
       P.xpos = 200f;
       P.ypos = 500f;
-      P.health = 60;
+      P.health = 6000;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
 
@@ -101,11 +101,13 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(P);
 
 
-    
+    //Loads the Levels
       for(int i = 0; i < test.level01.stages.get(Stagecounter).platforms.size(); i++){
         sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
       }
 
+      //Alert
+      if(menu == null){}
 
 
 
@@ -636,7 +638,6 @@ public class GameLoop extends JComponent implements Runnable {
 
     public void loadnewScene() {
       // Stagecounter soll sich erhöhen sobald trigger passiert wurde, lädt dann neue Stage
-      // TODO
       sObjects.clear();
       sObjects.add(P);
       
