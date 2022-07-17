@@ -366,11 +366,13 @@ public class GameLoop extends JComponent implements Runnable {
                 if(colliders.get(j).movingx == true && move.getXpos() == 0){
                   switch (colliders.get(j).movDirx){
                     case "right":
-                      move.setXpos(- colliders.get(j).Speedx());
+                      //move.setXpos(- colliders.get(j).Speedx());
+                      isColliding = false;
                     break;
 
                     case "left":
-                      move.setXpos(+ colliders.get(j).Speedx());
+                      //move.setXpos(+ colliders.get(j).Speedx());
+                      isColliding = false;
                     break;
                   }
                 }
