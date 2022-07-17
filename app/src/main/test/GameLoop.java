@@ -198,6 +198,8 @@ public class GameLoop extends JComponent implements Runnable {
 
             returnToTitleScreen();
 
+          returnafterWin();
+
           break;
 
           default:
@@ -430,6 +432,7 @@ public class GameLoop extends JComponent implements Runnable {
 
             break;
 
+          
            
             case "doubleJump":
               dJumpenabled = true;
@@ -768,5 +771,23 @@ public class GameLoop extends JComponent implements Runnable {
 
       }
 
+    }
+
+    //resets after win the player
+    public void returnafterWin() {
+      if(Gamestate.state == Gamestate.VICTORY) {
+
+        P.despos.setXpos(0);
+
+          Stagecounter = 0;
+
+          sceneChange = true;
+
+          P.health = 40;
+
+          invincFrames = 0;
+
+          dJumpenabled = false;
+      }
     }
 }
