@@ -178,7 +178,17 @@ public class GamePanel extends JPanel {
 
                         // When the player takes damage an animation for that is implemented
 
-                        damage = dO.returnDamage();
+                        if (actualPlayer.actMovL == true) {
+
+                            damage = dO.returnDamageL();
+
+                        }
+
+                        else if (actualPlayer.actMovR == true) {
+
+                            damage = dO.returnDamageR();
+
+                        }
 
                         g2.drawImage(damage, x, y, w, h, null);
 

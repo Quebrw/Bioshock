@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class DObjects {
 
     // BufferdImages in which the drawn images are stored
-    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background, menu, buttonBackground, damage, enemy, enemy_right, victory, doubleJump;
+    public BufferedImage right1, right2, left1, left2, jumpR, jumpL, death, groundslam, grabR, grabL, idle1, idle2, nothing, titlescreen, background, menu, buttonBackground, damageR, damageL, enemy, enemy_right, victory, doubleJump;
 
     public DObjects() {
 
@@ -39,7 +39,8 @@ public class DObjects {
             background = ImageIO.read(getClass().getResourceAsStream("Background.png"));
             menu = ImageIO.read(getClass().getResourceAsStream("Menu_screen.png"));
             buttonBackground = ImageIO.read(getClass().getResourceAsStream("Button_map.png"));
-            damage = ImageIO.read(getClass().getResourceAsStream("Damage.png"));
+            damageR = ImageIO.read(getClass().getResourceAsStream("DamageR.png"));
+            damageL = ImageIO.read(getClass().getResourceAsStream("DamageL.png"));
             enemy = ImageIO.read(getClass().getResourceAsStream("Enemy.png"));
             victory = ImageIO.read(getClass().getResourceAsStream("Victory.png"));
             doubleJump = ImageIO.read(getClass().getResourceAsStream("double_Jump.png"));
@@ -149,9 +150,15 @@ public class DObjects {
 
     }
 
-    public BufferedImage returnDamage() {
+    public BufferedImage returnDamageR() {
 
-        return damage;
+        return damageR;
+
+    }
+
+    public BufferedImage returnDamageL() {
+
+        return damageL;
 
     }
 
