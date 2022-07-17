@@ -13,6 +13,7 @@ public class Level {
         
     };
     public void addStage(){
+        //Ground that is added with every Stage
        stages.add(new Stage(new worldObjects(50, 1920, new Vector2f(0,250), "box", 0)));
     }
     

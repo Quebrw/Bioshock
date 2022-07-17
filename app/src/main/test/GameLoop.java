@@ -101,7 +101,7 @@ public class GameLoop extends JComponent implements Runnable {
       sObjects.add(P);
 
 
-    
+    //Loads the Levels
       for(int i = 0; i < test.level01.stages.get(Stagecounter).platforms.size(); i++){
         sObjects.add(test.level01.stages.get(Stagecounter).platforms.get(i));
       }
