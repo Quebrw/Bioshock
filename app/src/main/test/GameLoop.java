@@ -81,7 +81,7 @@ public class GameLoop extends JComponent implements Runnable {
       P.setWidth(50);
       P.xpos = 200f;
       P.ypos = 500f;
-      P.health = 6000;
+      P.health = 80;
       P.despos.setXpos(P.xpos);
       P.despos.setYpos(P.ypos); 
 
